@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/csman.dir/main.cpp.o -o csman   -L/mnt/d/mywork/csman/{libjsoncpp_DIR}  -L/mnt/d/mywork/csman/{libcurl_DIR}  -L/mnt/d/mywork/csman/{libZipper_DIR}  -Wl,-rpath,/mnt/d/mywork/csman/{libjsoncpp_DIR}:/mnt/d/mywork/csman/{libcurl_DIR}:/mnt/d/mywork/csman/{libZipper_DIR} -ljsoncpp -lcurl -lZipper -ljsoncpp -lcurl -lZipper 
