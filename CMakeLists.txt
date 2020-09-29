@@ -21,5 +21,6 @@ include_directories(Zipper_DIR)
 link_directories({libZipper_DIR})
 link_libraries(Zipper)
 
-add_executable(csman main.cpp Command.hpp Config.hpp CsmBase.hpp Cfg.hpp)
+#add_executable(csman main.cpp Command.hpp CsmBase.hpp Config.hpp Config.cpp)
+add_executable(csman main.cpp CsmBase.hpp Config.hpp Config.cpp)
 target_link_libraries(csman jsoncpp)

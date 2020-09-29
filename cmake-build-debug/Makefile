@@ -142,6 +142,33 @@ csman/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/build
 .PHONY : csman/fast
 
+Config.o: Config.cpp.o
+
+.PHONY : Config.o
+
+# target to build an object file
+Config.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Config.cpp.o
+.PHONY : Config.cpp.o
+
+Config.i: Config.cpp.i
+
+.PHONY : Config.i
+
+# target to preprocess a source file
+Config.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Config.cpp.i
+.PHONY : Config.cpp.i
+
+Config.s: Config.cpp.s
+
+.PHONY : Config.s
+
+# target to generate assembly for a file
+Config.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Config.cpp.s
+.PHONY : Config.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -178,6 +205,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... csman"
+	@echo "... Config.o"
+	@echo "... Config.i"
+	@echo "... Config.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

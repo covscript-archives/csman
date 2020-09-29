@@ -10,7 +10,8 @@
 #include "json/json.h"
 #include "zipper/unzipper.h"
 
-extern std::string homePath,csmanPath, platform, currentRuntime, csmanVersion;
+extern std::string homePath,csmanPath, platform, currentRuntime;
+extern const std::string csmanVersion = "20.09.30";
 extern int reconnectTime;
 
 size_t CurlWriteString(char *buffer, size_t size, size_t count, std::string *data) {
@@ -18,7 +19,7 @@ size_t CurlWriteString(char *buffer, size_t size, size_t count, std::string *dat
     data->append(buffer);
     return recv_size;
 }
-size_t CurlWriteFileB(char *buffer, size_t size, size_t count, FILE *data) {
+size_t CurlWriteFileBin(char *buffer, size_t size, size_t count, FILE *data) {
     size_t recv_size = fwrite(buffer,size,count,data);
     return recv_size;
 }
@@ -46,7 +47,7 @@ int HttpStatusCode(const std::string &url){
         curl = curl_easy_init();
         curl_easy_setopt(curl,CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl,CURLOPT_WRITEDATA,fp);
-        curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION,&CurlWriteFileB);
+        curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION, &CurlWriteFileBin);
         while(curl_easy_perform(curl)!=CURLE_OK && reconnectTime-- > 0)
             ;
         if(reconnectTime <= 0){
@@ -84,7 +85,6 @@ int HttpStatusCode(const std::string &url){
         res += asctime(gmtime(&now));
         return res;
     }
-
     class CsmErr{
     public:
         std::string title,content;

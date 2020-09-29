@@ -12,12 +12,11 @@
 #include <functional>
 
 #include "CsmBase.hpp"
-#include "Config.hpp"
 
 //main.cpp只调用该文件内方法
 
 
-namespace Csmcmd {
+namespace CsmCmd {
     enum class WordClass {
         STD, ABI, PACNAME, VER, ARG, ERR
     };
@@ -88,7 +87,7 @@ namespace Csmcmd {
     };
 }
 
-std::vector<std::string> Csmcmd::StrToVec(const std::string str) {
+std::vector<std::string> CsmCmd::StrToVec(const std::string str) {
     std::string buf = "";
     std::vector<std::string> res;
     for (char c:str) {
@@ -100,40 +99,40 @@ std::vector<std::string> Csmcmd::StrToVec(const std::string str) {
     return res;
 }
 
-bool Csmcmd::IsABI(const std::string &str) {
+bool CsmCmd::IsABI(const std::string &str) {
     return std::regex_match(str, std::regex("^ABI[0-9]{4}[0-9A-F]{2}$"));
 }
 
-bool Csmcmd::IsSTD(const std::string &str) {
+bool CsmCmd::IsSTD(const std::string &str) {
     return std::regex_match(str, std::regex("^STD[0-9]{4}[0-9A-F]{2}$"));
 }
 
-bool Csmcmd::IsGeneric(const std::string &str) {
+bool CsmCmd::IsGeneric(const std::string &str) {
     return !str.compare("Generic");
 }
 
-bool Csmcmd::IsVersion(const std::string &str) {
+bool CsmCmd::IsVersion(const std::string &str) {
     return std::regex_match(str, std::regex("^([0-9]+\\.){0,3}[0-9]+\\w*$"));
 }
 
-bool Csmcmd::IsPackage(const std::string &str) {
+bool CsmCmd::IsPackage(const std::string &str) {
     return std::regex_match(str, std::regex("^(\\w+\\.)+\\w+$"));
 }
 
-bool Csmcmd::IsArgument(const std::string &str) {
+bool CsmCmd::IsArgument(const std::string &str) {
     return std::regex_match(str,std::regex("^-[a-z]$"));
 }
 
-Csmcmd::WordClass Csmcmd::WordType(const std::string &str) {
-    if (Csmcmd::IsABI(str)) return WordClass::ABI;
-    else if (Csmcmd::IsSTD(str)) return WordClass::STD;
-    else if (Csmcmd::IsVersion(str)) return WordClass::VER;
-    else if (Csmcmd::IsPackage(str)) return WordClass::PACNAME;
-    else if (Csmcmd::IsArgument(str)) return WordClass::ARG;
+CsmCmd::WordClass CsmCmd::WordType(const std::string &str) {
+    if (CsmCmd::IsABI(str)) return WordClass::ABI;
+    else if (CsmCmd::IsSTD(str)) return WordClass::STD;
+    else if (CsmCmd::IsVersion(str)) return WordClass::VER;
+    else if (CsmCmd::IsPackage(str)) return WordClass::PACNAME;
+    else if (CsmCmd::IsArgument(str)) return WordClass::ARG;
     return WordClass::ERR;
 }
 
-bool Csmcmd::InstallPackageFromCat(const std::string &cat,const std::string &packageName, std::string version, const int &reconnectTime){
+bool CsmCmd::InstallPackageFromCat(const std::string &cat, const std::string &packageName, std::string version, const int &reconnectTime){
     if(!Config::source[cat].isMember(packageName))
         return false;
     else{
@@ -154,8 +153,8 @@ bool Csmcmd::InstallPackageFromCat(const std::string &cat,const std::string &pac
             !Config::source[cat][packageName]["Version"][version]["Dependencies"].empty()) {
             const Json::Value &dep = Config::source[cat][packageName]["Version"][version]["Dependencies"];
             for (auto depPacName : dep.getMemberNames()) {
-                if (!Csmcmd::InstallPackage(depPacName, dep[depPacName].asString(),
-                                    reconnectTime))    // some dependencies installing failed.
+                if (!CsmCmd::InstallPackage(depPacName, dep[depPacName].asString(),
+                                            reconnectTime))    // some dependencies installing failed.
                     return false;
             }
         }
@@ -173,13 +172,13 @@ bool Csmcmd::InstallPackageFromCat(const std::string &cat,const std::string &pac
     }
 }
 
-bool Csmcmd::InstallPackage(const std::string &packageName, std::string version, const int &reconnectTime) {
+bool CsmCmd::InstallPackage(const std::string &packageName, std::string version, const int &reconnectTime) {
 
-    return  Csmcmd::InstallPackageFromCat("Generic",packageName,version,reconnectTime)||
-            Csmcmd::InstallPackageFromCat(Config::config["CurrentRuntime"]["ABI"].asString(),packageName,version,reconnectTime)||
-            Csmcmd::InstallPackageFromCat(Config::config["CurrentRuntime"]["STD"].asString(),packageName,version,reconnectTime);
+    return CsmCmd::InstallPackageFromCat("Generic", packageName, version, reconnectTime) ||
+           CsmCmd::InstallPackageFromCat(Config::config["CurrentRuntime"]["ABI"].asString(), packageName, version, reconnectTime) ||
+           CsmCmd::InstallPackageFromCat(Config::config["CurrentRuntime"]["STD"].asString(), packageName, version, reconnectTime);
 }
 
-bool Csmcmd::UninstallPackage(const std::string &packageName,
+bool CsmCmd::UninstallPackage(const std::string &packageName,
                               std::string version) {
 }

@@ -90,19 +90,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/d/mywork/csman/Cfg.hpp">
-			<Option target="csman"/>
-		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/Command.hpp">
+		<Unit filename="/mnt/d/mywork/csman/Config.cpp">
 			<Option target="csman"/>
 		</Unit>
 		<Unit filename="/mnt/d/mywork/csman/Config.hpp">
 			<Option target="csman"/>
 		</Unit>
 		<Unit filename="/mnt/d/mywork/csman/CsmBase.hpp">
-			<Option target="csman"/>
-		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/CsmSource.hpp">
 			<Option target="csman"/>
 		</Unit>
 		<Unit filename="/mnt/d/mywork/csman/main.cpp">
