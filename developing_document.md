@@ -3,10 +3,10 @@ A package manager for Covscript.
 ## 1.Requirement abstraction
 + Installing (packages & runtimes).
 + Deleting (packages & runtimes).
-
++ Checking out (packages & runtimes).
 ## 2.Convention
 
-+ The **File Construction** of csman:
++ The **DIR Construction** of csman:
     
     + **/~/.csman_config.json**: to tell csman all details
     + **/~/.csman_installed**: what had csman isntalled
@@ -18,7 +18,7 @@ A package manager for Covscript.
         + **runtimes/**    
             + someRuntimes...    
             
-+ Some description of some json files(except [csman.json](https://csman.info/csman.json), all URLs are from json file.):
++ Some description of **some json files**(except [csman.json](https://csman.info/csman.json), all URLs are from json file.):
     + **csman.json:**
         + URL: https://csman.info/csman.json
         + description: refer to required files for building **source.json**.
@@ -40,14 +40,14 @@ A package manager for Covscript.
     + **Package:** (\w+\\.)\*\w
     + **Version of Package:** (\[0-9\]+\\.){0, 3}(0-9)+\w\*
 ## 3.Function abstraction
-+ **Updating:** update source from server when launching csman so it can get all packages information latest and correctly.
++ **Updating Sources:** update source from server when launching csman so it can get all packages information latest and correctly.
     + Connect to [csman.json](https://csman.info/csman.json) which should guide csman where to access.
     + Then, merge **BaseUrl+Platform.json** and **BaseUrl+Generic.json** as **ONE FILE** that we call it **"source.json"**, two files shouldn't have anything repeated.
         + Two files are online file, the **"source.json"** is local.
         + To get two files, need to use **HttpGet Request** via **Https Protocol**. 
 
 + **Installing:**  
-    + **Checking:** make sure which package have to install. This Part should mentioned again in 
+    + **Checking:** make sure which package have to install. This Part should mentioned again latter
     + **Downloading:** download packages from **source.json -> ContentUrl**.
     + **Decompression:** decompress **zip file** after download.
     + **Fitting Covsript:** write library into **evn_variable** ~~developing...~~

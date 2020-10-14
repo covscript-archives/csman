@@ -89,30 +89,31 @@ CMakeFiles/csman.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/main.cpp -o CMakeFiles/csman.dir/main.cpp.s
 
-CMakeFiles/csman.dir/Config.cpp.o: CMakeFiles/csman.dir/flags.make
-CMakeFiles/csman.dir/Config.cpp.o: ../Config.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/csman.dir/Config.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/Config.cpp.o -c /mnt/d/mywork/csman/Config.cpp
+CMakeFiles/csman.dir/CsmBase.cpp.o: CMakeFiles/csman.dir/flags.make
+CMakeFiles/csman.dir/CsmBase.cpp.o: ../CsmBase.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/csman.dir/CsmBase.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/CsmBase.cpp.o -c /mnt/d/mywork/csman/CsmBase.cpp
 
-CMakeFiles/csman.dir/Config.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/Config.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/Config.cpp > CMakeFiles/csman.dir/Config.cpp.i
+CMakeFiles/csman.dir/CsmBase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/CsmBase.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/CsmBase.cpp > CMakeFiles/csman.dir/CsmBase.cpp.i
 
-CMakeFiles/csman.dir/Config.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/Config.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/Config.cpp -o CMakeFiles/csman.dir/Config.cpp.s
+CMakeFiles/csman.dir/CsmBase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/CsmBase.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/CsmBase.cpp -o CMakeFiles/csman.dir/CsmBase.cpp.s
 
 # Object files for target csman
 csman_OBJECTS = \
 "CMakeFiles/csman.dir/main.cpp.o" \
-"CMakeFiles/csman.dir/Config.cpp.o"
+"CMakeFiles/csman.dir/CsmBase.cpp.o"
 
 # External object files for target csman
 csman_EXTERNAL_OBJECTS =
 
 csman: CMakeFiles/csman.dir/main.cpp.o
-csman: CMakeFiles/csman.dir/Config.cpp.o
+csman: CMakeFiles/csman.dir/CsmBase.cpp.o
 csman: CMakeFiles/csman.dir/build.make
+csman: libmozart.a
 csman: CMakeFiles/csman.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable csman"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/csman.dir/link.txt --verbose=$(VERBOSE)

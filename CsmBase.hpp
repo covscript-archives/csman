@@ -2,21 +2,81 @@
 // Created by Rend on 2020/9/6.
 //
 #pragma once
-
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <queue>
+#include <regex>
 #include "curl/curl.h"
 #include "json/json.h"
+#include "mozart++/process"
 #include "zipper/unzipper.h"
 
-extern std::string homePath,csmanPath, platform, currentRuntime;
-extern const std::string csmanVersion = "20.09.30";
+#if defined(__linux) || defined(__linux__) || defined(linux)
+#include<sys/stat.h>
+#include<unistd.h>
+
+#elif defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
+#include<io.h>
+#include<direct.h>
+#elif defined(__APPLE__) || defined(__MACH__)
+#include<sys/stat.h>
+#include<unistd.h>
+#endif
+
+extern const std::string csmanVersion;
+extern std::string homePath,csmanPath, platform;
 extern int reconnectTime;
 
-size_t CurlWriteString(char *buffer, size_t size, size_t count, std::string *data) {
+struct {
+	std::string ABI,STD,version;
+	bool ReadVersion(){
+        mpp::process_builder builder;
+        builder
+                .command("cs")
+                .arguments(std::vector<std::string>{"-v"})
+                .merge_outputs(true);
+        auto p = builder.start();
+/*缺少：进程启动失败，还未安装covscript*/
+        auto &out = p.out();
+        std::regex regVersion("Version: ([0-9\\.]+)"),
+                regSTD("STD Version: ([0-9]{4}[0-9A-F]{2})"),
+                regABI("ABI Version: ([0-9]{4}[0-9A-F]{2})"),
+                regAPI("API Version: ([0-9]{4}[0-9A-F]{2})"),
+                regBuild("Build ([0-9]+)");
+        std::string _build,_version;
+        while (out){
+            std::string line;
+            std::getline(out, line);
+            std::smatch std_match;
+
+            if (std::regex_search(line, std_match, regSTD))
+                this->STD = std_match[1];
+            else if (std::regex_search(line, std_match, regABI))
+                this->ABI = std_match[1];
+            else if (std::regex_search(line, std_match, regAPI))
+                /*do nothing*/;
+            else if (std::regex_search(line, std_match, regVersion))
+                _version = std_match[1];
+
+            if (std::regex_search(line, std_match, regBuild)){
+                _build = std_match[1];
+                continue;
+            }
+        }
+        this->version = _version + _build;
+        if(this->ABI.empty() || this->STD.empty() || this->version.empty())
+	        return false;
+        else return true;
+	};
+}currentRuntime;
+
+//libcurl的WriteFunction 是分数据包次数写的。。。会被回调很多次，所以考虑重复动作和继续上一次的写入什么的。。。
+size_t CurlWriteCharBuff(char *buffer, size_t size, size_t count, std::vector<char>* data) {
     size_t recv_size = size * count;
-    data->append(buffer);
+    data->reserve(recv_size);
+    for (size_t i = 0; i < recv_size; ++i)
+        data->push_back(buffer[i]);
     return recv_size;
 }
 size_t CurlWriteFileBin(char *buffer, size_t size, size_t count, FILE *data) {
@@ -25,66 +85,33 @@ size_t CurlWriteFileBin(char *buffer, size_t size, size_t count, FILE *data) {
 }
 
 namespace CsmBase{
-    /*
-int HttpStatusCode(const std::string &url){
-    CURL *curl = curl_easy_init();
-    CURLcode res;
-    int statusCode;
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl,CURLOPT_TCP_KEEPALIVE,1);
-    curl_easy_setopt(curl, CURLOPT_NOBODY,1);
-    res = curl_easy_perform(curl);
-    if(res == CURLE_OK)
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
-    curl_easy_cleanup(curl);
-    return statusCode;
-}*/
-    bool HttpRequestGet(const std::string &url, const std::string &path,int reconnectTime){
-        CURL *curl;
-        FILE *fp;
-        remove(path.c_str());
-        fp = fopen(path.c_str(),"wb");
-        curl = curl_easy_init();
-        curl_easy_setopt(curl,CURLOPT_URL, url.c_str());
-        curl_easy_setopt(curl,CURLOPT_WRITEDATA,fp);
-        curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION, &CurlWriteFileBin);
-        while(curl_easy_perform(curl)!=CURLE_OK && reconnectTime-- > 0)
-            ;
-        if(reconnectTime <= 0){
-            remove(path.c_str());
-            return false;
-        }
-        return true;
-    }
-    //WriteFunction 是分数据包次数写的。。。会被回调很多次，所以考虑重复动作和继续上一次的写入什么的。。。
-    std::string HttpRequestGet(const std::string &url,int reconnectTime) {
-        std::string response;
-        CURL *curl;
-        curl = curl_easy_init();
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        curl_easy_setopt(curl,CURLOPT_TCP_KEEPALIVE,1);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &CurlWriteString);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-        while(curl_easy_perform(curl)!=CURLE_OK && reconnectTime-- > 0)
-            response.clear();
-        curl_easy_cleanup(curl);
-        return response;
-    }
-    bool Unzip(const std::string& path) {
-        zipper::Unzipper unzipper(path);
-        unzipper.extract();
-        unzipper.close();
-        return true;
-    }
-    std::string Nowtime() {
-        time_t now = time(0);
-        std::string res = "";
-        res += "\tlocaltime:\t";
-        res += ctime(&now);
-        res += "\tUTCtime:\t";
-        res += asctime(gmtime(&now));
-        return res;
-    }
+
+    enum class WordClass {
+        STD, ABI, PACNAME, VER, ARG, ERR
+    };
+
+    bool IsABI(const std::string &str);
+    bool IsSTD(const std::string &str);
+    bool IsGeneric(const std::string &str);
+    bool IsVersion(const std::string &str);
+    bool IsPackage(const std::string &str);
+    bool IsArgument(const std::string &str);    //目前小写
+    WordClass WordType(const std::string &str);
+    bool Unzip(const std::string& path);
+    std::vector<std::string> StrToVec(const std::string str);
+    std::string Nowtime();
+    bool HttpRequestGet(const std::string &url, const std::string &path,int reconnectTime);
+    std::vector<char> HttpRequestGet(const std::string &url,int reconnectTime);
+
+
+    class Warning{
+    private:
+        std::queue<std::string> message;
+    public:
+        void add(const std::string &str);
+        void printAll();
+    };
+
     class CsmErr{
     public:
         std::string title,content;
@@ -100,4 +127,8 @@ int HttpStatusCode(const std::string &url){
         ofs << err.title << Nowtime() << "\n" << err.content << std::endl;
         ofs.close();
     }
+
+    std::string GetNameFromURL(const std::string &url);
 }
+
+extern CsmBase::Warning Warning;

@@ -49,4 +49,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/csman.dir/DependInfo.cmake"
+  "CMakeFiles/mozart.dir/DependInfo.cmake"
   )

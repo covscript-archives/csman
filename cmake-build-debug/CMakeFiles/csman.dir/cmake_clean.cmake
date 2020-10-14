@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/csman.dir/Config.cpp.o"
+  "CMakeFiles/csman.dir/CsmBase.cpp.o"
   "CMakeFiles/csman.dir/main.cpp.o"
   "csman"
   "csman.pdb"

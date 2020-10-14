@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmozart.a CMakeFiles/mozart.dir/src/core.cpp.o CMakeFiles/mozart.dir/src/process.cpp.o CMakeFiles/mozart.dir/src/process_unix.cpp.o CMakeFiles/mozart.dir/src/process_win32.cpp.o
+/usr/bin/ranlib libmozart.a

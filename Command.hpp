@@ -4,7 +4,6 @@
 #pragma once
 
 #include <map>
-#include <regex>
 #include <string>
 #include <vector>
 #include <cstring>
@@ -17,25 +16,6 @@
 
 
 namespace CsmCmd {
-    enum class WordClass {
-        STD, ABI, PACNAME, VER, ARG, ERR
-    };
-
-
-    std::vector<std::string> StrToVec(const std::string str);
-
-    bool IsABI(const std::string &str);
-
-    bool IsSTD(const std::string &str);
-
-    bool IsGeneric(const std::string &str);
-
-    bool IsVersion(const std::string &str);
-
-    bool IsPackage(const std::string &str);
-
-    bool IsArgument(const std::string &str);    //目前小写
-    WordClass WordType(const std::string &str);
 
     bool InstallPackageFromCat(const std::string &cat,const std::string &packageName, std::string version, const int &reconnectTime);
     bool InstallPackage(const std::string &packageName,
@@ -87,50 +67,8 @@ namespace CsmCmd {
     };
 }
 
-std::vector<std::string> CsmCmd::StrToVec(const std::string str) {
-    std::string buf = "";
-    std::vector<std::string> res;
-    for (char c:str) {
-        if (c == ' ') {
-            res.emplace_back(buf);
-            buf = "";
-        } else buf += c;
-    }
-    return res;
-}
 
-bool CsmCmd::IsABI(const std::string &str) {
-    return std::regex_match(str, std::regex("^ABI[0-9]{4}[0-9A-F]{2}$"));
-}
 
-bool CsmCmd::IsSTD(const std::string &str) {
-    return std::regex_match(str, std::regex("^STD[0-9]{4}[0-9A-F]{2}$"));
-}
-
-bool CsmCmd::IsGeneric(const std::string &str) {
-    return !str.compare("Generic");
-}
-
-bool CsmCmd::IsVersion(const std::string &str) {
-    return std::regex_match(str, std::regex("^([0-9]+\\.){0,3}[0-9]+\\w*$"));
-}
-
-bool CsmCmd::IsPackage(const std::string &str) {
-    return std::regex_match(str, std::regex("^(\\w+\\.)+\\w+$"));
-}
-
-bool CsmCmd::IsArgument(const std::string &str) {
-    return std::regex_match(str,std::regex("^-[a-z]$"));
-}
-
-CsmCmd::WordClass CsmCmd::WordType(const std::string &str) {
-    if (CsmCmd::IsABI(str)) return WordClass::ABI;
-    else if (CsmCmd::IsSTD(str)) return WordClass::STD;
-    else if (CsmCmd::IsVersion(str)) return WordClass::VER;
-    else if (CsmCmd::IsPackage(str)) return WordClass::PACNAME;
-    else if (CsmCmd::IsArgument(str)) return WordClass::ARG;
-    return WordClass::ERR;
-}
 
 bool CsmCmd::InstallPackageFromCat(const std::string &cat, const std::string &packageName, std::string version, const int &reconnectTime){
     if(!Config::source[cat].isMember(packageName))
