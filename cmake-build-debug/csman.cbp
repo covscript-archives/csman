@@ -146,6 +146,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/mnt/d/mywork/csman/Command.cpp">
+			<Option target="csman"/>
+		</Unit>
+		<Unit filename="/mnt/d/mywork/csman/Command.hpp">
+			<Option target="csman"/>
+		</Unit>
 		<Unit filename="/mnt/d/mywork/csman/CsmBase.cpp">
 			<Option target="csman"/>
 		</Unit>

@@ -48,7 +48,7 @@ bool CsmBase::IsArgument(const std::string &str) {
     return std::regex_match(str,reg);
 }
 
-CsmBase::WordClass CsmBase::WordType(const std::string &str) {
+CsmBase::WordClass CsmBase::GetWordType(const std::string &str) {
     if (CsmBase::IsABI(str)) return WordClass::ABI;
     else if (CsmBase::IsSTD(str)) return WordClass::STD;
     else if (CsmBase::IsVersion(str)) return WordClass::VER;

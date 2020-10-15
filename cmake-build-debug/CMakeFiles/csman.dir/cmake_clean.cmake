@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/csman.dir/Command.cpp.o"
   "CMakeFiles/csman.dir/CsmBase.cpp.o"
   "CMakeFiles/csman.dir/main.cpp.o"
   "csman"

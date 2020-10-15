@@ -31,7 +31,7 @@ private:
 
     virtual void Initialize() {}
 
-    virtual bool Validate() {}
+    virtual bool Validate() {return 0;}
 };
 
 namespace CsmConfig {

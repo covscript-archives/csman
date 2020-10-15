@@ -95,12 +95,12 @@ clean: CMakeFiles/mozart.dir/clean
 CMakeFiles/csman.dir/all: CMakeFiles/mozart.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target csman"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target csman"
 .PHONY : CMakeFiles/csman.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/csman.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/mywork/csman/cmake-build-debug/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/mywork/csman/cmake-build-debug/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/csman.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/mywork/csman/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/csman.dir/rule
@@ -122,7 +122,7 @@ CMakeFiles/csman.dir/clean:
 CMakeFiles/mozart.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=4,5,6,7,8 "Built target mozart"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=5,6,7,8,9 "Built target mozart"
 .PHONY : CMakeFiles/mozart.dir/all
 
 # Build rule for subdir invocation for target.

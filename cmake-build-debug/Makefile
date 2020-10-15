@@ -155,6 +155,33 @@ mozart/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/build
 .PHONY : mozart/fast
 
+Command.o: Command.cpp.o
+
+.PHONY : Command.o
+
+# target to build an object file
+Command.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Command.cpp.o
+.PHONY : Command.cpp.o
+
+Command.i: Command.cpp.i
+
+.PHONY : Command.i
+
+# target to preprocess a source file
+Command.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Command.cpp.i
+.PHONY : Command.cpp.i
+
+Command.s: Command.cpp.s
+
+.PHONY : Command.s
+
+# target to generate assembly for a file
+Command.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Command.cpp.s
+.PHONY : Command.cpp.s
+
 CsmBase.o: CsmBase.cpp.o
 
 .PHONY : CsmBase.o
@@ -327,6 +354,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... csman"
 	@echo "... mozart"
+	@echo "... Command.o"
+	@echo "... Command.i"
+	@echo "... Command.s"
 	@echo "... CsmBase.o"
 	@echo "... CsmBase.i"
 	@echo "... CsmBase.s"

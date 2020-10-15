@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/mnt/d/mywork/csman/Command.cpp" "/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/csman.dir/Command.cpp.o"
   "/mnt/d/mywork/csman/CsmBase.cpp" "/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/csman.dir/CsmBase.cpp.o"
   "/mnt/d/mywork/csman/main.cpp" "/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/csman.dir/main.cpp.o"
   )

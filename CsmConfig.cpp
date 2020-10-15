@@ -16,11 +16,15 @@ CsmJsonFile::CsmJsonFile(const std::string &_path) : path(_path) {
     std::ifstream ifs(path);
     if (!ifs.is_open()) {
         ifs.close();
-        throw std::ios_base::failure("Opening " + path + " as \"ifstream\" failed.");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                              "CsmConfig.cpp->CsmJsonFile",
+                              "Opening " + path + " as [ifstream type] failed.");
     } else {
         if (!Json::parseFromStream(builder, ifs, &root, &jsonErrs)) {
             ifs.close();
-            throw std::ios_base::failure("Opening " + path + " as \"json\" failed.");
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                  "CsmConfig.cpp->CsmJsonFile",
+                                  "Opening " + path + " as [json file] failed.");
         }
     }
 
@@ -56,7 +60,9 @@ void CsmConfig::Sources::PreLaunching() {
         /*I WANNA RED WORDS HERE!!!!*/
         std::cout << "csman:\tcan not connect to server, some download function may work incorrectly."
                   << std::endl;
-        throw CsmBase::CsmErr("", "downloading [csman.json] failed from csman.info.");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::NetWorkErr,
+                              "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                              "downloading [csman.json] failed from https://csman.info.");
     }
 
     /*Parse Json from csman.info*/
@@ -66,11 +72,16 @@ void CsmConfig::Sources::PreLaunching() {
     /*[csman.json]*/
     std::unique_ptr<Json::CharReader> jsonReader(builder.newCharReader());
     if (!jsonReader->parse(request.data(), request.data() + request.size(), &root, &jsonErrs)) {
-        throw CsmBase::CsmErr("", "parsing [csman.json] failed.");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                              "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                              "parsing [csman.json] as [json file] failed.");
     }
     /*[version validation]*/
     if (root["Version"] != csmanVersion) {
-        throw CsmBase::CsmErr("", "version is not avilable, please try to update your \"csman\".");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                              "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                              "current version \"" + csmanVersion +
+                              "\" is not available, please try to update [csman] via \"csman update csman\".");
     }
 
     /*get Generic.json and Platform.json*/
@@ -83,10 +94,14 @@ void CsmConfig::Sources::PreLaunching() {
             /*I WANNA RED WORDS HERE!!!!*/
             std::cout << "csman:\tcan not connect to server, some download-function may work incorrectly."
                       << std::endl;
-            throw "downloading [Generic.json] failed from csman.info.";
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::NetWorkErr,
+                                  "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                  "downloading [Generic.json] failed from csman.info.");
         }
         if (!jsonReader->parse(request.data(), request.data() + request.size(), &genericRoot, &jsonErrs)) {
-            throw CsmBase::CsmErr("", "parsing [Generic.json] failed.");
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                  "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                  "parsing [Generic.json] as [json file] failed.");
         }
         /*[Linux_GCC_AMD64.json]*/
         if (platform == "linux") {
@@ -95,10 +110,14 @@ void CsmConfig::Sources::PreLaunching() {
                 /*I WANNA RED WORDS HERE!!!!*/
                 std::cout << "csman:\tcan not connect to server, some download function may work incorrectly."
                           << std::endl;
-                throw CsmBase::CsmErr("", "downloading [Linux_GCC_AMD64.json] failed from csman.info.");
+                throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::NetWorkErr,
+                                      "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                      "downloading [Linux_GCC_AMD64.json] failed from https://csman.info.");
             }
             if (!jsonReader->parse(request.data(), request.data() + request.size(), &platformRoot, &jsonErrs)) {
-                throw CsmBase::CsmErr("", "parsing [Linux_GCC_AMD64.json] failed.");
+                throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                      "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                      "parsing [Linux_GCC_AMD64.json] as [json file] failed.");
             }
             /*[macOS_clang_AMD64.json]*/
         } else if (platform == "MacOS") {
@@ -107,10 +126,14 @@ void CsmConfig::Sources::PreLaunching() {
                 /*I WANNA RED WORDS HERE!!!!*/
                 std::cout << "csman:\tcan not connect to server, some download function may work incorrectly."
                           << std::endl;
-                throw CsmBase::CsmErr("", "downloading [macOS_clang_AMD64.json] failed from csman.info.");
+                throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::NetWorkErr,
+                                      "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                      "downloading [macOS_clang_AMD64.json] failed from https://csman.info.");
             }
             if (!jsonReader->parse(request.data(), request.data() + request.size(), &platformRoot, &jsonErrs)) {
-                throw CsmBase::CsmErr("", "parsing [macOS_clang_AMD64.json] failed.");
+                throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                      "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                      "parsing [macOS_clang_AMD64.json] as [json file] failed.");
             }
             /*[Win32_MinGW-w64_AMD64.json]*/
         } else if (platform == "WIN") {
@@ -119,10 +142,14 @@ void CsmConfig::Sources::PreLaunching() {
                 /*I WANNA RED WORDS HERE!!!!*/
                 std::cout << "csman:\tcan not connect to server, some download function may work incorrectly."
                           << std::endl;
-                throw CsmBase::CsmErr("", "downloading [Win32_MinGW-w64_AMD64.json] failed from csman.info.");
+                throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::NetWorkErr,
+                                      "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                      "downloading [Win32_MinGW-w64_AMD64.json] failed from https://csman.info.");
             }
             if (!jsonReader->parse(request.data(), request.data() + request.size(), &platformRoot, &jsonErrs)) {
-                throw CsmBase::CsmErr("", "parsing [Win32_MinGW-w64_AMD64.json] failed.");
+                throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                      "CsmConfig.cpp->CsmConfig::Sources::PreLaunching()",
+                                      "parsing [Win32_MinGW-w64_AMD64.json] as [json flile] failed.");
             }
         }
     }
@@ -197,10 +224,10 @@ Json::Value CsmConfig::Sources::GetPacJson(const std::string &name, const std::s
 std::vector<Json::Value> CsmConfig::Sources::GetDepall(const std::vector<Json::Value> &vec_pac) {
     vis.clear();
     std::vector<Json::Value> res;
-    for(auto pac:vec_pac){
+    for (auto pac:vec_pac) {
         static std::vector<Json::Value> r = DFSDeps(pac);
         res.reserve(res.size() + r.size());
-        res.insert(res.end(),r.begin(),r.end());
+        res.insert(res.end(), r.begin(), r.end());
     }
     return res;
 }
@@ -210,13 +237,13 @@ std::vector<Json::Value> CsmConfig::Sources::GetDepall(const std::vector<std::st
     vis.clear();
     std::vector<Json::Value> res;
     static Json::Value pac;
-    for(auto str:vec_str){
-        for(int i=str.size()-1;i>=0;i--)
-            if(str[i]=='_')
-                pac = GetPacJson(str.substr(0,i-1),str.substr(i+1,str.size()-1));
+    for (auto str:vec_str) {
+        for (int i = str.size() - 1; i >= 0; i--)
+            if (str[i] == '_')
+                pac = GetPacJson(str.substr(0, i - 1), str.substr(i + 1, str.size() - 1));
         static std::vector<Json::Value> r = DFSDeps(pac);
         res.reserve(res.size() + r.size());
-        res.insert(res.end(),r.begin(),r.end());
+        res.insert(res.end(), r.begin(), r.end());
     }
     return res;
 }
@@ -236,7 +263,7 @@ std::vector<Json::Value> CsmConfig::Sources::GetDep(const std::string &name) {
 /*done*/
 std::vector<Json::Value> CsmConfig::Sources::DFSDeps(const Json::Value &pac) {
     std::vector<Json::Value> res;
-    if ( vis.find(CsmBase::GetNameFromURL(pac["ContentUrl"].asString())) != vis.end() )
+    if (vis.find(CsmBase::GetNameFromURL(pac["ContentUrl"].asString())) != vis.end())
         return res;
     this->vis.insert(CsmBase::GetNameFromURL(pac["ContentUrl"].asString()));
     res.push_back(pac);
@@ -246,7 +273,7 @@ std::vector<Json::Value> CsmConfig::Sources::DFSDeps(const Json::Value &pac) {
         static std::vector<Json::Value> s = DFSDeps(
                 GetPacJson(d, v));
         // s d依赖（包）的依赖集合
-        res.reserve(res.size() + s.size() );
+        res.reserve(res.size() + s.size());
         res.insert(res.end(), s.begin(), s.end());
     }
     return res;
@@ -254,7 +281,7 @@ std::vector<Json::Value> CsmConfig::Sources::DFSDeps(const Json::Value &pac) {
 
 /*done*/
 std::vector<std::string> CsmConfig::Sources::DepsName(const std::vector<Json::Value> &vec_pac) {
-    std::vector <std::string> res(vec_pac.size());
+    std::vector<std::string> res(vec_pac.size());
     for (auto d:vec_pac) {
         res.push_back(CsmBase::GetNameFromURL(d["ContentUrl"].asString()));
     }
@@ -275,7 +302,9 @@ void CsmConfig::Config::Initialize() {
     std::ifstream ifs(homePath + "/.csman_config.json");
     if (!ifs.is_open()) {
         ifs.close();
-        throw CsmBase::CsmErr("", "open \".csman_config.json\" failed when initialing.");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                              "CsmConfig.cpp->CsmConfig::Config::Initialize()",
+                              "open [.csman_config.json] failed when initialing.");
     }
     ifs >> root;
     ifs.close();
@@ -290,13 +319,15 @@ bool CsmConfig::Config::Validate() {
     ifs.close();
 
     if (!ISOPEN) {
-        throw CsmBase::CsmErr("Config.hpp->bool Config::Validate()",
-                              "Loading [.csman_config.json] as ifstream failed.");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                              "CsmConfig.cpp->CsmConfig::Config::Validate()",
+                              "Loading [.csman_config.json] as [ifstream type] failed.");
     } else {
         if (!Json::parseFromStream(builder, ifs, &rt, &jsonErrs)) {
             ifs.close();
-            throw CsmBase::CsmErr("Config.hpp->bool Config::Validate()",
-                                  "Loading [.csman_config.json] as json failed.");
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                  "CmsConfig.cpp->CsmConfig::Config::Validate()",
+                                  "Loading [.csman_config.json] as [json file] failed.");
         }
     }
 
@@ -334,8 +365,9 @@ void CsmConfig::Config::PreLaunching() {
         if (c == 'y' || c == 'Y')
             Initialize();
         else
-            throw CsmBase::CsmErr("class CsmConfig()",
-                                  "\".csman_config.json\" is broken and the fucker seemed not happy to rebuild it.");
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::ProtectErr,
+                                  "CmsConfig.cpp->CsmConfig::Config::PreLaunching()",
+                                  "[.csman_config.json] is broken and the sucker seemed not happy to rebuild it.");
     }
 }
 
@@ -349,8 +381,9 @@ void CsmConfig::Config::EndLaunching() {
 
 CsmConfig::Config::~Config() {
     if (root.empty() || root.isNull()) {
-        CsmBase::WriteErrLog(CsmBase::CsmErr("CsmConfig.hpp->~CsmConfig():",
-                                             "configure data is empty while saving [.csman_config], maybe it has been broken in memory."));
+        CsmBase::WriteErrLog(CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                             "CsmConfig.hpp->CsmConfig::Config::~Config():",
+                                             "configure data is empty while saving [.csman_config], maybe it has been broken when which was in memory."));
         return;
     }
     std::ofstream ofs(homePath + "/.csman_config.json");
@@ -378,7 +411,10 @@ void CsmConfig::Installed::PreLaunching() {
         std::cin >> c;
         if (c == 'y' || c == 'Y')
             Initialize();
-        else throw CsmBase::CsmErr("class CsmConfig()", "[.csman_config.json] was broken.");
+        else
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                  "CsmConfig.cpp->CsmConfig::Installed::PreLaunching()",
+                                  "[.csman_config.json] was broken.");
     }
 }
 
@@ -392,18 +428,20 @@ bool CsmConfig::Installed::Validate() {
     ifs.close();
 
     if (!ISOPEN) {
-        throw CsmBase::CsmErr("Config.hpp->bool Installed::Validate()",
-                              "Loading [.csman_isntalled.json] as ifstream failed.");
+        throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                              "Config.hpp->CsmConfig::Installed::Validate()",
+                              "Loading [.csman_isntalled.json] as [ifstream type] failed.");
     } else {
         if (!Json::parseFromStream(builder, ifs, &rt, &jsonErrs)) {
             ifs.close();
-            throw CsmBase::CsmErr("Config.hpp->bool Installed::Validate()",
-                                  "Loading [.csman_isntalled.json] as json failed.");
+            throw CsmBase::CsmErr(CsmBase::CsmErr::ErrCodeClass::CsmanErr,
+                                  "Config.hpp->CsmConfig::Installed::Validate()",
+                                  "Loading [.csman_isntalled.json] as [json file] failed.");
         }
     }
 
-    for(auto x:rt)
-        if(!x.isArray())
+    for (auto x:rt)
+        if (!x.isArray())
             return false;
 
     return true;
@@ -414,12 +452,12 @@ void CsmConfig::Installed::Initialize() {
 
 }
 
-std::vector<std::string> CsmConfig::Installed::Absence(std::vector<std::string>Deps){
-    std::vector<std::string>res;
-    for(auto d:Deps){
-        for(int i=d.size()-1;i>=0;--i)
-            if(d[i]=='_'){
-                if( !Contains(d.substr(0,i-1),d.substr(i+1,d.size()-1)) )
+std::vector<std::string> CsmConfig::Installed::Absence(std::vector<std::string> Deps) {
+    std::vector<std::string> res;
+    for (auto d:Deps) {
+        for (int i = d.size() - 1; i >= 0; --i)
+            if (d[i] == '_') {
+                if (!Contains(d.substr(0, i - 1), d.substr(i + 1, d.size() - 1)))
                     res.push_back(d);
             }
     }
@@ -428,14 +466,16 @@ std::vector<std::string> CsmConfig::Installed::Absence(std::vector<std::string>D
 
 /*done*/
 bool CsmConfig::Installed::Contains(const std::string &name, const std::string &ver) {
-    if(root[name].isNull() || root[name].empty())
+    if (root[name].isNull() || root[name].empty())
         return false;
     return ver.empty() ? true : root[name].isMember(ver);
 }
+
 void CsmConfig::Installed::Add(const std::string &name, const std::string &ver) {
     root[name].append(ver);
     return;
 }
+
 void CsmConfig::Installed::Del(const std::string &name, const std::string &ver) {
     root[name].removeMember(ver);
     return;

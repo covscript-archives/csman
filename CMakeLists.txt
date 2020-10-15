@@ -29,5 +29,5 @@ link_libraries(Zipper)
 
 
 #add_executable(csman main.cpp CsmBase.hpp Config.hpp Config.cpp)
-add_executable(csman main.cpp CsmBase.hpp CsmBase.cpp)
+add_executable(csman main.cpp CsmBase.hpp CsmBase.cpp Command.cpp)
 target_link_libraries(csman jsoncpp)
