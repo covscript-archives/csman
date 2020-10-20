@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/csman.dir/main.cpp.o CMakeFiles/csman.dir/CsmBase.cpp.o CMakeFiles/csman.dir/Command.cpp.o -o csman   -L/mnt/d/mywork/csman/{libjsoncpp_DIR}  -L/mnt/d/mywork/csman/{libcurl_DIR}  -L/mnt/d/mywork/csman/{libZipper_DIR}  -Wl,-rpath,/mnt/d/mywork/csman/{libjsoncpp_DIR}:/mnt/d/mywork/csman/{libcurl_DIR}:/mnt/d/mywork/csman/{libZipper_DIR} libmozart.a -ljsoncpp -lcurl -lZipper -ljsoncpp -lcurl -lZipper 
+/usr/bin/c++ -g CMakeFiles/csman.dir/main.cpp.o -o csman  libmozart.a src/libcsman_src.a libmozart.a -ljsoncpp -lcurl -lZipper 

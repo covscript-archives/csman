@@ -9,9 +9,9 @@ A package manager for Covscript.
 + The **DIR Construction** of csman:
     
     + **/~/.csman_config.json**: to tell csman all details
-    + **/~/.csman_installed**: what had csman isntalled
     + **csmanPath/** (default = ~/.csman/)  
-        + source.json    
+        + source.json 
+        + installed.json   
         + error_log.txt    
         + **packages/**    
             + somePackages...

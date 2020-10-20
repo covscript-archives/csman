@@ -155,59 +155,18 @@ mozart/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/build
 .PHONY : mozart/fast
 
-Command.o: Command.cpp.o
+#=============================================================================
+# Target rules for targets named csman_src
 
-.PHONY : Command.o
+# Build rule for target.
+csman_src: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 csman_src
+.PHONY : csman_src
 
-# target to build an object file
-Command.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Command.cpp.o
-.PHONY : Command.cpp.o
-
-Command.i: Command.cpp.i
-
-.PHONY : Command.i
-
-# target to preprocess a source file
-Command.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Command.cpp.i
-.PHONY : Command.cpp.i
-
-Command.s: Command.cpp.s
-
-.PHONY : Command.s
-
-# target to generate assembly for a file
-Command.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/Command.cpp.s
-.PHONY : Command.cpp.s
-
-CsmBase.o: CsmBase.cpp.o
-
-.PHONY : CsmBase.o
-
-# target to build an object file
-CsmBase.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/CsmBase.cpp.o
-.PHONY : CsmBase.cpp.o
-
-CsmBase.i: CsmBase.cpp.i
-
-.PHONY : CsmBase.i
-
-# target to preprocess a source file
-CsmBase.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/CsmBase.cpp.i
-.PHONY : CsmBase.cpp.i
-
-CsmBase.s: CsmBase.cpp.s
-
-.PHONY : CsmBase.s
-
-# target to generate assembly for a file
-CsmBase.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/CsmBase.cpp.s
-.PHONY : CsmBase.cpp.s
+# fast build rule for target.
+csman_src/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/csman_src.dir/build.make src/CMakeFiles/csman_src.dir/build
+.PHONY : csman_src/fast
 
 main.o: main.cpp.o
 
@@ -236,113 +195,113 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/core.o: src/core.cpp.o
+mozart/src/core.o: mozart/src/core.cpp.o
 
-.PHONY : src/core.o
-
-# target to build an object file
-src/core.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/core.cpp.o
-.PHONY : src/core.cpp.o
-
-src/core.i: src/core.cpp.i
-
-.PHONY : src/core.i
-
-# target to preprocess a source file
-src/core.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/core.cpp.i
-.PHONY : src/core.cpp.i
-
-src/core.s: src/core.cpp.s
-
-.PHONY : src/core.s
-
-# target to generate assembly for a file
-src/core.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/core.cpp.s
-.PHONY : src/core.cpp.s
-
-src/process.o: src/process.cpp.o
-
-.PHONY : src/process.o
+.PHONY : mozart/src/core.o
 
 # target to build an object file
-src/process.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process.cpp.o
-.PHONY : src/process.cpp.o
+mozart/src/core.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/core.cpp.o
+.PHONY : mozart/src/core.cpp.o
 
-src/process.i: src/process.cpp.i
+mozart/src/core.i: mozart/src/core.cpp.i
 
-.PHONY : src/process.i
+.PHONY : mozart/src/core.i
 
 # target to preprocess a source file
-src/process.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process.cpp.i
-.PHONY : src/process.cpp.i
+mozart/src/core.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/core.cpp.i
+.PHONY : mozart/src/core.cpp.i
 
-src/process.s: src/process.cpp.s
+mozart/src/core.s: mozart/src/core.cpp.s
 
-.PHONY : src/process.s
+.PHONY : mozart/src/core.s
 
 # target to generate assembly for a file
-src/process.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process.cpp.s
-.PHONY : src/process.cpp.s
+mozart/src/core.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/core.cpp.s
+.PHONY : mozart/src/core.cpp.s
 
-src/process_unix.o: src/process_unix.cpp.o
+mozart/src/process.o: mozart/src/process.cpp.o
 
-.PHONY : src/process_unix.o
+.PHONY : mozart/src/process.o
 
 # target to build an object file
-src/process_unix.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process_unix.cpp.o
-.PHONY : src/process_unix.cpp.o
+mozart/src/process.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process.cpp.o
+.PHONY : mozart/src/process.cpp.o
 
-src/process_unix.i: src/process_unix.cpp.i
+mozart/src/process.i: mozart/src/process.cpp.i
 
-.PHONY : src/process_unix.i
+.PHONY : mozart/src/process.i
 
 # target to preprocess a source file
-src/process_unix.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process_unix.cpp.i
-.PHONY : src/process_unix.cpp.i
+mozart/src/process.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process.cpp.i
+.PHONY : mozart/src/process.cpp.i
 
-src/process_unix.s: src/process_unix.cpp.s
+mozart/src/process.s: mozart/src/process.cpp.s
 
-.PHONY : src/process_unix.s
+.PHONY : mozart/src/process.s
 
 # target to generate assembly for a file
-src/process_unix.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process_unix.cpp.s
-.PHONY : src/process_unix.cpp.s
+mozart/src/process.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process.cpp.s
+.PHONY : mozart/src/process.cpp.s
 
-src/process_win32.o: src/process_win32.cpp.o
+mozart/src/process_unix.o: mozart/src/process_unix.cpp.o
 
-.PHONY : src/process_win32.o
+.PHONY : mozart/src/process_unix.o
 
 # target to build an object file
-src/process_win32.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process_win32.cpp.o
-.PHONY : src/process_win32.cpp.o
+mozart/src/process_unix.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o
+.PHONY : mozart/src/process_unix.cpp.o
 
-src/process_win32.i: src/process_win32.cpp.i
+mozart/src/process_unix.i: mozart/src/process_unix.cpp.i
 
-.PHONY : src/process_win32.i
+.PHONY : mozart/src/process_unix.i
 
 # target to preprocess a source file
-src/process_win32.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process_win32.cpp.i
-.PHONY : src/process_win32.cpp.i
+mozart/src/process_unix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.i
+.PHONY : mozart/src/process_unix.cpp.i
 
-src/process_win32.s: src/process_win32.cpp.s
+mozart/src/process_unix.s: mozart/src/process_unix.cpp.s
 
-.PHONY : src/process_win32.s
+.PHONY : mozart/src/process_unix.s
 
 # target to generate assembly for a file
-src/process_win32.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/src/process_win32.cpp.s
-.PHONY : src/process_win32.cpp.s
+mozart/src/process_unix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.s
+.PHONY : mozart/src/process_unix.cpp.s
+
+mozart/src/process_win32.o: mozart/src/process_win32.cpp.o
+
+.PHONY : mozart/src/process_win32.o
+
+# target to build an object file
+mozart/src/process_win32.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o
+.PHONY : mozart/src/process_win32.cpp.o
+
+mozart/src/process_win32.i: mozart/src/process_win32.cpp.i
+
+.PHONY : mozart/src/process_win32.i
+
+# target to preprocess a source file
+mozart/src/process_win32.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.i
+.PHONY : mozart/src/process_win32.cpp.i
+
+mozart/src/process_win32.s: mozart/src/process_win32.cpp.s
+
+.PHONY : mozart/src/process_win32.s
+
+# target to generate assembly for a file
+mozart/src/process_win32.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.s
+.PHONY : mozart/src/process_win32.cpp.s
 
 # Help Target
 help:
@@ -353,28 +312,23 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... csman"
+	@echo "... csman_src"
 	@echo "... mozart"
-	@echo "... Command.o"
-	@echo "... Command.i"
-	@echo "... Command.s"
-	@echo "... CsmBase.o"
-	@echo "... CsmBase.i"
-	@echo "... CsmBase.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/core.o"
-	@echo "... src/core.i"
-	@echo "... src/core.s"
-	@echo "... src/process.o"
-	@echo "... src/process.i"
-	@echo "... src/process.s"
-	@echo "... src/process_unix.o"
-	@echo "... src/process_unix.i"
-	@echo "... src/process_unix.s"
-	@echo "... src/process_win32.o"
-	@echo "... src/process_win32.i"
-	@echo "... src/process_win32.s"
+	@echo "... mozart/src/core.o"
+	@echo "... mozart/src/core.i"
+	@echo "... mozart/src/core.s"
+	@echo "... mozart/src/process.o"
+	@echo "... mozart/src/process.i"
+	@echo "... mozart/src/process.s"
+	@echo "... mozart/src/process_unix.o"
+	@echo "... mozart/src/process_unix.i"
+	@echo "... mozart/src/process_unix.s"
+	@echo "... mozart/src/process_win32.o"
+	@echo "... mozart/src/process_win32.i"
+	@echo "... mozart/src/process_win32.s"
 .PHONY : help
 
 

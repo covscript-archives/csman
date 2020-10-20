@@ -1,0 +1,19 @@
+set(jsoncpp_DIR ../jsoncpp/include)
+set(libjsoncpp_DIR /usr/local/lib/)
+include_directories(jsoncpp_DIR)
+link_directories({libjsoncpp_DIR})
+link_libraries(jsoncpp)
+
+set(curl_DIR ../curl/include)
+set(libcurl_DIR /usr/local/lib/)
+include_directories(curl_DIR)
+link_directories({libcurl_DIR})
+link_libraries(curl)
+
+set(Zipper_DIR ../zipper/zipper)
+set(libZipper_DIR /usr/local/lib/)
+include_directories(Zipper_DIR)
+link_directories({libZipper_DIR})
+link_libraries(Zipper)
+
+add_library(csman_src .) #如何理解add_lib

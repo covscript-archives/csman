@@ -76,72 +76,72 @@ include CMakeFiles/mozart.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/mozart.dir/flags.make
 
-CMakeFiles/mozart.dir/src/core.cpp.o: CMakeFiles/mozart.dir/flags.make
-CMakeFiles/mozart.dir/src/core.cpp.o: ../src/core.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mozart.dir/src/core.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/src/core.cpp.o -c /mnt/d/mywork/csman/src/core.cpp
+CMakeFiles/mozart.dir/mozart/src/core.cpp.o: CMakeFiles/mozart.dir/flags.make
+CMakeFiles/mozart.dir/mozart/src/core.cpp.o: ../mozart/src/core.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mozart.dir/mozart/src/core.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/mozart/src/core.cpp.o -c /mnt/d/mywork/csman/mozart/src/core.cpp
 
-CMakeFiles/mozart.dir/src/core.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/src/core.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/src/core.cpp > CMakeFiles/mozart.dir/src/core.cpp.i
+CMakeFiles/mozart.dir/mozart/src/core.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/mozart/src/core.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/mozart/src/core.cpp > CMakeFiles/mozart.dir/mozart/src/core.cpp.i
 
-CMakeFiles/mozart.dir/src/core.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/src/core.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/src/core.cpp -o CMakeFiles/mozart.dir/src/core.cpp.s
+CMakeFiles/mozart.dir/mozart/src/core.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/mozart/src/core.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/mozart/src/core.cpp -o CMakeFiles/mozart.dir/mozart/src/core.cpp.s
 
-CMakeFiles/mozart.dir/src/process.cpp.o: CMakeFiles/mozart.dir/flags.make
-CMakeFiles/mozart.dir/src/process.cpp.o: ../src/process.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mozart.dir/src/process.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/src/process.cpp.o -c /mnt/d/mywork/csman/src/process.cpp
+CMakeFiles/mozart.dir/mozart/src/process.cpp.o: CMakeFiles/mozart.dir/flags.make
+CMakeFiles/mozart.dir/mozart/src/process.cpp.o: ../mozart/src/process.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mozart.dir/mozart/src/process.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/mozart/src/process.cpp.o -c /mnt/d/mywork/csman/mozart/src/process.cpp
 
-CMakeFiles/mozart.dir/src/process.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/src/process.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/src/process.cpp > CMakeFiles/mozart.dir/src/process.cpp.i
+CMakeFiles/mozart.dir/mozart/src/process.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/mozart/src/process.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/mozart/src/process.cpp > CMakeFiles/mozart.dir/mozart/src/process.cpp.i
 
-CMakeFiles/mozart.dir/src/process.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/src/process.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/src/process.cpp -o CMakeFiles/mozart.dir/src/process.cpp.s
+CMakeFiles/mozart.dir/mozart/src/process.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/mozart/src/process.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/mozart/src/process.cpp -o CMakeFiles/mozart.dir/mozart/src/process.cpp.s
 
-CMakeFiles/mozart.dir/src/process_unix.cpp.o: CMakeFiles/mozart.dir/flags.make
-CMakeFiles/mozart.dir/src/process_unix.cpp.o: ../src/process_unix.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mozart.dir/src/process_unix.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/src/process_unix.cpp.o -c /mnt/d/mywork/csman/src/process_unix.cpp
+CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o: CMakeFiles/mozart.dir/flags.make
+CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o: ../mozart/src/process_unix.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o -c /mnt/d/mywork/csman/mozart/src/process_unix.cpp
 
-CMakeFiles/mozart.dir/src/process_unix.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/src/process_unix.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/src/process_unix.cpp > CMakeFiles/mozart.dir/src/process_unix.cpp.i
+CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/mozart/src/process_unix.cpp > CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.i
 
-CMakeFiles/mozart.dir/src/process_unix.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/src/process_unix.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/src/process_unix.cpp -o CMakeFiles/mozart.dir/src/process_unix.cpp.s
+CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/mozart/src/process_unix.cpp -o CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.s
 
-CMakeFiles/mozart.dir/src/process_win32.cpp.o: CMakeFiles/mozart.dir/flags.make
-CMakeFiles/mozart.dir/src/process_win32.cpp.o: ../src/process_win32.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mozart.dir/src/process_win32.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/src/process_win32.cpp.o -c /mnt/d/mywork/csman/src/process_win32.cpp
+CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o: CMakeFiles/mozart.dir/flags.make
+CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o: ../mozart/src/process_win32.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o -c /mnt/d/mywork/csman/mozart/src/process_win32.cpp
 
-CMakeFiles/mozart.dir/src/process_win32.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/src/process_win32.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/src/process_win32.cpp > CMakeFiles/mozart.dir/src/process_win32.cpp.i
+CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/mywork/csman/mozart/src/process_win32.cpp > CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.i
 
-CMakeFiles/mozart.dir/src/process_win32.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/src/process_win32.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/src/process_win32.cpp -o CMakeFiles/mozart.dir/src/process_win32.cpp.s
+CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/mywork/csman/mozart/src/process_win32.cpp -o CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.s
 
 # Object files for target mozart
 mozart_OBJECTS = \
-"CMakeFiles/mozart.dir/src/core.cpp.o" \
-"CMakeFiles/mozart.dir/src/process.cpp.o" \
-"CMakeFiles/mozart.dir/src/process_unix.cpp.o" \
-"CMakeFiles/mozart.dir/src/process_win32.cpp.o"
+"CMakeFiles/mozart.dir/mozart/src/core.cpp.o" \
+"CMakeFiles/mozart.dir/mozart/src/process.cpp.o" \
+"CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o" \
+"CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o"
 
 # External object files for target mozart
 mozart_EXTERNAL_OBJECTS =
 
-libmozart.a: CMakeFiles/mozart.dir/src/core.cpp.o
-libmozart.a: CMakeFiles/mozart.dir/src/process.cpp.o
-libmozart.a: CMakeFiles/mozart.dir/src/process_unix.cpp.o
-libmozart.a: CMakeFiles/mozart.dir/src/process_win32.cpp.o
+libmozart.a: CMakeFiles/mozart.dir/mozart/src/core.cpp.o
+libmozart.a: CMakeFiles/mozart.dir/mozart/src/process.cpp.o
+libmozart.a: CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o
+libmozart.a: CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o
 libmozart.a: CMakeFiles/mozart.dir/build.make
 libmozart.a: CMakeFiles/mozart.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libmozart.a"

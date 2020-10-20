@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/d/mywork/csman/include -I/mnt/d/mywork/csman/jsoncpp_DIR -I/mnt/d/mywork/csman/curl_DIR -I/mnt/d/mywork/csman/Zipper_DIR
+CXX_INCLUDES = -I/mnt/d/mywork/csman/./mozart/include
 
 CXX_FLAGS = -g -std=gnu++1z
 

@@ -5,7 +5,7 @@
 		<Option title="csman"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/mnt/d/mywork/csman/cmake-build-debug"/>
@@ -44,10 +44,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/mnt/d/mywork/csman/include"/>
-					<Add directory="/mnt/d/mywork/csman/jsoncpp_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/curl_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/Zipper_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/./mozart/include"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -71,10 +68,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/mnt/d/mywork/csman/include"/>
-					<Add directory="/mnt/d/mywork/csman/jsoncpp_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/curl_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/Zipper_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/./mozart/include"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -98,10 +92,7 @@
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/mnt/d/mywork/csman/include"/>
-					<Add directory="/mnt/d/mywork/csman/jsoncpp_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/curl_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/Zipper_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/./mozart/include"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -125,10 +116,7 @@
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/mnt/d/mywork/csman/include"/>
-					<Add directory="/mnt/d/mywork/csman/jsoncpp_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/curl_DIR"/>
-					<Add directory="/mnt/d/mywork/csman/Zipper_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/./mozart/include"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -145,36 +133,84 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="csman_src">
+				<Option output="/mnt/d/mywork/csman/cmake-build-debug/src/libcsman_src.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/d/mywork/csman/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/d/mywork/csman/./mozart/include"/>
+					<Add directory="/mnt/d/mywork/csman/src/jsoncpp_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/src/curl_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/src/Zipper_DIR"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 csman_src"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="csman_src/fast">
+				<Option output="/mnt/d/mywork/csman/cmake-build-debug/src/libcsman_src.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/d/mywork/csman/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/d/mywork/csman/./mozart/include"/>
+					<Add directory="/mnt/d/mywork/csman/src/jsoncpp_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/src/curl_DIR"/>
+					<Add directory="/mnt/d/mywork/csman/src/Zipper_DIR"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 csman_src/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/d/mywork/csman/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
-		<Unit filename="/mnt/d/mywork/csman/Command.cpp">
-			<Option target="csman"/>
-		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/Command.hpp">
-			<Option target="csman"/>
-		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/CsmBase.cpp">
-			<Option target="csman"/>
-		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/CsmBase.hpp">
-			<Option target="csman"/>
-		</Unit>
 		<Unit filename="/mnt/d/mywork/csman/main.cpp">
 			<Option target="csman"/>
 		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/src/core.cpp">
+		<Unit filename="/mnt/d/mywork/csman/mozart/src/core.cpp">
 			<Option target="mozart"/>
 		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/src/process.cpp">
+		<Unit filename="/mnt/d/mywork/csman/mozart/src/process.cpp">
 			<Option target="mozart"/>
 		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/src/process_unix.cpp">
+		<Unit filename="/mnt/d/mywork/csman/mozart/src/process_unix.cpp">
 			<Option target="mozart"/>
 		</Unit>
-		<Unit filename="/mnt/d/mywork/csman/src/process_win32.cpp">
+		<Unit filename="/mnt/d/mywork/csman/mozart/src/process_win32.cpp">
 			<Option target="mozart"/>
+		</Unit>
+		<Unit filename="/mnt/d/mywork/csman/src">
+			<Option target="csman_src"/>
 		</Unit>
 		<Unit filename="/mnt/d/mywork/csman/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/d/mywork/csman/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>
