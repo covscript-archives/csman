@@ -107,107 +107,109 @@
 #endif
 
 namespace mpp {
-    /**
-     * Path seperator and delimiter
-     */
+	/**
+	 * Path seperator and delimiter
+	 */
 #ifdef MOZART_PLATFORM_WIN32
-    constexpr char path_separator = '\\';
-    constexpr char path_delimiter = ';';
+	constexpr char path_separator = '\\';
+	constexpr char path_delimiter = ';';
 #else
-    constexpr char path_separator = '/';
-    constexpr char path_delimiter = ':';
+	constexpr char path_separator = '/';
+	constexpr char path_delimiter = ':';
 #endif
 
-    using byte_t = std::uint8_t;
+	using byte_t = std::uint8_t;
 
-    /* Import basic types and functions */
-    using std::size_t;
-    using std::declval;
-    using std::forward;
-    using std::memcpy;
-    using std::move;
-    using std::swap;
+	/* Import basic types and functions */
+	using std::size_t;
+	using std::declval;
+	using std::forward;
+	using std::memcpy;
+	using std::move;
+	using std::swap;
 
-    /**
-     * Alignment
-     */
-    template <typename type>
-    using aligned_type = std::aligned_storage_t<sizeof(type), std::alignment_of<type>::value>;
+	/**
+	 * Alignment
+	 */
+	template <typename type>
+	using aligned_type = std::aligned_storage_t<sizeof(type), std::alignment_of<type>::value>;
 
-    template <size_t len, typename ...types>
-    using aligned_union = std::aligned_union_t<len, types...>;
+	template <size_t len, typename ...types>
+	using aligned_union = std::aligned_union_t<len, types...>;
 
-    inline byte_t *uninitialized_copy(byte_t *dest, byte_t *src, size_t count) noexcept;
+	inline byte_t *uninitialized_copy(byte_t *dest, byte_t *src, size_t count) noexcept;
 
-    template <typename T, typename ...Args>
-    inline static void construct_at(byte_t *ptr, Args &&...args) {
-        ::new(ptr) T(forward<Args>(args)...);
-    }
+	template <typename T, typename ...Args>
+	inline static void construct_at(byte_t *ptr, Args &&...args)
+	{
+		::new(ptr) T(forward<Args>(args)...);
+	}
 
-    template <typename T>
-    inline static void destroy_at(byte_t *ptr) {
-        reinterpret_cast<T *>(ptr)->~T();
-    }
+	template <typename T>
+	inline static void destroy_at(byte_t *ptr)
+	{
+		reinterpret_cast<T *>(ptr)->~T();
+	}
 
-    class object {
-    public:
-        constexpr object() = default;
+	class object {
+	public:
+		constexpr object() = default;
 
-        object(const object &) = default;
+		object(const object &) = default;
 
-        object(object &&) noexcept = default;
+		object(object &&) noexcept = default;
 
-        virtual ~object() = default;
+		virtual ~object() = default;
 
-        object &operator=(const object &) = default;
+		object &operator=(const object &) = default;
 
-        object &operator=(object &&) = default;
-    };
+		object &operator=(object &&) = default;
+	};
 
-    class nocopyable {
-    public:
-        nocopyable() = default;
+	class nocopyable {
+	public:
+		nocopyable() = default;
 
-        nocopyable(const nocopyable &) = delete;
+		nocopyable(const nocopyable &) = delete;
 
-        nocopyable(nocopyable &&) noexcept = default;
+		nocopyable(nocopyable &&) noexcept = default;
 
-        ~nocopyable() = default;
+		~nocopyable() = default;
 
-        nocopyable &operator=(const nocopyable &) = delete;
+		nocopyable &operator=(const nocopyable &) = delete;
 
-        nocopyable &operator=(nocopyable &&) = default;
-    };
+		nocopyable &operator=(nocopyable &&) = default;
+	};
 
-    class nomovable {
-    public:
-        nomovable() = default;
+	class nomovable {
+	public:
+		nomovable() = default;
 
-        nomovable(const nomovable &) = default;
+		nomovable(const nomovable &) = default;
 
-        nomovable(nomovable &&) noexcept = delete;
+		nomovable(nomovable &&) noexcept = delete;
 
-        ~nomovable() = default;
+		~nomovable() = default;
 
-        nomovable &operator=(const nomovable &) = default;
+		nomovable &operator=(const nomovable &) = default;
 
-        nomovable &operator=(nomovable &&) = delete;
-    };
+		nomovable &operator=(nomovable &&) = delete;
+	};
 
-    class singleton : public object, public nocopyable, public nomovable {
-    protected:
-        singleton() = default;
-    };
+	class singleton : public object, public nocopyable, public nomovable {
+	protected:
+		singleton() = default;
+	};
 
-    /**
-     * Name demangle.
-     *
-     * @param mangled mangled type name.
-     * @return Human-readable type name.
-     */
-    std::string cxx_demangle(const char *mangled);
+	/**
+	 * Name demangle.
+	 *
+	 * @param mangled mangled type name.
+	 * @return Human-readable type name.
+	 */
+	std::string cxx_demangle(const char *mangled);
 }
 
 namespace mpp_impl {
-    // Not implemented yet
+// Not implemented yet
 }
