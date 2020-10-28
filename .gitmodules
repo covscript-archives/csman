@@ -1,0 +1,6 @@
+[submodule "imports/zipper"]
+	path = imports/zipper
+	url = https://github.com/sebastiandev/zipper
+[submodule "imports/jsoncpp"]
+	path = imports/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp

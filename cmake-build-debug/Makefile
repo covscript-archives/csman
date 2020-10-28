@@ -76,6 +76,39 @@ CMAKE_BINARY_DIR = /Users/mikecovlee/work/rend/csman/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"lib\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cpack" --config ./CPackSourceConfig.cmake /Users/mikecovlee/work/rend/csman/cmake-build-debug/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+
+.PHONY : package_source/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -97,6 +130,41 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cpack" --config ./CPackConfig.cmake
+.PHONY : package
+
+# Special rule for the target package
+package/fast: package
+
+.PHONY : package/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -P cmake_install.cmake
+.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -153,156 +221,649 @@ mozart: cmake_check_build_system
 
 # fast build rule for target.
 mozart/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/build
+	$(MAKE) $(MAKESILENT) -f imports/mozart/CMakeFiles/mozart.dir/build.make imports/mozart/CMakeFiles/mozart.dir/build
 .PHONY : mozart/fast
 
 #=============================================================================
-# Target rules for targets named csman_src
+# Target rules for targets named ContinuousCoverage
 
 # Build rule for target.
-csman_src: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 csman_src
-.PHONY : csman_src
+ContinuousCoverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousCoverage
+.PHONY : ContinuousCoverage
 
 # fast build rule for target.
-csman_src/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/csman_src.dir/build.make src/CMakeFiles/csman_src.dir/build
-.PHONY : csman_src/fast
+ContinuousCoverage/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousCoverage.dir/build.make imports/zipper/CMakeFiles/ContinuousCoverage.dir/build
+.PHONY : ContinuousCoverage/fast
 
-main.o: main.cpp.o
+#=============================================================================
+# Target rules for targets named ContinuousTest
 
-.PHONY : main.o
+# Build rule for target.
+ContinuousTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousTest
+.PHONY : ContinuousTest
+
+# fast build rule for target.
+ContinuousTest/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousTest.dir/build.make imports/zipper/CMakeFiles/ContinuousTest.dir/build
+.PHONY : ContinuousTest/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousBuild
+
+# Build rule for target.
+ContinuousBuild: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousBuild
+.PHONY : ContinuousBuild
+
+# fast build rule for target.
+ContinuousBuild/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousBuild.dir/build.make imports/zipper/CMakeFiles/ContinuousBuild.dir/build
+.PHONY : ContinuousBuild/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousUpdate
+
+# Build rule for target.
+ContinuousUpdate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousUpdate
+.PHONY : ContinuousUpdate
+
+# fast build rule for target.
+ContinuousUpdate/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousUpdate.dir/build.make imports/zipper/CMakeFiles/ContinuousUpdate.dir/build
+.PHONY : ContinuousUpdate/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousStart
+
+# Build rule for target.
+ContinuousStart: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousStart
+.PHONY : ContinuousStart
+
+# fast build rule for target.
+ContinuousStart/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousStart.dir/build.make imports/zipper/CMakeFiles/ContinuousStart.dir/build
+.PHONY : ContinuousStart/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalMemCheck
+
+# Build rule for target.
+ExperimentalMemCheck: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalMemCheck
+.PHONY : ExperimentalMemCheck
+
+# fast build rule for target.
+ExperimentalMemCheck/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalMemCheck.dir/build.make imports/zipper/CMakeFiles/ExperimentalMemCheck.dir/build
+.PHONY : ExperimentalMemCheck/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalSubmit
+
+# Build rule for target.
+ExperimentalSubmit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalSubmit
+.PHONY : ExperimentalSubmit
+
+# fast build rule for target.
+ExperimentalSubmit/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalSubmit.dir/build.make imports/zipper/CMakeFiles/ExperimentalSubmit.dir/build
+.PHONY : ExperimentalSubmit/fast
+
+#=============================================================================
+# Target rules for targets named dist
+
+# Build rule for target.
+dist: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dist
+.PHONY : dist
+
+# fast build rule for target.
+dist/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/dist.dir/build.make imports/zipper/CMakeFiles/dist.dir/build
+.PHONY : dist/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalCoverage
+
+# Build rule for target.
+ExperimentalCoverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalCoverage
+.PHONY : ExperimentalCoverage
+
+# fast build rule for target.
+ExperimentalCoverage/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalCoverage.dir/build.make imports/zipper/CMakeFiles/ExperimentalCoverage.dir/build
+.PHONY : ExperimentalCoverage/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalBuild
+
+# Build rule for target.
+ExperimentalBuild: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalBuild
+.PHONY : ExperimentalBuild
+
+# fast build rule for target.
+ExperimentalBuild/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalBuild.dir/build.make imports/zipper/CMakeFiles/ExperimentalBuild.dir/build
+.PHONY : ExperimentalBuild/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalStart
+
+# Build rule for target.
+ExperimentalStart: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalStart
+.PHONY : ExperimentalStart
+
+# fast build rule for target.
+ExperimentalStart/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalStart.dir/build.make imports/zipper/CMakeFiles/ExperimentalStart.dir/build
+.PHONY : ExperimentalStart/fast
+
+#=============================================================================
+# Target rules for targets named Zipper-test
+
+# Build rule for target.
+Zipper-test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Zipper-test
+.PHONY : Zipper-test
+
+# fast build rule for target.
+Zipper-test/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/Zipper-test.dir/build.make imports/zipper/CMakeFiles/Zipper-test.dir/build
+.PHONY : Zipper-test/fast
+
+#=============================================================================
+# Target rules for targets named Zipper-static
+
+# Build rule for target.
+Zipper-static: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Zipper-static
+.PHONY : Zipper-static
+
+# fast build rule for target.
+Zipper-static/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/Zipper-static.dir/build.make imports/zipper/CMakeFiles/Zipper-static.dir/build
+.PHONY : Zipper-static/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalConfigure
+
+# Build rule for target.
+ExperimentalConfigure: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalConfigure
+.PHONY : ExperimentalConfigure
+
+# fast build rule for target.
+ExperimentalConfigure/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalConfigure.dir/build.make imports/zipper/CMakeFiles/ExperimentalConfigure.dir/build
+.PHONY : ExperimentalConfigure/fast
+
+#=============================================================================
+# Target rules for targets named NightlyCoverage
+
+# Build rule for target.
+NightlyCoverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyCoverage
+.PHONY : NightlyCoverage
+
+# fast build rule for target.
+NightlyCoverage/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyCoverage.dir/build.make imports/zipper/CMakeFiles/NightlyCoverage.dir/build
+.PHONY : NightlyCoverage/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousMemCheck
+
+# Build rule for target.
+ContinuousMemCheck: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousMemCheck
+.PHONY : ContinuousMemCheck
+
+# fast build rule for target.
+ContinuousMemCheck/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousMemCheck.dir/build.make imports/zipper/CMakeFiles/ContinuousMemCheck.dir/build
+.PHONY : ContinuousMemCheck/fast
+
+#=============================================================================
+# Target rules for targets named NightlyBuild
+
+# Build rule for target.
+NightlyBuild: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyBuild
+.PHONY : NightlyBuild
+
+# fast build rule for target.
+NightlyBuild/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyBuild.dir/build.make imports/zipper/CMakeFiles/NightlyBuild.dir/build
+.PHONY : NightlyBuild/fast
+
+#=============================================================================
+# Target rules for targets named NightlyConfigure
+
+# Build rule for target.
+NightlyConfigure: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyConfigure
+.PHONY : NightlyConfigure
+
+# fast build rule for target.
+NightlyConfigure/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyConfigure.dir/build.make imports/zipper/CMakeFiles/NightlyConfigure.dir/build
+.PHONY : NightlyConfigure/fast
+
+#=============================================================================
+# Target rules for targets named NightlyUpdate
+
+# Build rule for target.
+NightlyUpdate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyUpdate
+.PHONY : NightlyUpdate
+
+# fast build rule for target.
+NightlyUpdate/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyUpdate.dir/build.make imports/zipper/CMakeFiles/NightlyUpdate.dir/build
+.PHONY : NightlyUpdate/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousConfigure
+
+# Build rule for target.
+ContinuousConfigure: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousConfigure
+.PHONY : ContinuousConfigure
+
+# fast build rule for target.
+ContinuousConfigure/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousConfigure.dir/build.make imports/zipper/CMakeFiles/ContinuousConfigure.dir/build
+.PHONY : ContinuousConfigure/fast
+
+#=============================================================================
+# Target rules for targets named check
+
+# Build rule for target.
+check: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 check
+.PHONY : check
+
+# fast build rule for target.
+check/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/check.dir/build.make imports/zipper/CMakeFiles/check.dir/build
+.PHONY : check/fast
+
+#=============================================================================
+# Target rules for targets named NightlyMemoryCheck
+
+# Build rule for target.
+NightlyMemoryCheck: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyMemoryCheck
+.PHONY : NightlyMemoryCheck
+
+# fast build rule for target.
+NightlyMemoryCheck/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyMemoryCheck.dir/build.make imports/zipper/CMakeFiles/NightlyMemoryCheck.dir/build
+.PHONY : NightlyMemoryCheck/fast
+
+#=============================================================================
+# Target rules for targets named Continuous
+
+# Build rule for target.
+Continuous: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Continuous
+.PHONY : Continuous
+
+# fast build rule for target.
+Continuous/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/Continuous.dir/build.make imports/zipper/CMakeFiles/Continuous.dir/build
+.PHONY : Continuous/fast
+
+#=============================================================================
+# Target rules for targets named NightlyStart
+
+# Build rule for target.
+NightlyStart: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyStart
+.PHONY : NightlyStart
+
+# fast build rule for target.
+NightlyStart/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyStart.dir/build.make imports/zipper/CMakeFiles/NightlyStart.dir/build
+.PHONY : NightlyStart/fast
+
+#=============================================================================
+# Target rules for targets named Nightly
+
+# Build rule for target.
+Nightly: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Nightly
+.PHONY : Nightly
+
+# fast build rule for target.
+Nightly/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/Nightly.dir/build.make imports/zipper/CMakeFiles/Nightly.dir/build
+.PHONY : Nightly/fast
+
+#=============================================================================
+# Target rules for targets named Experimental
+
+# Build rule for target.
+Experimental: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Experimental
+.PHONY : Experimental
+
+# fast build rule for target.
+Experimental/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/Experimental.dir/build.make imports/zipper/CMakeFiles/Experimental.dir/build
+.PHONY : Experimental/fast
+
+#=============================================================================
+# Target rules for targets named NightlyMemCheck
+
+# Build rule for target.
+NightlyMemCheck: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyMemCheck
+.PHONY : NightlyMemCheck
+
+# fast build rule for target.
+NightlyMemCheck/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyMemCheck.dir/build.make imports/zipper/CMakeFiles/NightlyMemCheck.dir/build
+.PHONY : NightlyMemCheck/fast
+
+#=============================================================================
+# Target rules for targets named staticZipper
+
+# Build rule for target.
+staticZipper: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 staticZipper
+.PHONY : staticZipper
+
+# fast build rule for target.
+staticZipper/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/staticZipper.dir/build.make imports/zipper/CMakeFiles/staticZipper.dir/build
+.PHONY : staticZipper/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousSubmit
+
+# Build rule for target.
+ContinuousSubmit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ContinuousSubmit
+.PHONY : ContinuousSubmit
+
+# fast build rule for target.
+ContinuousSubmit/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ContinuousSubmit.dir/build.make imports/zipper/CMakeFiles/ContinuousSubmit.dir/build
+.PHONY : ContinuousSubmit/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalTest
+
+# Build rule for target.
+ExperimentalTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalTest
+.PHONY : ExperimentalTest
+
+# fast build rule for target.
+ExperimentalTest/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalTest.dir/build.make imports/zipper/CMakeFiles/ExperimentalTest.dir/build
+.PHONY : ExperimentalTest/fast
+
+#=============================================================================
+# Target rules for targets named NightlySubmit
+
+# Build rule for target.
+NightlySubmit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlySubmit
+.PHONY : NightlySubmit
+
+# fast build rule for target.
+NightlySubmit/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlySubmit.dir/build.make imports/zipper/CMakeFiles/NightlySubmit.dir/build
+.PHONY : NightlySubmit/fast
+
+#=============================================================================
+# Target rules for targets named Zipper
+
+# Build rule for target.
+Zipper: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Zipper
+.PHONY : Zipper
+
+# fast build rule for target.
+Zipper/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/Zipper.dir/build.make imports/zipper/CMakeFiles/Zipper.dir/build
+.PHONY : Zipper/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalUpdate
+
+# Build rule for target.
+ExperimentalUpdate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ExperimentalUpdate
+.PHONY : ExperimentalUpdate
+
+# fast build rule for target.
+ExperimentalUpdate/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/ExperimentalUpdate.dir/build.make imports/zipper/CMakeFiles/ExperimentalUpdate.dir/build
+.PHONY : ExperimentalUpdate/fast
+
+#=============================================================================
+# Target rules for targets named NightlyTest
+
+# Build rule for target.
+NightlyTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 NightlyTest
+.PHONY : NightlyTest
+
+# fast build rule for target.
+NightlyTest/fast:
+	$(MAKE) $(MAKESILENT) -f imports/zipper/CMakeFiles/NightlyTest.dir/build.make imports/zipper/CMakeFiles/NightlyTest.dir/build
+.PHONY : NightlyTest/fast
+
+#=============================================================================
+# Target rules for targets named jsoncpp_lib
+
+# Build rule for target.
+jsoncpp_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsoncpp_lib
+.PHONY : jsoncpp_lib
+
+# fast build rule for target.
+jsoncpp_lib/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/lib_json/CMakeFiles/jsoncpp_lib.dir/build.make imports/jsoncpp/src/lib_json/CMakeFiles/jsoncpp_lib.dir/build
+.PHONY : jsoncpp_lib/fast
+
+#=============================================================================
+# Target rules for targets named jsoncpp_object
+
+# Build rule for target.
+jsoncpp_object: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsoncpp_object
+.PHONY : jsoncpp_object
+
+# fast build rule for target.
+jsoncpp_object/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/lib_json/CMakeFiles/jsoncpp_object.dir/build.make imports/jsoncpp/src/lib_json/CMakeFiles/jsoncpp_object.dir/build
+.PHONY : jsoncpp_object/fast
+
+#=============================================================================
+# Target rules for targets named jsoncpp_static
+
+# Build rule for target.
+jsoncpp_static: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsoncpp_static
+.PHONY : jsoncpp_static
+
+# fast build rule for target.
+jsoncpp_static/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/lib_json/CMakeFiles/jsoncpp_static.dir/build.make imports/jsoncpp/src/lib_json/CMakeFiles/jsoncpp_static.dir/build
+.PHONY : jsoncpp_static/fast
+
+#=============================================================================
+# Target rules for targets named jsontestrunner_exe
+
+# Build rule for target.
+jsontestrunner_exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsontestrunner_exe
+.PHONY : jsontestrunner_exe
+
+# fast build rule for target.
+jsontestrunner_exe/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make imports/jsoncpp/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build
+.PHONY : jsontestrunner_exe/fast
+
+#=============================================================================
+# Target rules for targets named jsoncpp_check
+
+# Build rule for target.
+jsoncpp_check: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsoncpp_check
+.PHONY : jsoncpp_check
+
+# fast build rule for target.
+jsoncpp_check/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build.make imports/jsoncpp/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build
+.PHONY : jsoncpp_check/fast
+
+#=============================================================================
+# Target rules for targets named jsoncpp_readerwriter_tests
+
+# Build rule for target.
+jsoncpp_readerwriter_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsoncpp_readerwriter_tests
+.PHONY : jsoncpp_readerwriter_tests
+
+# fast build rule for target.
+jsoncpp_readerwriter_tests/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build.make imports/jsoncpp/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build
+.PHONY : jsoncpp_readerwriter_tests/fast
+
+#=============================================================================
+# Target rules for targets named jsoncpp_test
+
+# Build rule for target.
+jsoncpp_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jsoncpp_test
+.PHONY : jsoncpp_test
+
+# fast build rule for target.
+jsoncpp_test/fast:
+	$(MAKE) $(MAKESILENT) -f imports/jsoncpp/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/build.make imports/jsoncpp/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/build
+.PHONY : jsoncpp_test/fast
+
+csman.o: csman.cpp.o
+
+.PHONY : csman.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/main.cpp.o
-.PHONY : main.cpp.o
+csman.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/csman.cpp.o
+.PHONY : csman.cpp.o
 
-main.i: main.cpp.i
+csman.i: csman.cpp.i
 
-.PHONY : main.i
+.PHONY : csman.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/main.cpp.i
-.PHONY : main.cpp.i
+csman.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/csman.cpp.i
+.PHONY : csman.cpp.i
 
-main.s: main.cpp.s
+csman.s: csman.cpp.s
 
-.PHONY : main.s
+.PHONY : csman.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/main.cpp.s
-.PHONY : main.cpp.s
+csman.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/csman.cpp.s
+.PHONY : csman.cpp.s
 
-mozart/src/core.o: mozart/src/core.cpp.o
+src/Command.o: src/Command.cpp.o
 
-.PHONY : mozart/src/core.o
+.PHONY : src/Command.o
 
 # target to build an object file
-mozart/src/core.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/core.cpp.o
-.PHONY : mozart/src/core.cpp.o
+src/Command.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/Command.cpp.o
+.PHONY : src/Command.cpp.o
 
-mozart/src/core.i: mozart/src/core.cpp.i
+src/Command.i: src/Command.cpp.i
 
-.PHONY : mozart/src/core.i
+.PHONY : src/Command.i
 
 # target to preprocess a source file
-mozart/src/core.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/core.cpp.i
-.PHONY : mozart/src/core.cpp.i
+src/Command.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/Command.cpp.i
+.PHONY : src/Command.cpp.i
 
-mozart/src/core.s: mozart/src/core.cpp.s
+src/Command.s: src/Command.cpp.s
 
-.PHONY : mozart/src/core.s
+.PHONY : src/Command.s
 
 # target to generate assembly for a file
-mozart/src/core.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/core.cpp.s
-.PHONY : mozart/src/core.cpp.s
+src/Command.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/Command.cpp.s
+.PHONY : src/Command.cpp.s
 
-mozart/src/process.o: mozart/src/process.cpp.o
+src/CsmBase.o: src/CsmBase.cpp.o
 
-.PHONY : mozart/src/process.o
+.PHONY : src/CsmBase.o
 
 # target to build an object file
-mozart/src/process.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process.cpp.o
-.PHONY : mozart/src/process.cpp.o
+src/CsmBase.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/CsmBase.cpp.o
+.PHONY : src/CsmBase.cpp.o
 
-mozart/src/process.i: mozart/src/process.cpp.i
+src/CsmBase.i: src/CsmBase.cpp.i
 
-.PHONY : mozart/src/process.i
+.PHONY : src/CsmBase.i
 
 # target to preprocess a source file
-mozart/src/process.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process.cpp.i
-.PHONY : mozart/src/process.cpp.i
+src/CsmBase.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/CsmBase.cpp.i
+.PHONY : src/CsmBase.cpp.i
 
-mozart/src/process.s: mozart/src/process.cpp.s
+src/CsmBase.s: src/CsmBase.cpp.s
 
-.PHONY : mozart/src/process.s
+.PHONY : src/CsmBase.s
 
 # target to generate assembly for a file
-mozart/src/process.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process.cpp.s
-.PHONY : mozart/src/process.cpp.s
+src/CsmBase.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/CsmBase.cpp.s
+.PHONY : src/CsmBase.cpp.s
 
-mozart/src/process_unix.o: mozart/src/process_unix.cpp.o
+src/CsmConfig.o: src/CsmConfig.cpp.o
 
-.PHONY : mozart/src/process_unix.o
+.PHONY : src/CsmConfig.o
 
 # target to build an object file
-mozart/src/process_unix.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.o
-.PHONY : mozart/src/process_unix.cpp.o
+src/CsmConfig.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/CsmConfig.cpp.o
+.PHONY : src/CsmConfig.cpp.o
 
-mozart/src/process_unix.i: mozart/src/process_unix.cpp.i
+src/CsmConfig.i: src/CsmConfig.cpp.i
 
-.PHONY : mozart/src/process_unix.i
-
-# target to preprocess a source file
-mozart/src/process_unix.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.i
-.PHONY : mozart/src/process_unix.cpp.i
-
-mozart/src/process_unix.s: mozart/src/process_unix.cpp.s
-
-.PHONY : mozart/src/process_unix.s
-
-# target to generate assembly for a file
-mozart/src/process_unix.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_unix.cpp.s
-.PHONY : mozart/src/process_unix.cpp.s
-
-mozart/src/process_win32.o: mozart/src/process_win32.cpp.o
-
-.PHONY : mozart/src/process_win32.o
-
-# target to build an object file
-mozart/src/process_win32.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.o
-.PHONY : mozart/src/process_win32.cpp.o
-
-mozart/src/process_win32.i: mozart/src/process_win32.cpp.i
-
-.PHONY : mozart/src/process_win32.i
+.PHONY : src/CsmConfig.i
 
 # target to preprocess a source file
-mozart/src/process_win32.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.i
-.PHONY : mozart/src/process_win32.cpp.i
+src/CsmConfig.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/CsmConfig.cpp.i
+.PHONY : src/CsmConfig.cpp.i
 
-mozart/src/process_win32.s: mozart/src/process_win32.cpp.s
+src/CsmConfig.s: src/CsmConfig.cpp.s
 
-.PHONY : mozart/src/process_win32.s
+.PHONY : src/CsmConfig.s
 
 # target to generate assembly for a file
-mozart/src/process_win32.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mozart.dir/build.make CMakeFiles/mozart.dir/mozart/src/process_win32.cpp.s
-.PHONY : mozart/src/process_win32.cpp.s
+src/CsmConfig.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/csman.dir/build.make CMakeFiles/csman.dir/src/CsmConfig.cpp.s
+.PHONY : src/CsmConfig.cpp.s
 
 # Help Target
 help:
@@ -311,25 +872,68 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
+	@echo "... package"
+	@echo "... package_source"
 	@echo "... rebuild_cache"
+	@echo "... Continuous"
+	@echo "... ContinuousBuild"
+	@echo "... ContinuousConfigure"
+	@echo "... ContinuousCoverage"
+	@echo "... ContinuousMemCheck"
+	@echo "... ContinuousStart"
+	@echo "... ContinuousSubmit"
+	@echo "... ContinuousTest"
+	@echo "... ContinuousUpdate"
+	@echo "... Experimental"
+	@echo "... ExperimentalBuild"
+	@echo "... ExperimentalConfigure"
+	@echo "... ExperimentalCoverage"
+	@echo "... ExperimentalMemCheck"
+	@echo "... ExperimentalStart"
+	@echo "... ExperimentalSubmit"
+	@echo "... ExperimentalTest"
+	@echo "... ExperimentalUpdate"
+	@echo "... Nightly"
+	@echo "... NightlyBuild"
+	@echo "... NightlyConfigure"
+	@echo "... NightlyCoverage"
+	@echo "... NightlyMemCheck"
+	@echo "... NightlyMemoryCheck"
+	@echo "... NightlyStart"
+	@echo "... NightlySubmit"
+	@echo "... NightlyTest"
+	@echo "... NightlyUpdate"
+	@echo "... check"
+	@echo "... dist"
+	@echo "... jsoncpp_check"
+	@echo "... jsoncpp_readerwriter_tests"
+	@echo "... Zipper"
+	@echo "... Zipper-static"
+	@echo "... Zipper-test"
 	@echo "... csman"
-	@echo "... csman_src"
+	@echo "... jsoncpp_lib"
+	@echo "... jsoncpp_object"
+	@echo "... jsoncpp_static"
+	@echo "... jsoncpp_test"
+	@echo "... jsontestrunner_exe"
 	@echo "... mozart"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... mozart/src/core.o"
-	@echo "... mozart/src/core.i"
-	@echo "... mozart/src/core.s"
-	@echo "... mozart/src/process.o"
-	@echo "... mozart/src/process.i"
-	@echo "... mozart/src/process.s"
-	@echo "... mozart/src/process_unix.o"
-	@echo "... mozart/src/process_unix.i"
-	@echo "... mozart/src/process_unix.s"
-	@echo "... mozart/src/process_win32.o"
-	@echo "... mozart/src/process_win32.i"
-	@echo "... mozart/src/process_win32.s"
+	@echo "... staticZipper"
+	@echo "... csman.o"
+	@echo "... csman.i"
+	@echo "... csman.s"
+	@echo "... src/Command.o"
+	@echo "... src/Command.i"
+	@echo "... src/Command.s"
+	@echo "... src/CsmBase.o"
+	@echo "... src/CsmBase.i"
+	@echo "... src/CsmBase.s"
+	@echo "... src/CsmConfig.o"
+	@echo "... src/CsmConfig.i"
+	@echo "... src/CsmConfig.s"
 .PHONY : help
 
 

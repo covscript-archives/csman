@@ -284,3 +284,121 @@ Parsed CXX implicit link information from above output:
   implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks]
 
 
+Determining if the function gzopen exists in the /usr/lib/libz.dylib passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_80df0/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_80df0.dir/build.make CMakeFiles/cmTC_80df0.dir/build
+Building C object CMakeFiles/cmTC_80df0.dir/CheckFunctionExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gzopen -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_80df0.dir/CheckFunctionExists.c.o   -c "/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_80df0
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_80df0.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=gzopen -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_80df0.dir/CheckFunctionExists.c.o  -o cmTC_80df0  /usr/lib/libz.dylib 
+
+
+
+Determining if the include file clocale exists passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2d076/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_2d076.dir/build.make CMakeFiles/cmTC_2d076.dir/build
+Building CXX object CMakeFiles/cmTC_2d076.dir/CheckIncludeFile.cxx.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_2d076.dir/CheckIncludeFile.cxx.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+Linking CXX executable cmTC_2d076
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_2d076.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_2d076.dir/CheckIncludeFile.cxx.o  -o cmTC_2d076 
+
+
+
+Determining if the localeconv exist passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b423a/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_b423a.dir/build.make CMakeFiles/cmTC_b423a.dir/build
+Building CXX object CMakeFiles/cmTC_b423a.dir/CheckSymbolExists.cxx.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_b423a.dir/CheckSymbolExists.cxx.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTC_b423a
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_b423a.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_b423a.dir/CheckSymbolExists.cxx.o  -o cmTC_b423a 
+
+
+File /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <clocale>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef localeconv
+  return ((int*)(&localeconv))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cdb0a/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_cdb0a.dir/build.make CMakeFiles/cmTC_cdb0a.dir/build
+Building CXX object CMakeFiles/cmTC_cdb0a.dir/CheckIncludeFile.cxx.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_cdb0a.dir/CheckIncludeFile.cxx.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+Linking CXX executable cmTC_cdb0a
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_cdb0a.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_cdb0a.dir/CheckIncludeFile.cxx.o  -o cmTC_cdb0a 
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bd4a8/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_bd4a8.dir/build.make CMakeFiles/cmTC_bd4a8.dir/build
+Building CXX object CMakeFiles/cmTC_bd4a8.dir/CheckIncludeFile.cxx.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_bd4a8.dir/CheckIncludeFile.cxx.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+Linking CXX executable cmTC_bd4a8
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_bd4a8.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_bd4a8.dir/CheckIncludeFile.cxx.o  -o cmTC_bd4a8 
+
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_569b3/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_569b3.dir/build.make CMakeFiles/cmTC_569b3.dir/build
+Building CXX object CMakeFiles/cmTC_569b3.dir/CheckIncludeFile.cxx.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_569b3.dir/CheckIncludeFile.cxx.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+Linking CXX executable cmTC_569b3
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_569b3.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_569b3.dir/CheckIncludeFile.cxx.o  -o cmTC_569b3 
+
+
+
+Determining size of lconv passed with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_17e1c/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_17e1c.dir/build.make CMakeFiles/cmTC_17e1c.dir/build
+Building CXX object CMakeFiles/cmTC_17e1c.dir/LCONV_SIZE.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_17e1c.dir/LCONV_SIZE.cpp.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CheckTypeSize/LCONV_SIZE.cpp
+Linking CXX executable cmTC_17e1c
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_17e1c.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++    -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_17e1c.dir/LCONV_SIZE.cpp.o  -o cmTC_17e1c 
+
+
+
+Performing C++ SOURCE FILE Test HAVE_DECIMAL_POINT succeeded with the following output:
+Change Dir: /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_505eb/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_505eb.dir/build.make CMakeFiles/cmTC_505eb.dir/build
+Building CXX object CMakeFiles/cmTC_505eb.dir/src.cxx.o
+/Library/Developer/CommandLineTools/usr/bin/c++    -DHAVE_DECIMAL_POINT -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_505eb.dir/src.cxx.o -c /Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_505eb
+"/Users/mikecovlee/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/202.6948.80/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_505eb.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/c++   -DHAVE_DECIMAL_POINT -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_505eb.dir/src.cxx.o  -o cmTC_505eb 
+
+
+Source file was:
+
+#include <clocale>
+
+int main()
+{
+  (void)sizeof(((lconv *)0)->decimal_point);
+  return 0;
+}
+

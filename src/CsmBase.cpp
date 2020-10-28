@@ -4,9 +4,11 @@
 
 #include "CsmBase.h"
 
+// Implementation of extern variables
 const std::string csmanVersion = "200930";
-std::string homePath,csmanPath, platform;
+std::string homePath, csmanPath, platform;
 int reconnectTime;
+CsmBase::Warning WarningQueue;
 
 // ________________
 // tools of CsmBase

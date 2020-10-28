@@ -77,37 +77,83 @@ include CMakeFiles/csman.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/csman.dir/flags.make
 
-CMakeFiles/csman.dir/main.cpp.o: CMakeFiles/csman.dir/flags.make
-CMakeFiles/csman.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/csman.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/main.cpp.o -c /Users/mikecovlee/work/rend/csman/main.cpp
+CMakeFiles/csman.dir/csman.cpp.o: CMakeFiles/csman.dir/flags.make
+CMakeFiles/csman.dir/csman.cpp.o: ../csman.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/csman.dir/csman.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/csman.cpp.o -c /Users/mikecovlee/work/rend/csman/csman.cpp
 
-CMakeFiles/csman.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mikecovlee/work/rend/csman/main.cpp > CMakeFiles/csman.dir/main.cpp.i
+CMakeFiles/csman.dir/csman.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/csman.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mikecovlee/work/rend/csman/csman.cpp > CMakeFiles/csman.dir/csman.cpp.i
 
-CMakeFiles/csman.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mikecovlee/work/rend/csman/main.cpp -o CMakeFiles/csman.dir/main.cpp.s
+CMakeFiles/csman.dir/csman.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/csman.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mikecovlee/work/rend/csman/csman.cpp -o CMakeFiles/csman.dir/csman.cpp.s
+
+CMakeFiles/csman.dir/src/Command.cpp.o: CMakeFiles/csman.dir/flags.make
+CMakeFiles/csman.dir/src/Command.cpp.o: ../src/Command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/csman.dir/src/Command.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/src/Command.cpp.o -c /Users/mikecovlee/work/rend/csman/src/Command.cpp
+
+CMakeFiles/csman.dir/src/Command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/src/Command.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mikecovlee/work/rend/csman/src/Command.cpp > CMakeFiles/csman.dir/src/Command.cpp.i
+
+CMakeFiles/csman.dir/src/Command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/src/Command.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mikecovlee/work/rend/csman/src/Command.cpp -o CMakeFiles/csman.dir/src/Command.cpp.s
+
+CMakeFiles/csman.dir/src/CsmBase.cpp.o: CMakeFiles/csman.dir/flags.make
+CMakeFiles/csman.dir/src/CsmBase.cpp.o: ../src/CsmBase.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/csman.dir/src/CsmBase.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/src/CsmBase.cpp.o -c /Users/mikecovlee/work/rend/csman/src/CsmBase.cpp
+
+CMakeFiles/csman.dir/src/CsmBase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/src/CsmBase.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mikecovlee/work/rend/csman/src/CsmBase.cpp > CMakeFiles/csman.dir/src/CsmBase.cpp.i
+
+CMakeFiles/csman.dir/src/CsmBase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/src/CsmBase.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mikecovlee/work/rend/csman/src/CsmBase.cpp -o CMakeFiles/csman.dir/src/CsmBase.cpp.s
+
+CMakeFiles/csman.dir/src/CsmConfig.cpp.o: CMakeFiles/csman.dir/flags.make
+CMakeFiles/csman.dir/src/CsmConfig.cpp.o: ../src/CsmConfig.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/csman.dir/src/CsmConfig.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/csman.dir/src/CsmConfig.cpp.o -c /Users/mikecovlee/work/rend/csman/src/CsmConfig.cpp
+
+CMakeFiles/csman.dir/src/CsmConfig.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/csman.dir/src/CsmConfig.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mikecovlee/work/rend/csman/src/CsmConfig.cpp > CMakeFiles/csman.dir/src/CsmConfig.cpp.i
+
+CMakeFiles/csman.dir/src/CsmConfig.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/csman.dir/src/CsmConfig.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mikecovlee/work/rend/csman/src/CsmConfig.cpp -o CMakeFiles/csman.dir/src/CsmConfig.cpp.s
 
 # Object files for target csman
 csman_OBJECTS = \
-"CMakeFiles/csman.dir/main.cpp.o"
+"CMakeFiles/csman.dir/csman.cpp.o" \
+"CMakeFiles/csman.dir/src/Command.cpp.o" \
+"CMakeFiles/csman.dir/src/CsmBase.cpp.o" \
+"CMakeFiles/csman.dir/src/CsmConfig.cpp.o"
 
 # External object files for target csman
 csman_EXTERNAL_OBJECTS =
 
-csman: CMakeFiles/csman.dir/main.cpp.o
-csman: CMakeFiles/csman.dir/build.make
-csman: libmozart.a
-csman: src/libcsman_src.a
-csman: libmozart.a
-csman: CMakeFiles/csman.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable csman"
+bin/csman: CMakeFiles/csman.dir/csman.cpp.o
+bin/csman: CMakeFiles/csman.dir/src/Command.cpp.o
+bin/csman: CMakeFiles/csman.dir/src/CsmBase.cpp.o
+bin/csman: CMakeFiles/csman.dir/src/CsmConfig.cpp.o
+bin/csman: CMakeFiles/csman.dir/build.make
+bin/csman: lib/libmozart.dylib
+bin/csman: lib/libZipperd.a
+bin/csman: lib/libjsoncpp.1.9.4.dylib
+bin/csman: /usr/lib/libz.dylib
+bin/csman: CMakeFiles/csman.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable bin/csman"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/csman.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/csman.dir/build: csman
+CMakeFiles/csman.dir/build: bin/csman
 
 .PHONY : CMakeFiles/csman.dir/build
 

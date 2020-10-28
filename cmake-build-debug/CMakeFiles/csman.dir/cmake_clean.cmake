@@ -1,7 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/csman.dir/main.cpp.o"
-  "csman"
-  "csman.pdb"
+  "CMakeFiles/csman.dir/csman.cpp.o"
+  "CMakeFiles/csman.dir/src/Command.cpp.o"
+  "CMakeFiles/csman.dir/src/CsmBase.cpp.o"
+  "CMakeFiles/csman.dir/src/CsmConfig.cpp.o"
+  "bin/csman"
+  "bin/csman.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

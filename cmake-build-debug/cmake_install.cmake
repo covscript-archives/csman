@@ -34,7 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/mikecovlee/work/rend/csman/cmake-build-debug/src/cmake_install.cmake")
+  include("/Users/mikecovlee/work/rend/csman/cmake-build-debug/imports/mozart/cmake_install.cmake")
+  include("/Users/mikecovlee/work/rend/csman/cmake-build-debug/imports/zipper/cmake_install.cmake")
+  include("/Users/mikecovlee/work/rend/csman/cmake-build-debug/imports/jsoncpp/cmake_install.cmake")
 
 endif()
 
