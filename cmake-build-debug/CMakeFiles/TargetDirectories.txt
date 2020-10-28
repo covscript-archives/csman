@@ -1,7 +1,7 @@
-/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/csman.dir
-/mnt/d/mywork/csman/cmake-build-debug/CMakeFiles/mozart.dir
-/mnt/d/mywork/csman/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
-/mnt/d/mywork/csman/cmake-build-debug/src/CMakeFiles/edit_cache.dir
-/mnt/d/mywork/csman/cmake-build-debug/src/CMakeFiles/csman_src.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/csman.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/CMakeFiles/mozart.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/Users/mikecovlee/work/rend/csman/cmake-build-debug/src/CMakeFiles/csman_src.dir

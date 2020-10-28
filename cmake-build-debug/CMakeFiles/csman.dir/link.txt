@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/csman.dir/main.cpp.o -o csman  libmozart.a src/libcsman_src.a libmozart.a -ljsoncpp -lcurl -lZipper 
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/csman.dir/main.cpp.o  -o csman  libmozart.a src/libcsman_src.a libmozart.a -ljsoncpp -lcurl -lZipper 
