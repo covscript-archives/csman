@@ -483,18 +483,22 @@ void CsmConfig::Installed::Del(const std::string &name, const std::string &ver) 
 }
 
 bool CsmConfig::FileInitialize(CsmJsonFile *config, CsmJsonFile *sources, CsmJsonFile *installed) {
-    try{
-        config = new Config(homePath+"/.csman_config.json");
-        sources = new Sources(csmanPath+"sources.json");
-        installed = new Installed(csmanPath+"installed.json");
+    try {
+        config = new Config(homePath + "/.csman_config.json");
+        sources = new Sources(csmanPath + "sources.json");
+        installed = new Installed(csmanPath + "installed.json");
     }
     catch (CsmBase::CsmErr e) {
         CsmBase::WriteErrLog(e);
-        switch(e.errCode){
-            case CsmBase::CsmErr::ErrCodeClass::CsmanErr: break;
-            case CsmBase::CsmErr::ErrCodeClass::ArgErr: break;
-            case CsmBase::CsmErr::ErrCodeClass::ProtectErr: break;
-            case CsmBase::CsmErr::ErrCodeClass::NetWorkErr: break;
+        switch (e.errCode) {
+            case CsmBase::CsmErr::ErrCodeClass::CsmanErr:
+                break;
+            case CsmBase::CsmErr::ErrCodeClass::ArgErr:
+                break;
+            case CsmBase::CsmErr::ErrCodeClass::ProtectErr:
+                break;
+            case CsmBase::CsmErr::ErrCodeClass::NetWorkErr:
+                break;
         }
         return false;
     }

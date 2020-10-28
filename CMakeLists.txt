@@ -14,6 +14,6 @@ include_directories(imports/jsoncpp/include)
 
 aux_source_directory(src SRCS)
 
-add_executable(csman csman.cpp ${SRCS})
+add_executable(csman ${SRCS})
 
 target_link_libraries(csman mozart staticZipper jsoncpp_lib curl)

@@ -52,9 +52,13 @@ CsmCmd::ResultCode CsmCmd::Parse(const std::string &cmd, const std::vector<std::
 CsmCmd::ResultCode CsmCmd::install(const std::vector<std::string> &args) {
 
 }
-CsmCmd::ResultCode CsmCmd::uninstall(const std::vector<std::string> &args){
+
+CsmCmd::ResultCode CsmCmd::uninstall(const std::vector<std::string> &args) {
 
 }
+
 CsmCmd::ResultCode CsmCmd::check(const std::vector<std::string> &args);
+
 CsmCmd::ResultCode CsmCmd::list(const std::vector<std::string> &args);
+
 CsmCmd::ResultCode CsmCmd::run(const std::vector<std::string> &args);

@@ -14,13 +14,14 @@ CsmBase::Warning WarningQueue;
 // tools of CsmBase
 // ________________
 
-void CsmBase::Warning::add(const std::string &str){
+void CsmBase::Warning::add(const std::string &str) {
     this->message.push(str);
 }
-void CsmBase::Warning::printAll(){
-    std::cout<<"csman:"<<std::endl;
-    while(!this->message.empty()){
-        std::cout<<"\twarning:\t"<<this->message.front()<<std::endl;
+
+void CsmBase::Warning::printAll() {
+    std::cout << "csman:" << std::endl;
+    while (!this->message.empty()) {
+        std::cout << "\twarning:\t" << this->message.front() << std::endl;
         this->message.pop();
     }
 }
@@ -51,7 +52,7 @@ bool CsmBase::IsPackage(const std::string &str) {
 
 bool CsmBase::IsArgument(const std::string &str) {
     static const std::regex reg("^-[a-z]$");
-    return std::regex_match(str,reg);
+    return std::regex_match(str, reg);
 }
 
 CsmBase::WordClass CsmBase::GetWordType(const std::string &str) {
@@ -62,12 +63,14 @@ CsmBase::WordClass CsmBase::GetWordType(const std::string &str) {
     else if (CsmBase::IsArgument(str)) return WordClass::ARG;
     return WordClass::ERR;
 }
-bool CsmBase::Unzip(const std::string& path) {
+
+bool CsmBase::Unzip(const std::string &path) {
     zipper::Unzipper unzipper(path);
     unzipper.extract();
     unzipper.close();
     return true;
 }
+
 std::string CsmBase::Nowtime() {
     time_t now = time(0);
     std::string res = "";
@@ -77,6 +80,7 @@ std::string CsmBase::Nowtime() {
     res += asctime(gmtime(&now));
     return res;
 }
+
 std::vector<std::string> CsmBase::StrToVec(const std::string str) {
     std::string buf = "";
     std::vector<std::string> res;
@@ -99,33 +103,33 @@ std::string CsmBase::GetNameFromURL(const std::string &url) {
     reverse(res.begin(), res.end());
     return res;
 }
-bool CsmBase::HttpRequestGet(const std::string &url, const std::string &path,int reconnectTime){
+
+bool CsmBase::HttpRequestGet(const std::string &url, const std::string &path, int reconnectTime) {
     CURL *curl;
     FILE *fp;
     remove(path.c_str());
-    fp = fopen(path.c_str(),"wb");
+    fp = fopen(path.c_str(), "wb");
     curl = curl_easy_init();
-    curl_easy_setopt(curl,CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl,CURLOPT_WRITEDATA,fp);
-    curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION, &CurlWriteFileBin);
-    while(curl_easy_perform(curl)!=CURLE_OK && reconnectTime-- > 0)
-        ;
-    if(reconnectTime <= 0){
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &CurlWriteFileBin);
+    while (curl_easy_perform(curl) != CURLE_OK && reconnectTime-- > 0);
+    if (reconnectTime <= 0) {
         remove(path.c_str());
         return false;
     }
     return true;
 }
 
-std::vector<char> CsmBase::HttpRequestGet(const std::string &url,int reconnectTime) {
+std::vector<char> CsmBase::HttpRequestGet(const std::string &url, int reconnectTime) {
     std::vector<char> response;
     CURL *curl;
     curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl,CURLOPT_TCP_KEEPALIVE,1);
+    curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &CurlWriteCharBuff);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-    while(curl_easy_perform(curl)!=CURLE_OK && reconnectTime-- > 0)
+    while (curl_easy_perform(curl) != CURLE_OK && reconnectTime-- > 0)
         response.clear();
     curl_easy_cleanup(curl);
     return response;
