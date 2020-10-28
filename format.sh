@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+function format() {
+    file_list=$(ls $1)
+    cd $1
+    astyle -q *.* &> /dev/null
+    rm *.orig &> /dev/null
+    astyle -A4 -N -t -q *.* &> /dev/null
+    rm *.orig &> /dev/null
+    for file in $file_list;do
+        if test -d ${file};then
+            format ${file} "$2"
+        fi
+    done
+    cd ..
+}
+format ./include
+format ./src
+format ./imports/mozart

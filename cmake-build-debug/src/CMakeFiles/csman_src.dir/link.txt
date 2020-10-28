@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcsman_src.a 
-/usr/bin/ranlib libcsman_src.a
