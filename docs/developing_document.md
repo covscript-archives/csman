@@ -1,5 +1,18 @@
 # CSMAN Developing Document
 A package manager for Covscript.
+## 0.Usage
++ **csman install <package name> [--redo | --fix]**: install a package
+	+ **csman uninstall <package name> [--clean]**: uninstall a package
+	+ **csman checkout <stable | version>**: Toggle the currently used version of CovScript(runtime).
+	+ **csman run [-v version] <command>**:Run specific version directly.
+	+ **csman list**: Show all packages installed.
+	
+	
++ Configuration Manager: Command line configuration manager
+	+ **csman config set <key=value>**: set a variable of a key
+	+ **csman config unset <key>**: unset a variable of a key
+	+ **csman config get <key>**: show a variable of key
+
 ## 1.Requirement abstraction
 + Installing (packages & runtimes).
 + Deleting (packages & runtimes).
@@ -11,14 +24,10 @@ A package manager for Covscript.
     + **/~/.csman_config.json**: to tell csman all details
     + **csmanPath/** (default = ~/.csman/)  
         + source.json 
-        + installed.json   
+        + packages.json   
         + error_log.txt    
-        + **packages/**    
-            + somePackages...
-        + **runtimes/**    
-            + someRuntimes...    
             
-+ Some description of **some json files**(except [csman.json](https://csman.info/csman.json), all URLs are from json file.):
++ Description of **some json files** on **server**(except [csman.json](https://csman.info/csman.json), all URLs are from json file.):
     + **csman.json:**
         + URL: https://csman.info/csman.json
         + description: refer to required files for building **source.json**.
@@ -29,16 +38,20 @@ A package manager for Covscript.
         + URL: BaseUrl(from csman.json) + Generic.json
         + description: packages information for local platform
     + **source.json:**
-        + path: home path/.csman/
-        + description: packages complete information for local csman, merged from **platform.json and Generic.json** above.
-    + **.csman_config.json:**
-        + path: home path/.csman/
-        + description: configuration file for local csman.
-+ Some description of nomenclature in **source.json**
+        + COVSRIPT_HOME: environment variable, where the CovScript installed
+        + CS_IMPORT_PATH: environment variable, where the packages exist
+        + CS_DEV_PATH: environment variable, where the SDK exist
+        + CsmanPath: home path/.csman/
+        + MaxReconnectTime: number all Internet operations' max reconnection
++ **.csman_config.json:**
+    + CsmanPath: ~/
+    + description: configuration file for local csman.
++ Description of nomenclature
     + **STD:**  STD\(0-9\){4}\(0-9A-F\){2}
     + **ABI:** same as STD
     + **Package:** (\w+\\.)\*\w
     + **Version of Package:** (\[0-9\]+\\.){0, 3}(0-9)+\w\*
+    
 ## 3.Function abstraction
 + **Updating Sources:** update source from server when launching csman so it can get all packages information latest and correctly.
     + Connect to [csman.json](https://csman.info/csman.json) which should guide csman where to access.

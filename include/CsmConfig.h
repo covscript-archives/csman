@@ -1,4 +1,4 @@
-//
+     //
 // Created by Rend on 2020/9/19.
 //
 #pragma once
@@ -10,17 +10,17 @@
 #include<fstream>
 #include<iostream>
 #include<algorithm>
-#include "CsmBase.h"
+#include<CsmBase.h>
 
 class CsmJsonFile {
 public:
-	explicit CsmJsonFile(const std::string &_path);/*Reading JSON via constructor*/
-	explicit CsmJsonFile(const Json::Value &_root);
+	explicit CsmJsonFile(Context *&_cxt,const std::string &_path);/*Reading JSON via constructor*/
+	explicit CsmJsonFile(Context *&_cxt,const Json::Value &_root);
 
 protected:
 	std::string path;
 	Json::Value root;
-
+    Context *cxt;
 	virtual ~CsmJsonFile() = default;
 
 	virtual void PreLaunching() {}
@@ -29,8 +29,7 @@ protected:
 
 	virtual void Initialize() {}
 
-	virtual bool Validate()
-	{
+	virtual bool Validate()	{
 		return 0;
 	}
 };
@@ -40,9 +39,9 @@ namespace CsmConfig {
 
 	class Sources;
 
-	class Installed;
+	class Package;
 
-	bool FileInitialize(CsmJsonFile *config, CsmJsonFile* sources, CsmJsonFile* installed);
+	bool FileInitialize(Context *&cxt, CsmJsonFile *config, CsmJsonFile* sources, CsmJsonFile* package);
 }
 /*done*/
 class CsmConfig::Config : public CsmJsonFile {
@@ -60,58 +59,65 @@ private:
 	virtual ~Config() override;
 };
 
+/*all done*/
 class CsmConfig::Sources : public CsmJsonFile {
+/* package info(JSON)
+ * "20.2.2":{
+ *      "CurrentUrl":"",
+ *      "Dependencies":{}
+ * }
+ */
 public:
 	using CsmJsonFile::CsmJsonFile;
 
-	std::vector<Json::Value> GetDepall(const std::vector<Json::Value> &vec_pac);
+	std::vector<Json::Value> GetDep(const std::vector<Json::Value> &vec_pac); /*done*/
 
-	std::vector<Json::Value> GetDepall(const std::vector<std::string> &vec_str);
+	std::vector<Json::Value> GetDep(const std::vector<std::string> &vec_str); /*done*/
 
-	std::vector<Json::Value> GetDep(const Json::Value &pac);
+	std::vector<Json::Value> GetDep(const Json::Value &pac); /*done*/
 
-	std::vector<Json::Value> GetDep(const std::string &name);
+	std::vector<Json::Value> GetDep(const std::string &name,const std::string &ver); /*done*/
 
-	std::vector<std::string>
-	DepsName(const std::vector<Json::Value> &x); // turn vector of packages(JSON) into vector of pacnames(string)
+	std::vector<std::string> DepsUrl(const std::vector<Json::Value> &x); /*done*/
 
+	std::vector<std::string> DepsName(const std::vector<Json::Value> &x); /*done*/ // turn vector of packages(JSON) into vector of pacnames(string)
+
+    Json::Value GetPacJson(const std::string &name, const std::string &ver); /*done*/
+// return a package(JSON)
 private:
+    std::set<std::string> vis;
 
-	void JsonMerge(Json::Value &a, Json::Value &b);
+	void JsonMerge(Json::Value &a, Json::Value &b); /*done*/
 
-	void PreLaunching() override;
+	void PreLaunching() override; /*done*/
 
-	std::set<std::string> vis;
-
-	Json::Value GetPacJson(const std::string &name, const std::string &ver); // return a package INFO(JSON)
-
-	std::vector<Json::Value>
-	DFSDeps(const Json::Value &pac); // return a vecotr of packages(JSON), which means a dependencies of this package
-
-	virtual ~Sources() override;
+	std::vector<Json::Value> DFSDeps(const Json::Value &pac); /*done*/
+// return a vector of packages(JSON), which means a dependencies set of this package (include itself)
 };
 
-class CsmConfig::Installed : public CsmJsonFile {
+class CsmConfig::Package : public CsmJsonFile {
 public:
 	using CsmJsonFile::CsmJsonFile;
 
-	std::vector<std::string> Absence(std::vector<std::string>Deps);
+	std::vector<std::string> Absence(std::vector<std::string>Deps); /*done*/
 
-	bool Contains(const std::string &name, const std::string &ver);
+	bool Contains(const std::string &name, const std::string &ver); /*done*/
 
-	void Add(const std::string &name, const std::string &ver);
+	void Add(const std::string &name, const std::string &ver); /*done*/
 
-	void Del(const std::string &name, const std::string &ver);
+	void Del(const std::string &name, const std::string &ver); /*done*/
 
 private:
-	virtual void PreLaunching() override;
+    Json::Value lastDelete;
+
+	virtual void PreLaunching() override; /*done*/
 
 	virtual void EndLaunching() override;
 
-	virtual void Initialize() override;
+	virtual void Initialize() override; /*flag*/
 
-	virtual bool Validate() override;
+	virtual bool Validate() override; /*done*/
 
-	virtual ~Installed() override;
+	virtual ~Package() override;
 };
 
