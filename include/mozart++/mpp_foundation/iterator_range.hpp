@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <mozart++/core>
 #include <utility>
 
 namespace mpp {
@@ -16,31 +17,24 @@ namespace mpp {
 	 * A range adaptor for a pair of iterators.
 	 * This just wraps two iterators into a range-compatible interface.
 	 *
-	 * @tparam IteratorT
+	 * @tparam IterT
 	 */
-	template <typename IteratorT>
+	template <typename IterT>
 	class iterator_range {
-		IteratorT _begin_iterator;
-		IteratorT _end_iterator;
+		IterT _begin_iterator;
+		IterT _end_iterator;
 
 	public:
-		// TODO: Add SFINAE to test that the Container's iterators match the range's
-		//      iterators.
-		template <typename Container>
-		iterator_range(Container &&c)
-		// TODO: Consider std::begin()/std::end() calls.
-			: _begin_iterator(c.begin()), _end_iterator(c.end()) {}
-
-		iterator_range(IteratorT begin_iterator, IteratorT end_iterator)
+		iterator_range(IterT begin_iterator, IterT end_iterator)
 			: _begin_iterator(std::move(begin_iterator)),
 			  _end_iterator(std::move(end_iterator)) {}
 
-		IteratorT begin() const
+		IterT begin() const
 		{
 			return _begin_iterator;
 		}
 
-		IteratorT end() const
+		IterT end() const
 		{
 			return _end_iterator;
 		}
@@ -63,9 +57,12 @@ namespace mpp {
 		return iterator_range<T>(std::move(x), std::move(y));
 	}
 
-	template <typename T>
-	iterator_range<T> make_range(std::pair<T, T> p)
+	template <typename Container>
+	auto make_range(Container &&c)
 	{
-		return iterator_range<T>(std::move(p.first), std::move(p.second));
+		static_assert(is_iterable_v<Container>, "not an iterable");
+		using IterT = typename iterable_traits<Container>::iterator_type;
+		return make_range<IterT>(iterable_traits<Container>::begin(std::forward<Container>(c)),
+		                         iterable_traits<Container>::end(std::forward<Container>(c)));
 	}
 }

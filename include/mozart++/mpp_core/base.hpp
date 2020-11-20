@@ -27,6 +27,12 @@
 #endif
 #endif
 
+#ifndef _MSC_VER
+#define MOZART_NORETURN __attribute__((noreturn))
+#else
+#define MOZART_NORETURN
+#endif
+
 /**
  * Mozart++ Version: 20.2.1
  */

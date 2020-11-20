@@ -51,9 +51,6 @@ namespace mpp_impl {
 }
 
 namespace mpp {
-	template <typename ...>
-	using void_t = void;
-
 	struct true_type {
 		constexpr static bool value = true;
 	};
@@ -61,6 +58,31 @@ namespace mpp {
 	struct false_type {
 		constexpr static bool value = false;
 	};
+
+	/*
+	 * Something to simulate the requires keyword introduced in C++20.
+	 */
+
+	template <typename ...>
+	using requires_all = void;
+
+	template <bool>
+	struct requires_true_ {
+	};
+
+	template <>
+	struct requires_true_<true> {
+		using type = void;
+	};
+
+	template <bool b>
+	using requires_true = typename requires_true_<b>::type;
+
+	template <typename T, typename R>
+	using requires_same = requires_true<std::is_same<T, R>::value>;
+
+	template <typename T>
+	using remove_cr_t = std::remove_const_t<std::remove_reference_t<T>>;
 
 	/**
 	 * Integer Sequence
@@ -177,5 +199,55 @@ namespace mpp {
 
 		template <typename SeqL, typename SeqR>
 		static constexpr bool equals_v = equals<SeqL, SeqR>::value;
+	};
+
+	template <typename, typename = mpp::requires_all<>>
+	struct is_iterable : public mpp::false_type {};
+
+	template <typename CharT>
+	struct is_iterable<std::basic_string<CharT>> : public mpp::false_type {};
+
+	template <typename T>
+	struct is_iterable<T,
+		       mpp::requires_all<
+		       typename T::iterator,
+		       typename T::const_iterator,
+	       requires_same<typename T::iterator, decltype(std::declval<T>().begin())>,
+	       requires_same<typename T::iterator, decltype(std::declval<T>().end())>,
+	       requires_same<typename T::const_iterator, decltype(std::declval<T>().cbegin())>,
+	       requires_same<typename T::const_iterator, decltype(std::declval<T>().cend())>
+       >> : public mpp::true_type {
+	       };
+
+	template <typename T>
+	static constexpr bool is_iterable_v = is_iterable<mpp::remove_cr_t<T>>::value;
+
+	template <typename, typename = void>
+	struct iterable_traits {};
+
+	template <typename Container>
+	struct iterable_traits<Container, std::enable_if_t<is_iterable_v<Container>>> {
+		using iterator_type = typename mpp::remove_cr_t<Container>::iterator;
+		using const_iterator_type = typename mpp::remove_cr_t<Container>::const_iterator;
+
+		static constexpr iterator_type begin(Container &&c)
+		{
+			return c.begin();
+		}
+
+		static constexpr iterator_type end(Container &&c)
+		{
+			return c.end();
+		}
+
+		static constexpr const_iterator_type cbegin(Container &&c)
+		{
+			return c.cbegin();
+		}
+
+		static constexpr const_iterator_type cend(Container &&c)
+		{
+			return c.cbegin();
+		}
 	};
 }
