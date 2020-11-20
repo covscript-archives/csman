@@ -41,6 +41,11 @@ namespace mpp {
 	using fd_type = HANDLE;
 	static constexpr fd_type FD_INVALID = nullptr;
 
+	static fd_type get_fd(FILE* file)
+    {
+	    return reinterpret_cast<fd_type>(_get_osfhandle(_fileno(file)));
+    }
+
 	static mpp::ssize_t read(fd_type handle, void *buf, size_t count)
 	{
 		DWORD dwRead;
@@ -68,6 +73,11 @@ namespace mpp {
 	static constexpr fd_type FD_INVALID = -1;
 	using ::read;
 	using ::write;
+
+	static fd_type get_fd(FILE* file)
+	{
+	    return fileno(file);
+	}
 #endif
 
 	static void close_fd(fd_type &fd)

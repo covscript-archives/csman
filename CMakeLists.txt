@@ -14,4 +14,7 @@ ELSE()
     set(SYSTEM_SRC sources/system/linux.cpp)
 ENDIF()
 
-add_executable(csman ${SYSTEM_SRC} sources/csman.cpp)
+aux_source_directory(include/csman CSMAN_INCLUDE)
+aux_source_directory(include/csman/components CSMAN_COMPONENTS)
+
+add_executable(csman ${CSMAN_COMPONENTS} ${CSMAN_INCLUDE} ${SYSTEM_SRC} sources/csman.cpp)

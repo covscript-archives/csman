@@ -29,18 +29,22 @@
 
 namespace csman {
 	class event_log final {
-		struct output_target {
+		class output_target {
 			cov::optional<mpp::fdostream> os;
 			FILE* redirected = nullptr;
 			mpp::fd_type fd;
-			output_target() : fd(fileno(stdout)) {}
+		public:
+			output_target() : fd(mpp::get_fd(stderr)) {
+                os.emplace(fd);
+			}
 			output_target(const std::string& path)
 			{
 				redirected = fopen(path.c_str(), "a");
 				if (redirected != nullptr)
-					fd = fileno(redirected);
+					fd = mpp::get_fd(redirected);
 				else
-					fd = fileno(stdout);
+					fd = mpp::get_fd(stderr);
+                os.emplace(fd);
 			}
 			~output_target()
 			{
@@ -48,12 +52,13 @@ namespace csman {
 				if (redirected)
 					fclose(redirected);
 			}
-			void start()
-			{
-				os.emplace(fd);
-			}
+			std::ostream& get()
+            {
+			    return os.value();
+            }
 		};
 		struct event_content {
+
 		};
 		map_t<std::string, event_content> event_idx;
 	};
