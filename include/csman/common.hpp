@@ -23,6 +23,7 @@
 #include "components/exception.hpp"
 #include "components/version.hpp"
 #include "components/system.hpp"
+#include "components/event.hpp"
 #include <mozart++/optional>
 #include <string>
 #include <vector>
@@ -68,8 +69,11 @@ namespace csman {
 		std::string covscript_home;
 		std::string packages_cache;
 		std::vector<std::string> sources_list = {"http://csman.info"};
+		event_log log;
 		global_config()
 		{
+		    log.set_level("csman.global", 255);
+		    log.log_to_stdout("csman.global");
 			covscript_home = sys::get_env(env::covscript_home);
 			packages_cache = covscript_home + path::separator + path::packages_suffix;
 			// TODO: read config file

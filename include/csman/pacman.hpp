@@ -34,8 +34,9 @@ namespace csman {
 		void write_to_file(const package_index&, const std::string&);
 	public:
 		pacman() = delete;
-		pacman(global_config* cfg) : config(cfg)
+		explicit pacman(global_config* cfg) : config(cfg)
 		{
+		    cfg->log.set_level("csman.packman.install", 128);
 			read_from_file(local, config->packages_cache + path::delimiter + "packages.json");
 		}
 		/**
@@ -54,16 +55,27 @@ namespace csman {
 						fetch_source(url, sources_path);
 					}
 					catch (const http_host_unreachable&) {
+					    config->log.touch("csman.packman.install", "HTTP host unreachable! Install terminated. Source Url: " + url);
 						continue;
 					}
 					catch (const http_404_not_found&) {
+                        config->log.touch("csman.packman.install", "HTTP 404 Not Found! Install terminated. Source Url: " + url);
 						continue;
 					}
 					catch (...) {
+                        config->log.touch("csman.packman.install", "Unknown Exception when calling packman::fetch_source! Install terminated. Source Url: " + url);
 						throw;
 					}
 				}
+                read_from_file(remote, sources_path);
 			}
+            if (remote.count(name) > 0)
+            {
+
+            } else {
+                config->log.touch("csman.global", "Unknown package \"" + name + "\"");
+                config->log.touch("csman.packman.install", "Unknown package \"" + name + "\"");
+            }
 		}
 	};
 }

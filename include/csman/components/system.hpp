@@ -20,7 +20,6 @@
 * GitHub:  https://github.com/chengdu-zhirui
 * Website: http://csman.info/
 */
-#include <exception>
 #include <string>
 #include <vector>
 

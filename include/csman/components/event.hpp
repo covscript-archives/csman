@@ -24,6 +24,7 @@
 #include "optional.hpp"
 #include <mozart++/core>
 #include <mozart++/fdstream>
+#include <forward_list>
 #include <string>
 #include <cstdio>
 
@@ -40,11 +41,10 @@ namespace csman {
 			output_target(const std::string& path)
 			{
 				redirected = fopen(path.c_str(), "a");
-				if (redirected != nullptr)
-					fd = mpp::get_fd(redirected);
-				else
-					fd = mpp::get_fd(stderr);
-                os.emplace(fd);
+				if (redirected != nullptr) {
+                    fd = mpp::get_fd(redirected);
+                    os.emplace(fd);
+                }
 			}
 			~output_target()
 			{
@@ -52,14 +52,67 @@ namespace csman {
 				if (redirected)
 					fclose(redirected);
 			}
+			bool available() const
+            {
+			    return os.has_value();
+            }
 			std::ostream& get()
             {
 			    return os.value();
             }
 		};
 		struct event_content {
-
+		    bool has_stdout = false;
+            std::uint8_t level = 255;
+		    std::forward_list<output_target> output_list;
 		};
-		map_t<std::string, event_content> event_idx;
-	};
+		map_t<std::string, event_content> contents;
+        mpp::event_emitter emitter;
+	public:
+        std::uint8_t log_level = 0;
+	    template<typename listener_t>
+	    void add_listener(const std::string& name, listener_t&& func)
+        {
+	        emitter.on(name, std::forward<listener_t>(func));
+        }
+        void log_to_stdout(const std::string& name)
+        {
+            auto &c = contents[name];
+            if (!c.has_stdout) {
+                c.output_list.emplace_front();
+                c.has_stdout = true;
+            }
+        }
+        bool log_to_file(const std::string& name, const std::string& path)
+        {
+            auto &c = contents[name];
+            c.output_list.emplace_front(path);
+            if (!c.output_list.front().available())
+            {
+                c.output_list.pop_front();
+                return false;
+            } else
+                return true;
+        }
+        template<typename...ArgsT>
+        void touch(const std::string& name, const std::string& msg, ArgsT&&...args)
+        {
+            if (contents.count(name) > 0)
+            {
+                auto &c = contents[name];
+                if (c.level >= log_level)
+                {
+                    for (auto& out:c.output_list) {
+                        out.get() << "Log Name: " << name << ", Log Level = " << c.level << ", Message: " << msg
+                                  << std::endl;
+                    }
+                }
+            }
+            emitter.emit(name, msg, std::forward<ArgsT>(args)...);
+        }
+        void set_level(const std::string& name, std::uint8_t level)
+        {
+            contents[name].level = level;
+        }
+    };
 }
