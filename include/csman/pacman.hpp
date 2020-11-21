@@ -71,7 +71,23 @@ namespace csman {
 			}
             if (remote.count(name) > 0)
             {
-
+				static std::regex ver_reg = "^([0-9]\.){1,3}[0-9]$";
+				if (version == "stable")
+					version = remote[name].stable_ver.value_or("null");
+				else if (version == "unstable")
+					version = remote[name].unstable_ver.value_or("null");
+				if (!std::regex_match(ver_reg))
+				{
+					config->log.touch("csman.packman.install", "Wrong convention of version code!");
+					mpp::throw_ex<mpp::runtime_error>("csman.packman.install.wrong_version_code");
+				}
+				if (remote[name].contents.count(version) == 0)
+				{
+					config->log.touch("csman.packman.install", "Version not existed: " + version);
+					mpp::throw_ex<mpp::runtime_error>("csman.packman.install.version_not_existed");
+				}
+				package_content& pc = remote[name].contents[version];
+				// TODO: Download and Install package
             } else {
                 config->log.touch("csman.global", "Unknown package \"" + name + "\"");
                 config->log.touch("csman.packman.install", "Unknown package \"" + name + "\"");

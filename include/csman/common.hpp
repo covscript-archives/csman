@@ -101,14 +101,16 @@ namespace csman {
 		std::vector<std::string> deps;
 		std::string remote_url;
 		std::string local_path;
-		mpp::optional<std::string> std_opt;
-		mpp::optional<std::string> abi_opt;
+		cov::optional<std::string> std_opt;
+		cov::optional<std::string> abi_opt;
 	};
 
 	struct package {
 		std::string name;
 		std::string desc;
 		std::string author;
+		cov::optional<std::string> stable_ver;
+		cov::optional<std::string> unstable_ver;
 		map_t<std::string, package_content> contents;
 	};
 }
