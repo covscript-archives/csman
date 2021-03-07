@@ -54,7 +54,7 @@ private:
 	                         "\tversion\t\t\tCheck version of csman.\n"
 	                         "\tcheckout\t\tChange your CovScript's runtime version.\n"
 	                         "\n"
-	                         "Go to our page for more support: http://123.com";
+	                         "Go to our page for more support: http://csman.info";
 
 	const std::string VERSION = "csman 1.0";
 
