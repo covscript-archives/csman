@@ -14,5 +14,4 @@ function format() {
     cd ..
 }
 format ./include
-format ./src
-format ./imports/mozart
+format ./sources

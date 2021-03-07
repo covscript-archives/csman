@@ -1,0 +1,269 @@
+{
+	"ABI200203" : 
+	{
+		"cics.codec" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "Base32, Base64 and JSON Codec Library",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.codec_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.darwin" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "Covariant Darwin UCGL Bindings for CovScript",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.darwin_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.imgui" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "Ocornut Dear ImGUI Bindings for CovScript",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.imgui_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.network" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "ASIO Network Bindings for CovScript",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.network_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.process" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "System Process Library",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.process_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.regex" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "RegEx Library",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.regex_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.sqlite" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "SQLite Database Bindings for CovScript",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.sqlite_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		},
+		"cics.streams" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "Streams API for CovScript",
+			"Stable" : "20.2.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.2.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.streams_20.2.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "ABI200203"
+					}
+				}
+			}
+		}
+	},
+	"Generic" : 
+	{
+		"cics.csbuild" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "Official Build System for CovScript",
+			"Stable" : "1.0",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"1.0" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Generic/cics.csbuild_1.0.zip",
+					"Dependencies" : 
+					{
+						"cs.develop" : "Stable",
+						"cs.runtime" : "Stable"
+					}
+				}
+			}
+		},
+		"cics.picasso" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "Picasso UI Components for ImGUI",
+			"Stable" : "1.0",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"1.0" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Generic/cics.picasso_1.0.zip",
+					"Dependencies" : 
+					{
+						"cics.imgui" : "Stable",
+						"cics.regex" : "Stable",
+						"cs.runtime" : "Stable"
+					}
+				}
+			}
+		},
+		"cics.sqlite_ext" : 
+		{
+			"Author" : "Covariant Institute",
+			"Description" : "SQLite Extended Tools for SQLite",
+			"Stable" : "1.0",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"1.0" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Generic/cics.sqlite_ext_1.0.zip",
+					"Dependencies" : 
+					{
+						"cics.regex" : "Stable",
+						"cics.sqlite" : "Stable",
+						"cs.runtime" : "Stable"
+					}
+				}
+			}
+		},
+		"cs.develop" : 
+		{
+			"Author" : "CovScript Organization",
+			"Description" : "CovScript Develop Package",
+			"Stable" : "3.3.3.12",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"3.3.3.12" : 
+				{
+					"ABI" : "200203",
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/cs.develop_3.3.3.12.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "3.3.3.12"
+					},
+					"STD" : "200302"
+				}
+			}
+		},
+		"cs.runtime" : 
+		{
+			"Author" : "CovScript Organization",
+			"Description" : "CovScript Runtime Package",
+			"Stable" : "3.3.3.12",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"3.3.3.12" : 
+				{
+					"ABI" : "200203",
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/cs.runtime_3.3.3.12.zip",
+					"Dependencies" : {},
+					"STD" : "200302"
+				}
+			}
+		}
+	},
+	"STD200302" : 
+	{
+		"cs.docs" : 
+		{
+			"Author" : "CovScript Organization",
+			"Description" : "Official Document for CovScript",
+			"Stable" : "20.3.2",
+			"Unstable" : null,
+			"Version" : 
+			{
+				"20.3.2" : 
+				{
+					"ContentUrl" : "http://mirrors.covariant.cn/csman/Generic/STD_200302/cs.docs_20.3.2.zip",
+					"Dependencies" : 
+					{
+						"cs.runtime" : "STD200302"
+					}
+				}
+			}
+		}
+	}
+}

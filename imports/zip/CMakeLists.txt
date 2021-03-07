@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.4)
-project(libmozart)
+project(libz)
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(include)
-aux_source_directory(src SRCS)
-add_library(mozart ${SRCS})
+add_library(zip zip.c)

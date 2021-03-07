@@ -4,16 +4,18 @@ project(csman)
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(include)
+include_directories(imports/mozart/include)
+include_directories(imports/zip/include)
 
 add_subdirectory(imports/mozart)
-add_subdirectory(imports/zipper)
-add_subdirectory(imports/jsoncpp)
+add_subdirectory(imports/zip)
 
-include_directories(imports/mozart/include)
-include_directories(imports/jsoncpp/include)
-
-aux_source_directory(src SRCS)
-
+aux_source_directory(sources SRCS)
 add_executable(csman ${SRCS})
 
-target_link_libraries(csman mozart staticZipper jsoncpp_lib curl)
+target_link_libraries(csman mozart zip curl)
+
+if (WIN32)
+    target_compile_definitions(csman PRIVATE CURL_STATICLIB)
+    target_link_libraries(csman nghttp2 ssl crypto zstd ssh2 z brotlidec-static brotlicommon-static ws2_32 wldap32 crypt32)
+endif ()
