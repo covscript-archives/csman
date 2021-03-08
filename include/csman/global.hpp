@@ -10,7 +10,7 @@
 #include <regex>
 #include <set>
 
-#include "fileio.hpp"
+#include "file_io.hpp"
 #include "dir.hpp"
 
 bool is_abi(const std::string &str)
@@ -39,10 +39,11 @@ bool is_pac(const std::string &str)
 
 class context {
 private:
+    void set_testing_var();
 	void initialize_val();
 	void get_covscript_env();
 	void read_config();
-	void wirte_config();
+	void write_config();
 	std::set<std::string> only_read_vars;
 	struct Config_Data {
 		struct line_data {
@@ -61,7 +62,7 @@ public:
 	 * all variables in "configure vars":
 	 * home_path
 	 * COVSCRIPT_HOME, CS_IMPORT_PATH, CS_DEV_PATH
-	 * config_path, csman_path, _path, sources_idx_path, max_reconnect_time
+	 * config_path, csman_path, pac_repo_path, sources_idx_path, max_reconnect_time
 	 */
 
 	void show(const std::string &key);
@@ -70,12 +71,12 @@ public:
 
 	void set(const std::string &key, const std::string &val);
 
-	context()
-	{
+	context(){
 		try {
 			initialize_val();
-			get_covscript_env();
-			read_config();
+//			get_covscript_env();
+//			read_config();
+            set_testing_var();
 		}
 		catch (std::exception e) {
 			throw e;
@@ -83,6 +84,11 @@ public:
 	}
 };
 
+void context::set_testing_var() {
+    vars["config_path"] = "../misc/.csman_config";
+    vars["pac_repo_path"] = "../misc/pac_repo";
+    vars["sources_idx_path"] = "../misc/sources_idx";
+}
 void context::initialize_val()
 {
 
@@ -200,7 +206,7 @@ void context::read_config()
 	std::string text;
 	while (std::getline(ifs, text)) {
 		str_split(args,text);
-		if (vars.count(args[0]) > 0) { // 如果先前初始化vars时添加过此key，则key为规定内key
+		if (vars.count(args[0]) > 0) { // 如果先前初始化vars时添加过此key，则key为合法key
 			vars[args[0]] = args[2]; // "key" "=" "var"
 			config_data.lines.push_back(Config_Data::line_data(args[0], false));
 		}
@@ -210,7 +216,7 @@ void context::read_config()
 	}
 	return;
 }
-void context::wirte_config()
+void context::write_config()
 {
 	std::ofstream ofs(vars["config_path"]);
 	for(auto &l:config_data.lines) {

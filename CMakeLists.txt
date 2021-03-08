@@ -27,7 +27,7 @@ add_subdirectory(imports/mozart)
 add_subdirectory(imports/zip)
 
 aux_source_directory(sources SRCS)
-add_executable(csman ${SRCS})
+add_executable(csman ${SRCS} sources/main.cpp)
 
 target_link_libraries(csman mozart zip curl)
 
