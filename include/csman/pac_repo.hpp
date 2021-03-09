@@ -53,19 +53,33 @@ namespace csman {
 
 		pac_repo(context *cxt) : cxt(cxt)
 		{
-			std::ifstream ifs(cxt->vars["pac_repo_path"]);
-			if (!ifs.is_open())
-				throw std::runtime_error("opening \"pac_repo\" failed.");
-			read_file(ifs);
-			ifs.close();
+            std::string path;
+            if(cxt->vars.count("pac_repo_path") != 0){
+                path = cxt->vars["pac_repo_path"];
+                std::ifstream ifs(path);
+                if (!ifs.is_open())
+                    throw std::runtime_error("opening \"pac_repo\" failed.");
+                read_file(ifs);
+                ifs.close();
+            }
+            else
+                throw std::runtime_error("csman has a bug which can not get variable named \"pac_repo_path\" in context.");
 			return;
 		}
 
 		~pac_repo()
 		{
-			std::ofstream ofs(cxt->vars["pac_repo_path"]);
-			write_file(ofs);
-			ofs.close();
+		    std::string path;
+		    std::cout << std::endl;
+		    std::cout<<cxt->vars.count("pac_repo_path");
+		    if(cxt->vars.count("pac_repo_path") != 0){
+                path = cxt->vars["pac_repo_path"];
+                std::ofstream ofs(path);
+                write_file(ofs);
+                ofs.close();
+		    }
+		    else
+		        std::cout<<"Warning: your file for recording pac_repo updating failed, it may cause extremely problems while next time. Please try to repair it by using \"csman repair\"";
 			return;
 		}
 

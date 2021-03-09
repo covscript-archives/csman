@@ -6,15 +6,17 @@
  * Website: https://covariant.cn/
  * Github:  https://github.com/chengdu-zhirui/
  */
+#include<iostream>
 #include <unordered_map>
 #include <mozart++/core>
 #include <vector>
 #include <string>
 #include <regex>
+#include <map>
 #include <set>
 
 namespace csman {
-	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
+	template<typename K, typename V> using map_t = std::map<K, V>;
 	template<typename T> using set_t = std::set<T>;
 
 	namespace directory {
@@ -86,7 +88,7 @@ namespace csman {
 		} config_data;
 	public:
 		std::string ABI, STD, runtime_ver;
-		std::unordered_map<std::string, std::string> vars;
+		map_t<std::string, std::string> vars;
 
 		/*
 		 * all variables in "configure vars":

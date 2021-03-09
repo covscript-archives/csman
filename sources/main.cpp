@@ -3,24 +3,26 @@
 //
 #include <csman/command.hpp>
 
+void csman_main(csman::context* cxt, int argc, char* argv[])
+{
+    using namespace csman;
+    try {
+
+        std::vector<std::string> args(&argv[1], argv + argc);
+
+        parser ps(cxt, args);
+//
+//		ps.parse();
+    }
+    catch (std::exception &e) {
+        std::cout << e.what();
+    }
+}
+
 int main(int argc, char **argv)
 {
-	using namespace csman;
-	try {
-		std::vector<std::string> args(&argv[1], argv + argc);
-
-		std::cerr << args.size() << std::endl;
-
-		context *cxt = new context();
-
-		parser ps(cxt, args);
-
-		ps.parse();
-
-		return 0;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what();
-	}
+    using namespace csman;
+    context cxt;
+    csman_main(&cxt, argc, argv);
 	return 0;
 }

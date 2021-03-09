@@ -39,23 +39,29 @@ bool csman::readline(std::ifstream &ifs, std::vector<std::string> &args)
 
 void csman::context::set_testing_var()
 {
-	vars["config_path"] = "../misc/.csman_config";
-	vars["pac_repo_path"] = "../misc/pac_repo";
-	vars["sources_idx_path"] = "../misc/sources_idx";
+    vars["config_path"] = "../misc/.csman_config";
+    vars["pac_repo_path"] = "../misc/pac_repo";
+    vars["sources_idx_path"] = "../misc/sources_idx";
 }
 
 void csman::context::initialize_val()
 {
 
-	vars["home_path"] =
+	const char* home_ptr =
 #ifdef MOZART_PLATFORM_LINUX
 	    std::getenv("HOME");
 #elif defined(MOZART_PLATFORM_WIN32)
 	    std::getenv("USERPROFILE");
 #elif defined(MOZART_PLATFORM_DARWIN)
-	    std::getenv(""); // 改
+	    std::getenv("HOME"); // 改
 #endif
-	const std::string &home = vars["home_path"];
+
+    if (home_ptr == nullptr)
+        throw std::runtime_error("Get EnvVar Error: HOME");
+
+    vars["home_path"] = home_ptr;
+
+    std::string home = home_ptr;
 
 	/*CovScript var*/
 	if (std::getenv("COVSCRIPT_HOME") != nullptr) {
