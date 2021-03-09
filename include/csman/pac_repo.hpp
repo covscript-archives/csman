@@ -13,7 +13,7 @@
 namespace csman {
 	class pac_repo {
 	private:
-		context *cxt;
+		context *cxt = nullptr;
 	public:/*公开类*/
 		class pac_data {
 		public:
@@ -51,7 +51,7 @@ namespace csman {
 	public:/*公开接口*/
 		pac_repo() = default;
 
-		pac_repo(context *cxt) : cxt(cxt)
+		explicit pac_repo(context *cxt) : cxt(cxt)
 		{
 			std::string path;
 			if(cxt->vars.count("pac_repo_path") != 0) {
@@ -69,18 +69,15 @@ namespace csman {
 
 		~pac_repo()
 		{
-			std::string path;
-			std::cout << std::endl;
-			std::cout<<cxt->vars.count("pac_repo_path");
-			if(cxt->vars.count("pac_repo_path") != 0) {
-				path = cxt->vars["pac_repo_path"];
-				std::ofstream ofs(path);
-				write_file(ofs);
-				ofs.close();
+			if (cxt != nullptr) {
+				if(cxt->vars.count("pac_repo_path") != 0) {
+					std::ofstream ofs(cxt->vars["pac_repo_path"]);
+					write_file(ofs);
+					ofs.close();
+				}
+				else
+					std::cout<<"Warning: your file for recording pac_repo updating failed, it may cause extremely problems while next time. Please try to repair it by using \"csman repair\"";
 			}
-			else
-				std::cout<<"Warning: your file for recording pac_repo updating failed, it may cause extremely problems while next time. Please try to repair it by using \"csman repair\"";
-			return;
 		}
 
 		void update_install(const std::string &name, const std::string &ver, bool is_available)

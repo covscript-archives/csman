@@ -15,4 +15,3 @@ function format() {
 }
 format ./include
 format ./sources
-format ./imports
