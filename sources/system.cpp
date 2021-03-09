@@ -1,5 +1,11 @@
-/*
- * from https://blog.csdn.net/venom_snake/article/details/88066475
+/**
+ * CovScript Manager: OS Depended Functions Implementation
+ * Licensed under Apache 2.0
+ * Copyright (C) 2020-2021 Chengdu Covariant Technologies Co., LTD.
+ * Website: https://covariant.cn/
+ * Github:  https://github.com/chengdu-zhirui/
+ * 
+ * refer to https://blog.csdn.net/venom_snake/article/details/88066475
  */
 #include <csman/global.hpp>
 #include <iostream>
