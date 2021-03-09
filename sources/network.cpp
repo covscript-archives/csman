@@ -1,11 +1,5 @@
-//
-// Created by Rend on 2020/12/8.
-//
-#pragma once
-#include <vector>
-
-#include "curl/curl.h"
-#include "dir.hpp"
+#include <csman/global.hpp>
+#include <curl/curl.h>
 
 size_t write_char_buff(char *buffer, size_t size, size_t count, std::vector<char> *data)
 {
@@ -22,13 +16,13 @@ size_t write_bin_file(char *buffer, size_t size, size_t count, FILE *data)
 	return recv_size;
 }
 
-bool http_get(const std::string &url,const std::string &path, int reconnectTime)
+bool csman::network::http_get(const std::string &url,const std::string &path, int reconnectTime)
 {
 	CURL *curl;
 	FILE *fp;
 	fp = fopen(path.c_str(), "wb+");
 	if(fp==NULL) {
-		create_dir(path);
+		directory::create_dir(path);
 		fp = fopen(path.c_str(), "wb+");
 	}
 
@@ -45,7 +39,7 @@ bool http_get(const std::string &url,const std::string &path, int reconnectTime)
 	return true;
 }
 
-std::vector<char> http_get(const std::string &url, int reconnectTime)
+std::vector<char> csman::network::http_get(const std::string &url, int reconnectTime)
 {
 	std::vector<char> response;
 	CURL *curl;

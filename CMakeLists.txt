@@ -9,7 +9,7 @@ if (MSVC)
 elseif (CMAKE_COMPILER_IS_GNUCXX)
     if (WIN32)
         set(CMAKE_C_FLAGS "--static -fPIC -s -O3")
-        set(CMAKE_CXX_FLAGS "--static -fPIC -s -O3")
+        set(CMAKE_CXX_FLAGS "--static -fPIC -Og -g")
     else ()
         set(CMAKE_C_FLAGS "-fPIC -s -O3")
         set(CMAKE_CXX_FLAGS "-fPIC -s -O3")
@@ -26,8 +26,13 @@ include_directories(imports/zip/include)
 add_subdirectory(imports/mozart)
 add_subdirectory(imports/zip)
 
-aux_source_directory(sources SRCS)
-add_executable(csman ${SRCS} sources/main.cpp)
+set(SOURCE_CODE
+    sources/global.cpp
+    sources/network.cpp
+    sources/system.cpp
+    sources/main.cpp)
+
+add_executable(csman ${SOURCE_CODE})
 
 target_link_libraries(csman mozart zip curl)
 

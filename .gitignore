@@ -54,3 +54,6 @@ build/
 
 # macOS Files
 .DS_Store
+
+# Astyle Files
+*.orig

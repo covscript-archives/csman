@@ -1,22 +1,26 @@
 //
 // Created by Administrator on 2021/3/8.
 //
-#include "csman/command.hpp"
+#include <csman/command.hpp>
 
-int main(int argc, char **argv) {
-    try {
-        std::vector<std::string> args(&argv[1], argv + argc);
+int main(int argc, char **argv)
+{
+	using namespace csman;
+	try {
+		std::vector<std::string> args(&argv[1], argv + argc);
 
-        context *cxt = new context();
+		std::cerr << args.size() << std::endl;
 
-        parser ps(cxt,args);
+		context *cxt = new context();
 
-        ps.parse();
+		parser ps(cxt,args);
 
-        return 0;
-    }
-    catch (std::exception &e) {
-        std::cout << e.what();
-    }
-    return 0;
+		ps.parse();
+
+		return 0;
+	}
+	catch (std::exception &e) {
+		std::cout << e.what();
+	}
+	return 0;
 }
