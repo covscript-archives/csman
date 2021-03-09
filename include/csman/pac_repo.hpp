@@ -7,10 +7,8 @@
  * Github:  https://github.com/chengdu-zhirui/
  */
 #include <csman/global.hpp>
-#include <unordered_map>
 #include <iostream>
 #include <fstream>
-#include <set>
 
 namespace csman {
 	class pac_repo {
@@ -20,10 +18,10 @@ namespace csman {
 		class pac_data {
 		public:
 			std::string available;
-			std::set<std::string> ver;
+			set_t<std::string> ver;
 		};
 
-		std::unordered_map<std::string, pac_data> local_pac;
+		map_t<std::string, pac_data> local_pac;
 	private:/*私有方法*/
 		void read_file(std::ifstream &ifs)
 		{
@@ -98,9 +96,9 @@ namespace csman {
 
 		}
 
-		inline std::set<std::string> query_contains_ver(const std::string &name)
+		inline set_t<std::string> query_contains_ver(const std::string &name)
 		{
-			std::set<std::string> query_reasult;
+			set_t<std::string> query_reasult;
 			if (local_pac.count(name) != 0) {
 				for (auto ver : local_pac[name].ver)
 					query_reasult.insert(ver);

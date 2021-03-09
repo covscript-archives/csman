@@ -6,14 +6,16 @@
  * Website: https://covariant.cn/
  * Github:  https://github.com/chengdu-zhirui/
  */
-#include <unordered_set>
+#include <unordered_map>
 #include <mozart++/core>
 #include <vector>
 #include <string>
 #include <regex>
+#include <set>
 
 namespace csman {
-	template<typename T> using set_t = std::unordered_set<T>;
+	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
+	template<typename T> using set_t = std::set<T>;
 
 	namespace directory {
 		bool path_exist(const std::string &);

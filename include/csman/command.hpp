@@ -11,9 +11,6 @@
 #include <csman/idx_file.hpp>
 #include <zip.hpp>
 #include <iostream>
-#include <string>
-#include <vector>
-#include <set>
 
 namespace csman {
 	class parser {
@@ -22,7 +19,7 @@ namespace csman {
 		idx_file idx;   // sources_idx，可下载包信息，负责依赖查询，支持查询
 		pac_repo repo;  // pac_repo, 包仓库
 		std::vector<std::string> args;  // 用户命令的参数，例如install xxx
-		std::set<std::string> opt;  // 从args里分离出的可选参数，例如-r
+		set_t<std::string> opt;  // 从args里分离出的可选参数，例如-r
 		std::string predicate, object;  // 谓语，宾语
 
 		void download_unzip_pac(const std::string &name, const std::string &ver, const std::string &url)

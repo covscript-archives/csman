@@ -7,11 +7,7 @@
  * Github:  https://github.com/chengdu-zhirui/
  */
 #include <csman/global.hpp>
-#include <unordered_map>
 #include <fstream>
-#include <string>
-#include <vector>
-#include <set>
 
 // 一般格式：
 //  标题 对象数
@@ -162,7 +158,7 @@ namespace csman {
 
 	private:
 		/*使用:pac_description[name]*/
-		std::unordered_map<std::string, std::vector<std::string> > pac_description; // 值, 包的描述信息 : name, author, description
+		map_t<std::string, std::vector<std::string> > pac_description; // 值, 包的描述信息 : name, author, description
 		/*使用:rtm_list.lower_bound(a_runtime)*/
 		std::vector<rtm_label> rtm_list; // 用于寻找符合要求的runtime，默认idx文件给出的是单调的
 		/*lower_bound的临时替代*/
@@ -191,9 +187,9 @@ namespace csman {
 		}
 
 		/*使用:node_id[name][ver]*/
-		std::unordered_map<std::string, std::unordered_map<std::string, int> > node_id;
+		map_t<std::string, map_t<std::string, int> > node_id;
 		/*使用:un_stable_ver[name], first为unstable, second为stable*/
-		std::unordered_map<std::string, std::pair<std::string, std::string> > un_stable_ver;
+		map_t<std::string, std::pair<std::string, std::string> > un_stable_ver;
 
 		class graph {
 		public:
@@ -216,7 +212,7 @@ namespace csman {
 				vis.resize(s + 5);
 			}
 
-			void dfs(const int &u, std::set<int> &sc, bool sgn)
+			void dfs(const int &u, set_t<int> &sc, bool sgn)
 			{
 				vis[u] = true;
 				sc.insert(u);
@@ -228,12 +224,12 @@ namespace csman {
 					}
 			}
 
-			std::set<int> dfs_sc(const int &u, bool sgn)
+			set_t<int> dfs_sc(const int &u, bool sgn)
 			{
 				vis.reserve(size);
 				for (auto x:vis)
 					x = 0;
-				std::set<int> sc;
+				set_t<int> sc;
 				dfs(u, sc, sgn);
 				return sc;
 			}
@@ -244,17 +240,17 @@ namespace csman {
 				head[b].push_back(edge(a, 1));
 			}
 
-			std::set<pac_data> depend_node_set(const int &u)
+			set_t<pac_data> depend_node_set(const int &u)
 			{
-				std::set<pac_data> res;
+				set_t<pac_data> res;
 				for (auto x : dfs_sc(u, 0))
 					res.insert(*node_data[x]);
 				return res;
 			}
 
-			std::set<pac_data> support_node_set(const int &u)
+			set_t<pac_data> support_node_set(const int &u)
 			{
-				std::set<pac_data> res;
+				set_t<pac_data> res;
 				for (auto x : dfs_sc(u, 1))
 					res.insert(*node_data[x]);
 				return res;
@@ -275,14 +271,14 @@ namespace csman {
 			return this->un_stable_ver[name].first;
 		}
 
-		std::set<pac_data> get_depend_set(const std::string &name, const std::string &ver)
+		set_t<pac_data> get_depend_set(const std::string &name, const std::string &ver)
 		{
 			int id = this->node_id[name][ver];
 			if (id <= 0 || id > G.size) throw std::invalid_argument(name + " has no version named " + ver + ".");
 			return G.depend_node_set(id);
 		}
 
-		std::set<pac_data> get_support_set(const std::string &name, const std::string &ver)
+		set_t<pac_data> get_support_set(const std::string &name, const std::string &ver)
 		{
 			int id = this->node_id[name][ver];
 			if (id <= 0 || id > G.size) throw std::invalid_argument(name + " has no version named " + ver + ".");
