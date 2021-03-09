@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <unordered_map>
+
 // 一般格式：
 //  标题 对象数
 //  对象内容...
@@ -51,50 +52,50 @@ public:
 
     std::vector<rtm_label> rtm_list; // 用于寻找符合要求的runtime，默认idx文件给出的是单调的
 
-    int query_rtm(const std::string &AoS){ // 找合适的ABI，STD版本号的runtime，返回runtime在图中的id
-        int l=0,r=rtm_list.size()-1,mid = (rtm_list.size()-1)>>1;
-        if(AoS[0]=='A'){
-            while(l!=r){
-                mid = (l+r)>>1;
-                if(rtm_list[mid].ABI <= AoS)
+    int query_rtm(const std::string &AoS) { // 找合适的ABI，STD版本号的runtime，返回runtime在图中的id
+        int l = 0, r = rtm_list.size() - 1, mid = (rtm_list.size() - 1) >> 1;
+        if (AoS[0] == 'A') {
+            while (l != r) {
+                mid = (l + r) >> 1;
+                if (rtm_list[mid].ABI <= AoS)
                     r = mid;
                 else
-                    l = mid+1;
+                    l = mid + 1;
             }
-        }
-        else if(AoS[0]=='S'){
-            while(l!=r){
-                mid = (l+r)>>1;
-                if(rtm_list[mid].STD <= AoS)
+        } else if (AoS[0] == 'S') {
+            while (l != r) {
+                mid = (l + r) >> 1;
+                if (rtm_list[mid].STD <= AoS)
                     r = mid;
                 else
-                    l = mid+1;
+                    l = mid + 1;
             }
         }
         return mid;
     }
 
-    std::unordered_map<std::string,std::unordered_map<std::string,int> > node_id;
+    std::unordered_map<std::string, std::unordered_map<std::string, int> > node_id;
 
-    std::unordered_map<std::string,std::pair<std::string,std::string> > un_stable_ver;
+    std::unordered_map<std::string, std::pair<std::string, std::string> > un_stable_ver;
 
     class graph {
     public:
         struct edge {
             int out;
             bool inv;
-            edge(int o,bool i):out(o),inv(i){}
+
+            edge(int o, bool i) : out(o), inv(i) {}
         };
 
         std::vector<std::vector<edge>> head;
         std::vector<pac_data *> node_data;
         std::vector<bool> vis;
-        int size=0;
+        int size = 0;
 
         void init(int s) {
-            head.reserve(s+5);
-            node_data.reserve(s+5);
-            vis.reserve(s+5);
+            head.reserve(s + 5);
+            node_data.reserve(s + 5);
+            vis.reserve(s + 5);
         }
 
         void dfs(const int &u, std::set<int> &sc, bool sgn) {
@@ -180,17 +181,17 @@ public:
         pac_info[name].push_back(description);
         if (!readline(ifs, args))
             return false;
-        for (int i = 0, j = 0; i < cnt; ++i,++j) {
+        for (int i = 0, j = 0; i < cnt; ++i, ++j) {
 
-            if(j==0)
+            if (j == 0)
                 un_stable_ver[name].first = args[j];
-            if(j==1)
+            if (j == 1)
                 un_stable_ver[name].second = args[j];
 
             if (args[j] != "0") {
                 node_id[name][args[j]] = ++G.size;
                 G.node_data[G.size] = new rtm_data(name, args[j], args[j + 1], args[j + 2], args[j + 3]);
-                rtm_list.push_back(rtm_label (args[j + 1], args[j + 2], G.size));
+                rtm_list.push_back(rtm_label(args[j + 1], args[j + 2], G.size));
                 j += 3;
             } else
                 ++G.size;
@@ -216,9 +217,9 @@ public:
             return false;
         for (int i = 0, j = 0; i < cnt; i++) {
 
-            if(j==0)
+            if (j == 0)
                 un_stable_ver[name].first = args[j];
-            if(j==1)
+            if (j == 1)
                 un_stable_ver[name].second = args[j];
 
             if (args[j] != "0") {
@@ -238,13 +239,13 @@ public:
             return false;
         std::string label = args[0];
         int cnt = std::stoi(args[1]);
-        int rtm_id=-1;
-        if(label!="Generic")
+        int rtm_id = -1;
+        if (label != "Generic")
             rtm_id = rtm_list[query_rtm(label)].node_id;
         for (int i = 1; i <= cnt; i++) {
             readline(ifs, args);
-            if(label!="Generic")
-                G.add_edge(std::stoi(args[0]),rtm_id);
+            if (label != "Generic")
+                G.add_edge(std::stoi(args[0]), rtm_id);
             for (int j = 1; j < args.size(); j++)
                 G.add_edge(std::stoi(args[0]), std::stoi(args[j]));
         }

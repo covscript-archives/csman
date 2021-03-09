@@ -4,17 +4,20 @@
  * Copyright (C) 2020-2021 Chengdu Covariant Technologies Co., LTD.
  * Website: https://covariant.cn/
  * Github:  https://github.com/chengdu-zhirui/
- * 
+ *
  * refer to https://blog.csdn.net/venom_snake/article/details/88066475
  */
 #include <csman/global.hpp>
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+
 #ifdef MOZART_PLATFORM_WIN32
+
 #include <windows.h>
-#include <direct.h>		//for mkdir rmdir
-#include <io.h>			//for access
+#include <direct.h>        //for mkdir rmdir
+#include <io.h>            //for access
+
 #elif MOZART_PLATFORM_UNIX
 #include <sys/stat.h>	//for access
 #include <unistd.h>		//for mkdir rmdir
@@ -33,15 +36,15 @@
 
 bool csman::directory::path_exist(const std::string &path)
 {
-	return ACCESS(path.c_str(),0) == 0;
+	return ACCESS(path.c_str(), 0) == 0;
 }
 
 bool csman::directory::create_dir(const std::string &path)   // 存在则不建立
 {
 	for (int i = 0; i < path.size(); i++) {
-		if(path[i]!='/' && path[i]!='\\')
+		if (path[i] != '/' && path[i] != '\\')
 			continue;
-		std::string tmp = path.substr(0,i+1).c_str();
+		std::string tmp = path.substr(0, i + 1).c_str();
 		int status = ACCESS(tmp.c_str(), 0);
 		if (status != 0) {
 			status = MKDIR(tmp.c_str());
@@ -52,7 +55,7 @@ bool csman::directory::create_dir(const std::string &path)   // 存在则不建�
 	return true;
 }
 
-bool csman::directory::remove_dir(const std::string & path)
+bool csman::directory::remove_dir(const std::string &path)
 {
 	std::string strPath = path;
 #ifdef MOZART_PLATFORM_WIN32
@@ -65,7 +68,7 @@ bool csman::directory::remove_dir(const std::string & path)
 	if (handle != -1L) {
 		std::string pathTemp;
 		do {
-			if (strcmp(fb.name, "..")!=0 && strcmp(fb.name, ".")!=0) {
+			if (strcmp(fb.name, "..") != 0 && strcmp(fb.name, ".") != 0) {
 				pathTemp.clear();
 				pathTemp = strPath + std::string(fb.name);
 				if (fb.attrib == _A_SUBDIR)//_A_SUBDIR=16
@@ -77,7 +80,7 @@ bool csman::directory::remove_dir(const std::string & path)
 		while (0 == _findnext(handle, &fb));
 		_findclose(handle);
 	}
-	return remove_dir(strPath.c_str())==0?true:false;
+	return remove_dir(strPath.c_str()) == 0 ? true : false;
 
 #elif MOZART_PLATFORM_UNIX
 	if (strPath.at(strPath.length() - 1) != '\\' || strPath.at(strPath.length() - 1) != '/')

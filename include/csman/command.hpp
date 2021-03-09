@@ -100,12 +100,14 @@ namespace csman {
 		} message;
 
 	public:
-		parser(context *_context,const std::vector<std::string> &arguments) : cxt(_context), args(arguments) {}
+		parser(context *_context, const std::vector<std::string> &arguments) : cxt(_context), args(arguments) {}
+
 		void load_context()
 		{
 			idx = idx_file(cxt);
 			repo = pac_repo(cxt);
 		}
+
 		void parse()
 		{
 			try {
@@ -114,8 +116,8 @@ namespace csman {
 				predicate = args[0];
 				object = args[1];
 
-				if(predicate == "help") {
-					std::cout<<HELP;
+				if (predicate == "help") {
+					std::cout << HELP;
 					return;
 				}
 				else if (predicate == "version") {

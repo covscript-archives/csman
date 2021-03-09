@@ -26,7 +26,8 @@ namespace csman {
 	private:
 		context *cxt;
 
-		bool readruntime(const std::string &name, const int &cnt,std::ifstream &ifs, std::vector<std::string> &args)   // 改
+		bool
+		readruntime(const std::string &name, const int &cnt, std::ifstream &ifs, std::vector<std::string> &args)   // 改
 		{
 
 			rtm_list.reserve(cnt);
@@ -50,7 +51,7 @@ namespace csman {
 				if (args[j] != "0") {
 					node_id[name][args[j]] = ++G.size;
 					G.node_data[G.size] = new rtm_data(name, args[j], args[j + 1], args[j + 2], args[j + 3]);
-					rtm_list.push_back(rtm_label(args[j + 1], args[j + 2],args[j+3], G.size));
+					rtm_list.push_back(rtm_label(args[j + 1], args[j + 2], args[j + 3], G.size));
 					j += 3;
 				}
 				else
@@ -60,7 +61,7 @@ namespace csman {
 			return true;
 		} // 图论读点
 
-		bool readpackage(const std::string &name, const int &cnt,std::ifstream &ifs, std::vector<std::string> &args)
+		bool readpackage(const std::string &name, const int &cnt, std::ifstream &ifs, std::vector<std::string> &args)
 		{
 
 			std::string author, description;
@@ -122,8 +123,8 @@ namespace csman {
 			pac_data(const std::string &n, const std::string &v, const std::string &u) : name(n), ver(v), url(u)
 			{
 				hash_value = 0;
-				for(char c: name+ver)
-					hash_value = (((hash_value*101)%19260817)+(int)c)%19260817;
+				for (char c: name + ver)
+					hash_value = (((hash_value * 101) % 19260817) + (int) c) % 19260817;
 			}
 
 			bool operator<(const pac_data &rhs) const
@@ -146,6 +147,7 @@ namespace csman {
 		struct rtm_label {
 			std::string STD, ABI, ver;
 			int id;
+
 			rtm_label(const std::string &A, const std::string &S, const std::string v, const int &id)
 				: ABI(A), STD(S), ver(v), id(id) {}
 
@@ -187,6 +189,7 @@ namespace csman {
 			}
 			return mid;
 		}
+
 		/*使用:node_id[name][ver]*/
 		std::unordered_map<std::string, std::unordered_map<std::string, int> > node_id;
 		/*使用:un_stable_ver[name], first为unstable, second为stable*/
@@ -266,20 +269,23 @@ namespace csman {
 		{
 			return this->un_stable_ver[name].second;
 		}
+
 		std::string get_unstable_ver(const std::string &name)
 		{
 			return this->un_stable_ver[name].first;
 		}
-		std::set<pac_data> get_depend_set(const std::string &name,const std::string &ver)
+
+		std::set<pac_data> get_depend_set(const std::string &name, const std::string &ver)
 		{
 			int id = this->node_id[name][ver];
-			if(id<=0 || id>G.size)  throw std::invalid_argument(name+" has no version named "+ver+".");
+			if (id <= 0 || id > G.size) throw std::invalid_argument(name + " has no version named " + ver + ".");
 			return G.depend_node_set(id);
 		}
-		std::set<pac_data> get_support_set(const std::string &name,const std::string &ver)
+
+		std::set<pac_data> get_support_set(const std::string &name, const std::string &ver)
 		{
 			int id = this->node_id[name][ver];
-			if(id<=0 || id>G.size)  throw std::invalid_argument(name+" has no version named "+ver+".");
+			if (id <= 0 || id > G.size) throw std::invalid_argument(name + " has no version named " + ver + ".");
 			return G.support_node_set(id);
 		}
 
@@ -303,10 +309,10 @@ namespace csman {
 				std::string name = args[0];
 				int cnt = std::stoi(args[1]); // cnt 当前包内 包个数（按名称+版本）
 
-				if(name == "cs.runtime")
-					readruntime(name,cnt,ifs,args);
+				if (name == "cs.runtime")
+					readruntime(name, cnt, ifs, args);
 				else
-					readpackage(name,cnt,ifs, args);
+					readpackage(name, cnt, ifs, args);
 			}
 
 			//读取依赖

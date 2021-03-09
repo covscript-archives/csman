@@ -13,7 +13,7 @@
 #include <regex>
 
 namespace csman {
-	template<typename T>using set_t = std::unordered_set<T>;
+	template<typename T> using set_t = std::unordered_set<T>;
 
 	namespace directory {
 		bool path_exist(const std::string &);
@@ -24,7 +24,7 @@ namespace csman {
 	}
 
 	namespace network {
-		bool http_get(const std::string &,const std::string &, int);
+		bool http_get(const std::string &, const std::string &, int);
 
 		std::vector<char> http_get(const std::string &, int);
 	}
@@ -60,10 +60,15 @@ namespace csman {
 	class context {
 	private:
 		void set_testing_var();
+
 		void initialize_val();
+
 		void get_covscript_env();
+
 		void read_config();
+
 		void write_config();
+
 		set_t<std::string> only_read_vars;
 		struct Config_Data {
 			struct line_data {
@@ -71,13 +76,16 @@ namespace csman {
 				bool is_comment;
 
 				line_data(const std::string &text, bool is_comment) : text(text),
-					is_comment(is_comment) {}// 该行不是注释，则记录key；反之记录该行注释内容
+					is_comment(
+					    is_comment) {}// 该行不是注释，则记录key；反之记录该行注释内容
 			};
+
 			std::vector<line_data> lines;
 		} config_data;
 	public:
 		std::string ABI, STD, runtime_ver;
 		std::unordered_map<std::string, std::string> vars;
+
 		/*
 		 * all variables in "configure vars":
 		 * home_path

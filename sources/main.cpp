@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 
 		context *cxt = new context();
 
-		parser ps(cxt,args);
+		parser ps(cxt, args);
 
 		ps.parse();
 

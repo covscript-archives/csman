@@ -162,13 +162,13 @@ void csman::context::read_config()
 	std::vector<std::string> args;
 	std::string text;
 	while (std::getline(ifs, text)) {
-		str_split(args,text);
+		str_split(args, text);
 		if (vars.count(args[0]) > 0) { // 如果先前初始化vars时添加过此key，则key为合法key
 			vars[args[0]] = args[2]; // "key" "=" "var"
 			config_data.lines.push_back(Config_Data::line_data(args[0], false));
 		}
-		else if(text[0]=='#')
-			config_data.lines.push_back(Config_Data::line_data(text,true));
+		else if (text[0] == '#')
+			config_data.lines.push_back(Config_Data::line_data(text, true));
 		else throw std::runtime_error("format of .csman_config is incorrect.");
 	}
 	return;
@@ -177,34 +177,34 @@ void csman::context::read_config()
 void csman::context::write_config()
 {
 	std::ofstream ofs(vars["config_path"]);
-	for(auto &l:config_data.lines) {
-		if(l.is_comment)
-			ofs<<l.text<<std::endl;
+	for (auto &l:config_data.lines) {
+		if (l.is_comment)
+			ofs << l.text << std::endl;
 		else
-			ofs<<l.text+" = "+vars[l.text]<<std::endl;
+			ofs << l.text + " = " + vars[l.text] << std::endl;
 	}
 	ofs.close();
 }
 
 void csman::context::show_all()
 {
-	for(auto &x: vars)
-		std::cout<<x.first<<" = "<<x.second<<std::endl;
+	for (auto &x: vars)
+		std::cout << x.first << " = " << x.second << std::endl;
 }
 
 void csman::context::show(const std::string &key)
 {
-	if(vars.count(key)>0)
-		std::cout<<key<<" = "<<vars[key]<<std::endl;
+	if (vars.count(key) > 0)
+		std::cout << key << " = " << vars[key] << std::endl;
 	else
-		std::cout<<"no configure variable named \""<<key<<"\"!"<<std::endl;
+		std::cout << "no configure variable named \"" << key << "\"!" << std::endl;
 }
 
 void csman::context::set(const std::string &key, const std::string &val)
 {
-	if(vars.count(key)>0 || only_read_vars.find(key)==only_read_vars.end()) {
+	if (vars.count(key) > 0 || only_read_vars.find(key) == only_read_vars.end()) {
 		vars[key] = val;
-		std::cout<<"set "<<key<<" as \""<<val<<"\" successfully."<<std::endl;
+		std::cout << "set " << key << " as \"" << val << "\" successfully." << std::endl;
 	}
 	std::cout << "no configure variable named \"" << key << "\"!" << std::endl;
 }

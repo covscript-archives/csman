@@ -28,26 +28,28 @@ namespace csman {
 		void read_file(std::ifstream &ifs)
 		{
 			std::vector<std::string> args;
-			while(!readline(ifs,args)) {
+			while (!readline(ifs, args)) {
 				local_pac[args[0]] = pac_data();
 
 				auto &x = local_pac[args[0]];
-				for(int i=1; i<args.size(); i++)
+				for (int i = 1; i < args.size(); i++)
 					x.ver.insert(args[i]);
 				x.available = args[1];
 			}
 		}
+
 		void write_file(std::ofstream &ofs)
 		{
-			for(auto& x : local_pac) {
-				ofs<<x.first<<" ";
-				ofs<<x.second.available<<" ";
-				for(auto &y : x.second.ver)
-					if(y!=x.second.available)
-						ofs<<y<<" ";
-				ofs<<std::endl;
+			for (auto &x : local_pac) {
+				ofs << x.first << " ";
+				ofs << x.second.available << " ";
+				for (auto &y : x.second.ver)
+					if (y != x.second.available)
+						ofs << y << " ";
+				ofs << std::endl;
 			}
 		}
+
 	public:/*公开接口*/
 		pac_repo() = default;
 

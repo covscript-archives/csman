@@ -27,10 +27,10 @@ add_subdirectory(imports/mozart)
 add_subdirectory(imports/zip)
 
 set(SOURCE_CODE
-    sources/global.cpp
-    sources/network.cpp
-    sources/system.cpp
-    sources/main.cpp)
+        sources/global.cpp
+        sources/network.cpp
+        sources/system.cpp
+        sources/main.cpp)
 
 add_executable(csman ${SOURCE_CODE})
 
