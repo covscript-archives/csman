@@ -6,17 +6,17 @@
  * Website: https://covariant.cn/
  * Github:  https://github.com/chengdu-zhirui/
  */
-#include<iostream>
+#include <iostream>
 #include <unordered_map>
 #include <mozart++/core>
+#include <memory>
 #include <vector>
 #include <string>
 #include <regex>
-#include <map>
 #include <set>
 
 namespace csman {
-	template<typename K, typename V> using map_t = std::map<K, V>;
+	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
 	template<typename T> using set_t = std::set<T>;
 
 	namespace directory {
@@ -116,4 +116,11 @@ namespace csman {
 			}
 		}
 	};
+
+	using context_t = std::shared_ptr<context>;
+
+	static context_t make_context()
+	{
+		return std::make_shared<context>();
+	}
 }

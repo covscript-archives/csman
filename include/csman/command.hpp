@@ -109,9 +109,10 @@ namespace csman {
 		{
 			try {
 				opt_filter();
-				// Segfault Here
-				predicate = args[0];
-				object = args[1];
+				if (args.empty())
+					predicate = "help";
+				if (args.size() > 1)
+					object = args[1];
 
 				if (predicate == "help") {
 					std::cout << HELP;
