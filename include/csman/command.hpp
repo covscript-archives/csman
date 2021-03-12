@@ -76,7 +76,7 @@ namespace csman {
 		inline void opt_filter()   // 改
 		{
 			for (auto it = args.begin(); it != args.end(); it++) {
-				if (it->size() == 2 && it->operator[](0) == '-')
+				if (it->operator[](0) == '-')
 					opt.insert(*it), args.erase(it);
 			}
 		}
@@ -109,10 +109,14 @@ namespace csman {
 		{
 			try {
 				opt_filter();
-				if (args.empty())
+
+				if (args.size() == 0)
 					predicate = "help";
-				if (args.size() > 1)
-					object = args[1];
+				if (args.size() > 0){
+                    predicate = args[0];
+                    if(args.size() > 1)
+                        object = args[1];
+				}
 
 				if (predicate == "help") {
 					std::cout << HELP;
