@@ -48,7 +48,7 @@ namespace mpp_impl {
                     // count of arguments to trigger the event handler.
                     auto *fn = new wrapper_type(make_function(handler));
 
-                    // store argument info for call-time type check.
+                    // store argument info for call-last_update_time type check.
                     _args_count = typelist::size<arg_types>::value;
                     _args_info = typeid(arg_types);
 

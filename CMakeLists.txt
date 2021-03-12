@@ -8,7 +8,7 @@ if (MSVC)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 elseif (CMAKE_COMPILER_IS_GNUCXX)
     if (WIN32)
-        set(CMAKE_C_FLAGS "--static -fPIC -s -O3")
+        set(CMAKE_C_FLAGS "--static -fPIC -Og -g")
         set(CMAKE_CXX_FLAGS "--static -fPIC -Og -g")
     else ()
         set(CMAKE_C_FLAGS "-fPIC -s -O3")
@@ -30,7 +30,7 @@ set(SOURCE_CODE
         sources/global.cpp
         sources/network.cpp
         sources/system.cpp
-        sources/main.cpp)
+        sources/main.cpp include/csman/exception.hpp)
 
 add_executable(csman ${SOURCE_CODE})
 

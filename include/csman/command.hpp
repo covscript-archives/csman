@@ -15,7 +15,7 @@
 namespace csman {
 	class parser {
 	private:
-		context *cxt;   // 上下文，存取全局变量与信息
+		context *cxt = nullptr;   // 上下文，存取全局变量与信息
 		idx_file idx;   // sources_idx，可下载包信息，负责依赖查询，支持查询
 		pac_repo repo;  // pac_repo, 包仓库
 		std::vector<std::string> args;  // 用户命令的参数，例如install xxx
@@ -30,7 +30,7 @@ namespace csman {
 				network::http_get(url, zip_path, std::stoi(cxt->vars["max_reconnect_time"]));
 				cov::zip_extract(zip_path, dir_path);
 			}
-			catch (std::exception &e) {
+			catch (const std::exception &e) {
 				throw e;
 			}
 		}
@@ -45,7 +45,7 @@ namespace csman {
 				                         " failed, please check whether it's using by other progress.");
 		}
 
-		const std::string HELP = "usage: csman <command> [objects] [args]\n"
+		const std::string HELP = "\nusage: csman <command> [objects] [args]\n"
 		                         "\n"
 		                         "Online commands:\n"
 		                         "\tinstall\t\t\tInstall a package.\n"
@@ -57,11 +57,11 @@ namespace csman {
 		                         "\tversion\t\t\tCheck version of csman.\n"
 		                         "\tcheckout\t\tChange your CovScript's runtime version.\n"
 		                         "\n"
-		                         "Go to our page for more support: http://csman.info";
+		                         "Go to our page for more support: http://csman.info\n";
 
 		const std::string VERSION = "csman 1.0";
 
-		inline bool y_or_n()
+		inline bool y_or_n() // 也许可以扔针对命令行的组件里
 		{
 			static char c = '#';
 			std::cout << '>';
@@ -140,7 +140,7 @@ namespace csman {
 				else
 					throw std::invalid_argument("syntax error!");
 			}
-			catch (std::exception &e) {
+			catch (const std::exception &e) {
 				throw e;
 			}
 		}
@@ -175,7 +175,7 @@ namespace csman {
 				}
 				message.first_sentence("csman: install", object + " " + ver + " and it's dependencies successfully.");
 			}
-			catch (std::exception &e) {
+			catch (const std::exception &e) {
 				throw e;
 			}
 		}
@@ -214,7 +214,7 @@ namespace csman {
 				}
 				message.first_sentence("csman: uninstall", object + " " + ver + " and it's supports successfully.");
 			}
-			catch (std::exception &e) {
+			catch (const std::exception &e) {
 				throw e;
 			}
 		}
@@ -226,7 +226,7 @@ namespace csman {
 					try {
 						cxt->set(args[3], args[4]);
 					}
-					catch (std::exception &e) {
+					catch (const std::exception &e) {
 						throw e;
 					}
 				}

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
 		ps.parse();
 	}
-	catch (std::exception &e) {
+	catch (const std::exception &e) {
 		std::cout << e.what();
 	}
 	return 0;

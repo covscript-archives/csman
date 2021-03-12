@@ -1,5 +1,5 @@
 #pragma once
-/**
+/*
  * CovScript Manager: Index File
  * Licensed under Apache 2.0
  * Copyright (C) 2020-2021 Chengdu Covariant Technologies Co., LTD.
@@ -18,9 +18,9 @@
 //
 // 剩下具体的STD，ABI号内容为：对PAC中各个包的说明与索引
 namespace csman {
-	class idx_file {
+	class idx_file final {
 	private:
-		context *cxt;
+		context *cxt = nullptr;
 
 		bool
 		readruntime(const std::string &name, const int &cnt, std::ifstream &ifs, std::vector<std::string> &args)   // 改
@@ -35,6 +35,7 @@ namespace csman {
 			if (!getline(ifs, description))
 				return false;
 			pac_description[name].push_back(description);
+			
 			if (!readline(ifs, args))
 				return false;
 			for (int i = 0, j = 0; i < cnt; ++i, ++j) {
@@ -53,7 +54,6 @@ namespace csman {
 				else
 					++G.size;
 			}
-
 			return true;
 		} // 图论读点
 
@@ -90,26 +90,26 @@ namespace csman {
 
 		bool readdep(std::ifstream &ifs, std::vector<std::string> &args)   // 图论读边
 		{
-
 			if (!readline(ifs, args))
 				return false;
 			std::string label = args[0];
 			int cnt = std::stoi(args[1]);
+
+
 			int rtm_id = -1;
 			if (label != "Generic")
-				rtm_id = rtm_list[query_rtm(label)].id;
+				rtm_id = query_rtm_label(label).id;
 			for (int i = 1; i <= cnt; i++) {
 				readline(ifs, args);
-				if (label != "Generic")
+				if (rtm_id != -1)
 					G.add_edge(std::stoi(args[0]), rtm_id);
 				for (int j = 1; j < args.size(); j++)
 					G.add_edge(std::stoi(args[0]), std::stoi(args[j]));
 			}
-
 			return true;
 		}
 
-		std::string time;
+		std::string last_update_time;
 
 	public:/*公开类*/
 		struct pac_data {
@@ -162,28 +162,39 @@ namespace csman {
 		/*使用:rtm_list.lower_bound(a_runtime)*/
 		std::vector<rtm_label> rtm_list; // 用于寻找符合要求的runtime，默认idx文件给出的是单调的
 		/*lower_bound的临时替代*/
-		int query_rtm(const std::string &AoS)   // 找合适的ABI，STD版本号的runtime，返回runtime在图中的id，以后用lower_bound代替
+		rtm_label& query_rtm_label(const std::string &AoS)   // 找合适的ABI，STD版本号的runtime，返回runtime在图中的id，以后用lower_bound代替
 		{
-			int l = 0, r = rtm_list.size() - 1, mid = (rtm_list.size() - 1) >> 1;
-			if (AoS[0] == 'A') {
-				while (l != r) {
-					mid = (l + r) >> 1;
-					if (rtm_list[mid].ABI <= AoS)
-						r = mid;
-					else
-						l = mid + 1;
-				}
-			}
-			else if (AoS[0] == 'S') {
-				while (l != r) {
-					mid = (l + r) >> 1;
-					if (rtm_list[mid].STD <= AoS)
-						r = mid;
-					else
-						l = mid + 1;
-				}
-			}
-			return mid;
+		    for(auto it = rtm_list.rbegin(); it != rtm_list.rend(); ++it){
+		        if(AoS[0]=='A'){
+                    if(AoS==it->ABI)
+                        return *it;
+		        }
+		        else if(AoS[0]=='S'){
+		            if(AoS==it->STD)
+		                return *it;
+		        }
+		    }
+		    throw std::runtime_error(AoS+" is not installed.");
+/*			int l = 0, r = rtm_list.size() - 1, mid = (rtm_list.size() - 1) >> 1;
+//			if (AoS[0] == 'A') {
+//				while (l != r) {
+//					mid = (l + r) >> 1;
+//					if (rtm_list[mid].ABI <= AoS)
+//						r = mid;
+//					else
+//						l = mid + 1;
+//				}
+//			}
+//			else if (AoS[0] == 'S') {
+//				while (l != r) {
+//					mid = (l + r) >> 1;
+//					if (rtm_list[mid].STD <= AoS)
+//						r = mid;
+//					else
+//						l = mid + 1;
+//				}
+//			}
+//			return mid;*/
 		}
 
 		/*使用:node_id[name][ver]*/
@@ -293,12 +304,13 @@ namespace csman {
 			std::string str;
 			std::vector<std::string> args;
 
-			std::getline(ifs, time); //2020.02.30.10.35
+			std::getline(ifs, last_update_time); //2020.02.30.10.35
 			readline(ifs, args); //PAC 14 28
 			int cnt_1 = std::stoi(args[1]); // cnt_1 包个数（按名称）
 			G.init(std::stoi(args[2])); // cnt_2 包个数（按名称+版本）
 
-			for (int i = 2; i <= cnt_1; i++) { // 0为空位无效包编号，所有包编号为1~cnt_2，共cnt个包 改
+
+			for (int i = 1; i <= cnt_1; i++) { // 0为空位无效包编号，所有包编号为1~cnt_2，共cnt个包 改
 				if (!readline(ifs, args))
 					throw std::runtime_error("incorrect format of sources_idx.");
 

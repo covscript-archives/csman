@@ -1,19 +1,22 @@
 #pragma once
-/**
+/*
  * CovScript Manager: Global Functions
  * Licensed under Apache 2.0
  * Copyright (C) 2020-2021 Chengdu Covariant Technologies Co., LTD.
  * Website: https://covariant.cn/
  * Github:  https://github.com/chengdu-zhirui/
  */
+#include <fstream>
 #include <iostream>
 #include <unordered_map>
-#include <mozart++/core>
 #include <memory>
 #include <vector>
 #include <string>
 #include <regex>
 #include <set>
+
+#include <csman/exception.hpp>
+#include <mozart++/core>
 
 namespace csman {
 	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
@@ -77,11 +80,10 @@ namespace csman {
 		struct Config_Data {
 			struct line_data {
 				std::string text;
-				bool is_comment;
+				bool is_notes;
 
-				line_data(const std::string &text, bool is_comment) : text(text),
-					is_comment(
-					    is_comment) {}// 该行不是注释，则记录key；反之记录该行注释内容
+				line_data(const std::string &text, bool is_notes) : text(text),
+                                                                      is_notes(is_notes) {}// 该行不是注释，则记录key；反之记录该行注释内容
 			};
 
 			std::vector<line_data> lines;
@@ -91,7 +93,7 @@ namespace csman {
 		map_t<std::string, std::string> vars;
 
 		/*
-		 * all variables in "configure vars":
+		 * all variables are in "configure vars" :
 		 * home_path
 		 * COVSCRIPT_HOME, CS_IMPORT_PATH, CS_DEV_PATH
 		 * config_path, csman_path, pac_repo_path, sources_idx_path, max_reconnect_time
@@ -107,13 +109,23 @@ namespace csman {
 		{
 			try {
 				initialize_val();
-//			get_covscript_env();
-//			read_config();
-				set_testing_var();
+                get_covscript_env();
+                set_testing_var(); // for test
+                read_config();
 			}
-			catch (std::exception e) {
+			catch (const std::exception &e) {
 				throw e;
 			}
+		}
+
+		~context(){
+            if(vars.count("config_path") != 0) {
+                std::ofstream ofs(vars["config_path"]);
+                write_config();
+                ofs.close();
+            }
+            else
+                std::cout<<"Warning: your file for recording .csman_config updating failed, it may cause extremely problems while next last_update_time. Please try to repair it by using \"csman repair\""<<std::endl;
 		}
 	};
 

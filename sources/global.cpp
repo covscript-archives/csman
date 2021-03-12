@@ -170,7 +170,7 @@ void csman::context::read_config()
 	while (std::getline(ifs, text)) {
 		str_split(args, text);
 		if (vars.count(args[0]) > 0) { // 如果先前初始化vars时添加过此key，则key为合法key
-			vars[args[0]] = args[2]; // "key" "=" "var"
+			vars[args[0]] = args[2]; // args[0]:key args[1]:'=' args[2]:var
 			config_data.lines.push_back(Config_Data::line_data(args[0], false));
 		}
 		else if (text[0] == '#')
@@ -184,7 +184,7 @@ void csman::context::write_config()
 {
 	std::ofstream ofs(vars["config_path"]);
 	for (auto &l:config_data.lines) {
-		if (l.is_comment)
+		if (l.is_notes)
 			ofs << l.text << std::endl;
 		else
 			ofs << l.text + " = " + vars[l.text] << std::endl;

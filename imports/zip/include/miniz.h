@@ -34,10 +34,10 @@
    tested with clang v3.3 and gcc v4.6.
        - Clang fix for tdefl_write_image_to_png_file_in_memory() from toffaletti
        - Merged MZ_FORCEINLINE fix from hdeanclark
-       - Fix <time.h> include before config #ifdef, thanks emil.brink
+       - Fix <last_update_time.h> include before config #ifdef, thanks emil.brink
        - Added tdefl_write_image_to_png_file_in_memory_ex(): supports Y flipping
    (super useful for OpenGL apps), and explicit control over the compression
-   level (so you can set it to 1 for real-time compression).
+   level (so you can set it to 1 for real-last_update_time compression).
        - Merged in some compiler fixes from paulharris's github repro.
        - Retested this build under Windows (VS 2010, including static analysis),
    tcc  0.9.26, gcc v4.6 and clang v3.3.
@@ -51,7 +51,7 @@
    - In r4: Minor bugfix to mz_zip_writer_add_from_zip_reader(): Was pushing the
    wrong central dir header offset, appears harmless in this release, but it
    became a problem in the zip64 branch 5/20/12 v1.14 - MinGW32/64 GCC 4.6.1
-   compiler fixes: added MZ_FORCEINLINE, #include <time.h> (thanks fermtect).
+   compiler fixes: added MZ_FORCEINLINE, #include <last_update_time.h> (thanks fermtect).
      5/19/12 v1.13 - From jason@cornsyrup.org and kelwert@mtu.edu - Fix
    mz_crc32() so it doesn't compute the wrong CRC-32's when mz_ulong is 64-bit.
        - Temporarily/locally slammed in "typedef unsigned long mz_ulong" and
@@ -233,7 +233,7 @@
 //#define MINIZ_NO_STDIO
 
 // If MINIZ_NO_TIME is specified then the ZIP archive functions will not be able
-// to get the current time, or get/set file times, and the C run-time funcs that
+// to get the current last_update_time, or get/set file times, and the C run-last_update_time funcs that
 // get/set times won't be called. The current downside is the times written to
 // your archives will be from 1979.
 //#define MINIZ_NO_TIME
@@ -913,7 +913,7 @@ mz_bool mz_zip_writer_init_from_reader(mz_zip_archive *pZip,
                                        const char *pFilename);
 
 // Adds the contents of a memory buffer to an archive. These functions record
-// the current local time into the archive. To add a directory entry, call this
+// the current local last_update_time into the archive. To add a directory entry, call this
 // method with an archive name ending in a forwardslash with empty buffer.
 // level_and_flags - compression level (0-10, see MZ_BEST_SPEED,
 // MZ_BEST_COMPRESSION, etc.) logically OR'd with zero or more mz_zip_flags, or
@@ -930,7 +930,7 @@ mz_bool mz_zip_writer_add_mem_ex(mz_zip_archive *pZip,
 
 #ifndef MINIZ_NO_STDIO
 // Adds the contents of a disk file to an archive. This function also records
-// the disk file's modified time into the archive. level_and_flags - compression
+// the disk file's modified last_update_time into the archive. level_and_flags - compression
 // level (0-10, see MZ_BEST_SPEED, MZ_BEST_COMPRESSION, etc.) logically OR'd
 // with zero or more mz_zip_flags, or just set to MZ_DEFAULT_COMPRESSION.
 mz_bool mz_zip_writer_add_file(mz_zip_archive *pZip, const char *pArchive_name,
@@ -1127,7 +1127,7 @@ enum {
 // adler-32 of the input data (even when not writing zlib headers).
 // TDEFL_GREEDY_PARSING_FLAG: Set to use faster greedy parsing, instead of more
 // efficient lazy parsing. TDEFL_NONDETERMINISTIC_PARSING_FLAG: Enable to
-// decrease the compressor's initialization time to the minimum, but the output
+// decrease the compressor's initialization last_update_time to the minimum, but the output
 // may vary from run to run given the same input (depending on the contents of
 // memory). TDEFL_RLE_MATCHES: Only look for RLE matches (matches with a
 // distance of 1) TDEFL_FILTER_MATCHES: Discards matches <= 5 chars if enabled.
@@ -1187,7 +1187,7 @@ void *tdefl_write_image_to_png_file_in_memory(const void *pImage, int w, int h,
                                               int num_chans, size_t *pLen_out);
 
 // Output stream interface. The compressor uses this interface to write
-// compressed data. It'll typically be called TDEFL_OUT_BUF_SIZE at a time.
+// compressed data. It'll typically be called TDEFL_OUT_BUF_SIZE at a last_update_time.
 typedef mz_bool (*tdefl_put_buf_func_ptr)(const void *pBuf, int len,
                                           void *pUser);
 
@@ -3697,7 +3697,7 @@ static mz_bool tdefl_compress_normal(tdefl_compressor *d) {
     MZ_ASSERT(d->m_lookahead_size >= len_to_move);
     d->m_lookahead_size -= len_to_move;
     d->m_dict_size = MZ_MIN(d->m_dict_size + len_to_move, TDEFL_LZ_DICT_SIZE);
-    // Check if it's time to flush the current LZ codes to the internal output
+    // Check if it's last_update_time to flush the current LZ codes to the internal output
     // buffer.
     if ((d->m_pLZ_code_buf > &d->m_lz_code_buf[TDEFL_LZ_CODE_BUF_SIZE - 8]) ||
         ((d->m_total_lz_bytes > 31 * 1024) &&
@@ -4434,7 +4434,7 @@ static void mz_zip_time_t_to_dos_time(time_t time, mz_uint16 *pDOS_time,
 #ifdef _MSC_VER
   struct tm tm_struct;
   struct tm *tm = &tm_struct;
-  errno_t err = localtime_s(tm, &time);
+  errno_t err = localtime_s(tm, &last_update_time);
   if (err) {
     *pDOS_date = 0;
     *pDOS_time = 0;

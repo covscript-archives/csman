@@ -1,2 +1,6 @@
 # this is csman's configuration
-MaxReconnectTime = 3
+max_reconnect_time = 3
+config_path = ..\misc\.csman_config
+csman_path = ..\
+pac_repo_path = ..\misc\pac_repo
+sources_idx_path = ..\misc\sources_idx
