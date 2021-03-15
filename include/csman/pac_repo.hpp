@@ -36,7 +36,7 @@ namespace csman {
             if(!ifs.is_open())
                 throw std::runtime_error("opening \"pac_repo\" failed.");
 			std::vector<std::string> args;
-			while (readline(ifs, args))
+			while (str::readline(ifs, args))
 			    local_pac[args[0]] = pac_data(args);
 
 			ifs.close();

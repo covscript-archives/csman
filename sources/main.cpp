@@ -1,6 +1,10 @@
-//
-// Created by Administrator on 2021/3/8.
-//
+/*
+ * CovScript Manager: OS Depended Functions Implementation
+ * Licensed under Apache 2.0
+ * Copyright (C) 2020-2021 Chengdu Covariant Technologies Co., LTD.
+ * Website: https://covariant.cn/
+ * Github:  https://github.com/chengdu-zhirui/
+ */
 #include <csman/command.hpp>
 
 int main(int argc, char **argv)

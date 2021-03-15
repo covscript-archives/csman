@@ -18,52 +18,54 @@
 #include <csman/exception.hpp>
 #include <mozart++/core>
 
+#ifdef MOZART_PLATFORM_LINUX
+#define delimiter '/'
+#elif defined(MOZART_PLATFORM_WIN32)
+#define delimiter '\\'
+#elif defined(MOZART_PLATFORM_DARWIN)
+#define delimiter '/'
+#endif
+
 namespace csman {
-	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
-	template<typename T> using set_t = std::set<T>;
+    template<typename K, typename V> using map_t = std::unordered_map<K, V>;
+    template<typename T> using set_t = std::set<T>;
 
-	namespace directory {
-		bool path_exist(const std::string &);
+    namespace sys{
+        bool exist(const std::string &);
+        namespace dir {
+            bool create(std::string);
+            bool remove(std::string);
+        }
+        namespace file{
+            bool create(std::string);
+            bool remove(std::string);
+        }
+    }
 
-		bool create_dir(const std::string &);
+    namespace network {
+        bool http_get(const std::string &, std::string , int);
+        std::vector<char> http_get(const std::string &, int);
+    }
 
-		bool remove_dir(const std::string &);
-	}
-
-	namespace network {
-		bool http_get(const std::string &, const std::string &, int);
-
-		std::vector<char> http_get(const std::string &, int);
-	}
-
-	void str_split(std::vector<std::string> &, const std::string &);
-
-	bool readline(std::ifstream &, std::vector<std::string> &);
-
-	static bool is_abi(const std::string &str)
-	{
-		static const std::regex reg("^ABI[0-9]{4}[0-9A-F]{2}$");
-		return std::regex_match(str, reg);
-	}
-
-	static bool is_std(const std::string &str)
-	{
-		static const std::regex reg("^STD[0-9]{4}[0-9A-F]{2}$");
-		return std::regex_match(str, reg);
-	}
-
-	static bool is_ver(const std::string &str)
-	{
-		static const std::regex reg("^([0-9]+\\.){0,3}[0-9]+\\w*$");
-		return std::regex_match(str, reg);
-	}
-
-	static bool is_pac(const std::string &str)
-	{
-		static const std::regex reg("^(\\w+\\.)+\\w+$");
-		return std::regex_match(str, reg);
-	}
-
+    namespace str{
+        bool is_abi(const std::string &);
+        bool is_std(const std::string &);
+        bool is_ver(const std::string &);
+        bool is_pac(const std::string &);
+        bool weak_equal(const std::string &, const std::string &);
+        std::vector<std::string> split(const std::string &);
+        std::vector<std::string> split(const std::string &, const std::string &);
+        bool readline(std::ifstream &, std::vector<std::string> &);
+        bool path_char(const char &);
+        bool is_path(const std::string &);
+        bool path_compare(std::string , std::string );
+        std::string to_dir_path(const std::string &);
+        std::string to_file_path(const std::string &);
+    }
+}
+namespace csman {
+    template<typename K, typename V> using map_t = std::unordered_map<K, V>;
+    template<typename T> using set_t = std::set<T>;
 	class context {
 	private:
 

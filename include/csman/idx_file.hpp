@@ -36,7 +36,7 @@ namespace csman {
 				return false;
 			pac_description[name].push_back(description);
 			
-			if (!readline(ifs, args))
+			if (!str::readline(ifs, args))
 				return false;
 			for (int i = 0, j = 0; i < cnt; ++i, ++j) {
 
@@ -68,7 +68,7 @@ namespace csman {
 				return false;
 			pac_description[name].push_back(description);
 
-			if (!readline(ifs, args))
+			if (!str::readline(ifs, args))
 				return false;
 			for (int i = 0, j = 0; i < cnt; i++) {
 				if (j == 0)
@@ -90,7 +90,7 @@ namespace csman {
 
 		bool readdep(std::ifstream &ifs, std::vector<std::string> &args)   // 图论读边
 		{
-			if (!readline(ifs, args))
+			if (!str::readline(ifs, args))
 				return false;
 			std::string label = args[0];
 			int cnt = std::stoi(args[1]);
@@ -100,7 +100,7 @@ namespace csman {
 			if (label != "Generic")
 				rtm_id = query_rtm_label(label).id;
 			for (int i = 1; i <= cnt; i++) {
-				readline(ifs, args);
+				str::readline(ifs, args);
 				if (rtm_id != -1)
 					G.add_edge(std::stoi(args[0]), rtm_id);
 				for (int j = 1; j < args.size(); j++)
@@ -305,13 +305,13 @@ namespace csman {
 			std::vector<std::string> args;
 
 			std::getline(ifs, last_update_time); //2020.02.30.10.35
-			readline(ifs, args); //PAC 14 28
+			str::readline(ifs, args); //PAC 14 28
 			int cnt_1 = std::stoi(args[1]); // cnt_1 包个数（按名称）
 			G.init(std::stoi(args[2])); // cnt_2 包个数（按名称+版本）
 
 
 			for (int i = 1; i <= cnt_1; i++) { // 0为空位无效包编号，所有包编号为1~cnt_2，共cnt个包 改
-				if (!readline(ifs, args))
+				if (!str::readline(ifs, args))
 					throw std::runtime_error("incorrect format of sources_idx.");
 
 				std::string name = args[0];

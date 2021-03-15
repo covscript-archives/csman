@@ -132,7 +132,7 @@ namespace cov {
 		}
 	};
 
-	bool zip_extract(const std::string& zip_path, const std::string& target_path)
+	/*static*/ bool zip_extract(const std::string& zip_path, const std::string& target_path)
 	{
 		return ::zip_extract(zip_path.c_str(), target_path.c_str(), nullptr, nullptr) == 0;
 	}

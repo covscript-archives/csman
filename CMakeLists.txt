@@ -27,10 +27,13 @@ add_subdirectory(imports/mozart)
 add_subdirectory(imports/zip)
 
 set(SOURCE_CODE
-        sources/global.cpp
-        sources/network.cpp
-        sources/system.cpp
-        sources/main.cpp include/csman/exception.hpp)
+        sources/main.cpp
+        sources/command.cpp
+        sources/global/context.cpp
+        sources/global/network.cpp
+        sources/global/system.cpp
+        sources/global/str.cpp
+        )
 
 add_executable(csman ${SOURCE_CODE})
 
