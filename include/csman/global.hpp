@@ -66,7 +66,6 @@ namespace csman {
 
 	class context {
 	private:
-		void set_testing_var();
 
 		void initialize_val();
 
@@ -109,11 +108,13 @@ namespace csman {
 		{
 			try {
 				initialize_val();
+				
                 get_covscript_env();
-                set_testing_var(); // for test
+				
                 read_config();
 			}
 			catch (const std::exception &e) {
+				std::cerr << e.what() << std::endl;
 				throw e;
 			}
 		}

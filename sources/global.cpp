@@ -37,13 +37,6 @@ bool csman::readline(std::ifstream &ifs, std::vector<std::string> &args)
 	return true;
 }
 
-void csman::context::set_testing_var()
-{
-	vars["config_path"] = "../misc/.csman_config";
-	vars["pac_repo_path"] = "../misc/pac_repo";
-	vars["sources_idx_path"] = "../misc/sources_idx";
-}
-
 void csman::context::initialize_val()
 {
 
@@ -113,44 +106,55 @@ void csman::context::initialize_val()
 	vars["csman_path"] = home + "/.csman/";
 	vars["pac_repo_path"] = vars["COVSCRIPT_HOME"] + "/pac_repo/";
 	vars["sources_idx_path"] = vars["csman_path"] + "/sources_idx";
-	vars["max_reconnect_time"] = "5";
+	vars["max_reconnect_time"] = "5"; 
 }
 
 void csman::context::get_covscript_env()
 {
-	mpp::process_builder builder;
-	builder.command("cs")
-	.arguments(std::vector<std::string> {"-v"})
-	.merge_outputs(true);
-	auto p = builder.start();
-	auto &out = p.out();
-	std::regex regVersion("Version: ([0-9\\.]+)"),
-	    regSTD("STD Version: ([0-9]{4}[0-9A-F]{2})"),
-	    regABI("ABI Version: ([0-9]{4}[0-9A-F]{2})"),
-	    regAPI("API Version: ([0-9]{4}[0-9A-F]{2})"),
-	    regBuild("Build ([0-9]+)");
-	std::string _build, _version;
-	while (out) {
-		std::string line;
-		std::getline(out, line);
-		std::smatch std_match;
+	try{
+		mpp::process_builder builder;
+		builder.command("cs")
+		.arguments(std::vector<std::string> {"-v"})
+		.merge_outputs(true);
 
-		if (std::regex_search(line, std_match, regSTD))
-			this->STD = std_match[1];
-		else if (std::regex_search(line, std_match, regABI))
-			this->ABI = std_match[1];
-		else if (std::regex_search(line, std_match, regAPI))
-			/*do nothing*/;
-		else if (std::regex_search(line, std_match, regVersion))
-			_version = std_match[1];
-		if (std::regex_search(line, std_match, regBuild)) {
-			_build = std_match[1];
-			continue;
+		auto p = builder.start();
+
+		auto &out = p.out();
+
+		std::regex regVersion("Version: ([0-9\\.]+)"),
+			regSTD("STD Version: ([0-9]{4}[0-9A-F]{2})"),
+			regABI("ABI Version: ([0-9]{4}[0-9A-F]{2})"),
+			regAPI("API Version: ([0-9]{4}[0-9A-F]{2})"),
+			regBuild("Build ([0-9]+)");
+
+		std::string _build, _version;
+
+		while (out) {
+			std::string line;
+			std::getline(out, line);
+			std::smatch std_match;
+
+			if (std::regex_search(line, std_match, regSTD))
+				this->STD = std_match[1];
+			else if (std::regex_search(line, std_match, regABI))
+				this->ABI = std_match[1];
+			else if (std::regex_search(line, std_match, regAPI))
+				/*do nothing*/;
+			else if (std::regex_search(line, std_match, regVersion))
+				_version = std_match[1];
+			if (std::regex_search(line, std_match, regBuild)) {
+				_build = std_match[1];
+				continue;
+			}
 		}
+		this->runtime_ver = _version + _build;
 	}
-	this->runtime_ver = _version + _build;
+	catch(...){
+		throw std::runtime_error("CovScript has not installed.");
+	}
 	if (this->ABI.empty() || this->STD.empty() || this->runtime_ver.empty())
-		throw std::runtime_error("CovScript has not installed yet or maybe it has been broken.");
+			throw std::runtime_error("CovScript has not installed.");
+
 	return;
 }
 
@@ -175,7 +179,7 @@ void csman::context::read_config()
 		}
 		else if (text[0] == '#')
 			config_data.lines.push_back(Config_Data::line_data(text, true));
-		else throw std::runtime_error("format of .csman_config is incorrect.");
+		else throw std::logic_error("format of .csman_config is incorrect.");
 	}
 	return;
 }

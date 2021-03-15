@@ -1,0 +1,75 @@
+2020.02.30.10.35
+PAC 14 28
+cs.runtime 2
+CovScript Organization
+CovScript Runtime Package
+0 3.3.3.12 ABI200203 STD200203 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/cs.runtime_3.3.3.12.zip
+cics.codec 2
+Covariant Institute
+Base32, Base64 and JSON Codec Library
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.codec_20.2.2.zip
+cics.darwin 2
+Covariant Institute
+Covariant Darwin UCGL Bindings for CovScript
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.darwin_20.2.2.zip
+cics.imgui 2
+Covariant Institute
+Ocornut Dear ImGUI Bindings for CovScript
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.imgui_20.2.2.zip
+cics.network 2
+Covariant Institute
+ASIO Network Bindings for CovScript
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.network_20.2.2.zip
+cics.process 2
+Covariant Institute
+System Process Library
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.process_20.2.2.zip
+cics.regex 2
+Covariant Institute
+RegEx Library
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.regex_20.2.2.zip
+cics.sqlite 2
+Covariant Institute
+SQLite Database Bindings for CovScript
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.sqlite_20.2.2.zip
+cics.streams 2
+Covariant Institute
+Streams API for CovScript
+0 20.2.2 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/ABI_200203/cics.streams_20.2.2.zip
+cics.csbuild 2
+Covariant Institute
+Official Build System for CovScript
+0 1.0 http://mirrors.covariant.cn/csman/Generic/cics.csbuild_1.0.zip
+cics.picasso 2
+Covariant Institute
+Picasso UI Components for ImGUI
+0 1.0 http://mirrors.covariant.cn/csman/Generic/cics.picasso_1.0.zip
+cics.sqlite_ext 2
+Covariant Institute
+SQLite Extended Tools for SQLite
+0 1.0 http://mirrors.covariant.cn/csman/Generic/cics.sqlite_ext_1.0.zip
+cs.develop 2
+CovScript Organization
+CovScript Develop Package
+0 3.3.3.12 http://mirrors.covariant.cn/csman/Linux_GCC_AMD64/cs.develop_3.3.3.12.zip
+cs.docs 2
+CovScript Organization
+Official Document for CovScript
+0 20.3.2 http://mirrors.covariant.cn/csman/Generic/STD_200302/cs.docs_20.3.2.zip
+ABI200203 8
+4
+6 
+8 
+10 
+12 
+14 
+16 
+18
+Generic 5
+2
+20 26 2
+22 8 14 2
+24 14 16 2
+26 2
+STD200203 1
+28

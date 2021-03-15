@@ -32,7 +32,7 @@ namespace csman {
 	private:/*私有方法*/
 		void read_pac_repo(const std::string &path)
 		{
-            std::ifstream ifs(path);
+            std::ifstream ifs(path + "/" + "pac_list");
             if(!ifs.is_open())
                 throw std::runtime_error("opening \"pac_repo\" failed.");
 			std::vector<std::string> args;
@@ -44,7 +44,7 @@ namespace csman {
 
 		void write_pac_repo(const std::string &path)
 		{
-            std::ofstream ofs(path);
+            std::ofstream ofs(path + "/" + "pac_list");
 			for (auto &x : local_pac) {
 				ofs << x.first << " ";
 				ofs << x.second.available << " ";
