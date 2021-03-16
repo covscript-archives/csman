@@ -65,25 +65,39 @@ namespace csman {
                     object = args[1];
             }
 
+            /*安装csman前*/
             if (predicate == "help") {
                 std::cout << HELP;
                 return;
             } else if (predicate == "version") {
                 std::cout << VERSION;
                 return;
+            } else if (predicate == "init"){
+                init();
+                return;
             }
 
-            repo = pac_repo(cxt);
-            if (predicate == "list")
+            /*安装后*/
+            cxt->read_config();
+            repo = pac_repo(cxt); // load pac_repo
+            if (predicate == "list") {
                 list();
-            else if (predicate == "config")
+                return;
+            }
+            else if (predicate == "config") {
                 config();
+                return;
+            }
 
-            idx = idx_file(cxt);
-            if (predicate == "install")
+            idx = idx_file(cxt); // load sources_idx
+            if (predicate == "install") {
                 install();
-            else if (predicate == "uninstall")
+                return;
+            }
+            else if (predicate == "uninstall") {
                 uninstall();
+                return;
+            }
             else
                 throw std::invalid_argument("syntax error!");
         }
@@ -104,6 +118,20 @@ namespace csman {
 }
 
 namespace csman {
+    void parser::init(){
+        if(args.size()!=1)
+            throw std::invalid_argument("syntax error.");
+        try{
+            /*
+             * here
+             * install covscript
+             */
+
+        }catch(const std::exception &e){
+            throw e;
+        }
+    }
+
     void parser::install() {
         std::string ver;
         if (args.size() <= 2) ver = idx.get_stable_ver(object);

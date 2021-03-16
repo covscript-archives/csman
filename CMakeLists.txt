@@ -29,6 +29,7 @@ add_subdirectory(imports/zip)
 set(SOURCE_CODE
         sources/main.cpp
         sources/command.cpp
+        sources/initializer.cpp
         sources/global/context.cpp
         sources/global/network.cpp
         sources/global/system.cpp

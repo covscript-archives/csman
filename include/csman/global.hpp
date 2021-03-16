@@ -73,10 +73,6 @@ namespace csman {
 
 		void get_covscript_env();
 
-		void read_config();
-
-		void write_config();
-
 		set_t<std::string> only_read_vars;
 		struct Config_Data {
 			struct line_data {
@@ -86,34 +82,29 @@ namespace csman {
 				line_data(const std::string &text, bool is_notes) : text(text),
                                                                       is_notes(is_notes) {}// 该行不是注释，则记录key；反之记录该行注释内容
 			};
-
 			std::vector<line_data> lines;
 		} config_data;
+		std::string home_path;
 	public:
 		std::string ABI, STD, runtime_ver;
 		map_t<std::string, std::string> vars;
 
 		/*
 		 * all variables are in "configure vars" :
-		 * home_path
 		 * COVSCRIPT_HOME, CS_IMPORT_PATH, CS_DEV_PATH
 		 * config_path, csman_path, pac_repo_path, sources_idx_path, max_reconnect_time
 		 */
 
 		void show(const std::string &key);
-
 		void show_all();
-
 		void set(const std::string &key, const std::string &val);
+        void read_config(); // 需要手动调用read
+        void write_config(); // 析构会自动调用write，可提前手动调用
 
-		context()
-		{
+		context(){
 			try {
 				initialize_val();
-				
                 get_covscript_env();
-				
-                read_config();
 			}
 			catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;

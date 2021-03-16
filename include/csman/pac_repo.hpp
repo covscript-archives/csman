@@ -30,21 +30,18 @@ namespace csman {
 
 		map_t<std::string, pac_data> local_pac;
 	private:/*私有方法*/
-		void read_pac_repo(const std::string &path)
-		{
-            std::ifstream ifs(path + "/" + "pac_list");
+		void read_pac_list(const std::string &path)	{
+            std::ifstream ifs(path + delimiter + "pac_list");
             if(!ifs.is_open())
-                throw std::runtime_error("opening \"pac_repo\" failed.");
+                throw std::runtime_error("opening \"pac_list\" failed.");
 			std::vector<std::string> args;
 			while (str::readline(ifs, args))
 			    local_pac[args[0]] = pac_data(args);
-
 			ifs.close();
 		}
 
-		void write_pac_repo(const std::string &path)
-		{
-            std::ofstream ofs(path + "/" + "pac_list");
+		void write_pac_list(const std::string &path) {
+            std::ofstream ofs(path + delimiter + "pac_list");
 			for (auto &x : local_pac) {
 				ofs << x.first << " ";
 				ofs << x.second.available << " ";
@@ -59,15 +56,13 @@ namespace csman {
 	public:/*公开接口*/
 		pac_repo() = default;
 
-		explicit pac_repo(context *cxt) : cxt(cxt)
-		{
-			std::string path;
+		explicit pac_repo(context *cxt) : cxt(cxt) {
 			if(cxt->vars.count("pac_repo_path") != 0){
                 try{
-                    read_pac_repo(cxt->vars["pac_repo_path"]);
+                    read_pac_list(cxt->vars["pac_repo_path"]);
                 }
                 catch (const std::exception &e){
-                    throw e;
+                    throw std::runtime_error("reading pac_list failed: "+std::string(e.what()));
                 }
 			}
 			else
@@ -75,18 +70,20 @@ namespace csman {
 			return;
 		}
 
-		~pac_repo()
-		{
+		~pac_repo()	{
 			if (cxt != nullptr) {
 				if(cxt->vars.count("pac_repo_path") != 0)
-                    write_pac_repo(cxt->vars["pac_repo_path"]);
+                    write_pac_list(cxt->vars["pac_repo_path"]);
 				else
 					std::cout<<"Warning: your file for recording pac_repo updating failed, it may cause extremely problems while next last_update_time. Please try to repair it by using \"csman repair\""<<std::endl;
 			}
 		}
 
-		void update_install(const std::string &name, const std::string &ver, bool is_available)
-		{
+		void initialize_pac_list(){
+
+		}
+        /*还差安装runtime特殊处理*/
+		void update_install(const std::string &name, const std::string &ver, bool is_available)	{
 			if (local_pac.count(name) == 0)
 				local_pac[name] = pac_data();
 			if (is_available)
@@ -95,9 +92,8 @@ namespace csman {
 
 			return;
 		}
-
-		void update_uninstall(const std::string &name, const std::string &ver)
-		{
+        /*还差安装runtime特殊处理*/
+		void update_uninstall(const std::string &name, const std::string &ver)	{
 		    if (local_pac.count(name) == 0)
 		        throw std::invalid_argument("package \"" + name + "\" is not existed.");
 
@@ -112,13 +108,11 @@ namespace csman {
 			return;
 		}
 
-		void update_checkout()
-		{
+		void update_checkout() {
 
 		}
 
-		inline set_t<std::string> query_contains_ver(const std::string &name)
-		{
+		inline set_t<std::string> query_contains_ver(const std::string &name) {
 			set_t<std::string> res;
 			if (local_pac.count(name) != 0) {
 				for (auto ver : local_pac[name].ver)
@@ -127,13 +121,11 @@ namespace csman {
 			return res;
 		}
 
-		inline std::string query_using_ver(const std::string &name)
-		{
+		inline std::string query_using_ver(const std::string &name)	{
 			return local_pac.count(name) == 0 ? "" : /*likely*/ local_pac[name].available;
 		}
 
-		inline std::string get_current_runtime_ver()
-		{
+		inline std::string get_current_runtime_ver() {
 			return cxt->runtime_ver;
 		}
 	};

@@ -107,7 +107,7 @@ namespace csman::sys::dir {
 
 #elif MOZART_PLATFORM_UNIX
         if (strPath.at(strPath.length() - 1) != '\\' || strPath.at(strPath.length() - 1) != '/')
-        strPath.append("/");
+        strPath.append(delimiter);
         DIR *d = opendir(strPath.c_str());
         if (d != NULL) {
             struct dirent *dt = NULL;

@@ -26,9 +26,7 @@ namespace csman {
         if (home_ptr == nullptr)
             throw std::runtime_error("Get EnvVar Error: HOME");
 
-        vars["home_path"] = home_ptr;
-
-        std::string home = home_ptr;
+        home_path = home_ptr;
 
         /*CovScript var*/
         if (std::getenv("COVSCRIPT_HOME") != nullptr) {
@@ -39,7 +37,7 @@ namespace csman {
 #ifdef MOZART_PLATFORM_LINUX
 "/usr/share/covscript/";
 #elif defined(MOZART_PLATFORM_WIN32)
-home + "\\Documents\\CovScript\\";
+home_path + "\\Documents\\CovScript\\";
 #elif defined(MOZART_PLATFORM_DARWIN)
             "/Application/CovScript.app/Contents/";
 #endif
@@ -53,7 +51,7 @@ home + "\\Documents\\CovScript\\";
 #ifdef MOZART_PLATFORM_LINUX
 "";
 #elif defined(MOZART_PLATFORM_WIN32)
-home + " ";
+home_path + " ";
 #elif defined(MOZART_PLATFORM_DARWIN)
             "";
 #endif
@@ -67,16 +65,16 @@ home + " ";
 #ifdef MOZART_PLATFORM_LINUX
 "";
 #elif defined(MOZART_PLATFORM_WIN32)
-home + "";
+home_path + "";
 #elif defined(MOZART_PLATFORM_DARWIN)
             "";
 #endif
         }
         /*csman client var*/
-        vars["config_path"] = home + "/.csman_config";
-        vars["csman_path"] = home + "/.csman/";
-        vars["pac_repo_path"] = vars["COVSCRIPT_HOME"] + "/pac_repo/";
-        vars["sources_idx_path"] = vars["csman_path"] + "/sources_idx";
+        vars["config_path"] = home_path + delimiter + ".csman_config";
+        vars["csman_path"] = home_path + delimiter + ".csman" + delimiter;
+        vars["pac_repo_path"] = vars["COVSCRIPT_HOME"] + delimiter + "pac_repo" + delimiter;
+        vars["sources_idx_path"] = vars["csman_path"] +  delimiter + "sources_idx";
         vars["max_reconnect_time"] = "5";
     }
 

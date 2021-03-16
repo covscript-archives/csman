@@ -59,6 +59,7 @@ namespace csman {
     public:
         parser(context *, const std::vector<std::string> &);
         void parse();
+        void init();
         void install();
         void uninstall();
         void config();
