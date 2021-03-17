@@ -35,7 +35,7 @@ namespace csman {
 			if (!getline(ifs, description))
 				return false;
 			pac_description[name].push_back(description);
-			
+
 			if (!str::readline(ifs, args))
 				return false;
 			for (int i = 0, j = 0; i < cnt; ++i, ++j) {
@@ -164,37 +164,37 @@ namespace csman {
 		/*lower_bound的临时替代*/
 		rtm_label& query_rtm_label(const std::string &AoS)   // 找合适的ABI，STD版本号的runtime，返回runtime在图中的id，以后用lower_bound代替
 		{
-		    for(auto it = rtm_list.rbegin(); it != rtm_list.rend(); ++it){
-		        if(AoS[0]=='A'){
-                    if(AoS==it->ABI)
-                        return *it;
-		        }
-		        else if(AoS[0]=='S'){
-		            if(AoS==it->STD)
-		                return *it;
-		        }
-		    }
-		    throw std::runtime_error(AoS+" is not installed.");
-/*			int l = 0, r = rtm_list.size() - 1, mid = (rtm_list.size() - 1) >> 1;
-//			if (AoS[0] == 'A') {
-//				while (l != r) {
-//					mid = (l + r) >> 1;
-//					if (rtm_list[mid].ABI <= AoS)
-//						r = mid;
-//					else
-//						l = mid + 1;
-//				}
-//			}
-//			else if (AoS[0] == 'S') {
-//				while (l != r) {
-//					mid = (l + r) >> 1;
-//					if (rtm_list[mid].STD <= AoS)
-//						r = mid;
-//					else
-//						l = mid + 1;
-//				}
-//			}
-//			return mid;*/
+			for(auto it = rtm_list.rbegin(); it != rtm_list.rend(); ++it) {
+				if(AoS[0]=='A') {
+					if(AoS==it->ABI)
+						return *it;
+				}
+				else if(AoS[0]=='S') {
+					if(AoS==it->STD)
+						return *it;
+				}
+			}
+			throw std::runtime_error(AoS+" is not installed.");
+			/*			int l = 0, r = rtm_list.size() - 1, mid = (rtm_list.size() - 1) >> 1;
+			//			if (AoS[0] == 'A') {
+			//				while (l != r) {
+			//					mid = (l + r) >> 1;
+			//					if (rtm_list[mid].ABI <= AoS)
+			//						r = mid;
+			//					else
+			//						l = mid + 1;
+			//				}
+			//			}
+			//			else if (AoS[0] == 'S') {
+			//				while (l != r) {
+			//					mid = (l + r) >> 1;
+			//					if (rtm_list[mid].STD <= AoS)
+			//						r = mid;
+			//					else
+			//						l = mid + 1;
+			//				}
+			//			}
+			//			return mid;*/
 		}
 
 		/*使用:node_id[name][ver]*/

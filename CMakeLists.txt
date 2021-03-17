@@ -20,9 +20,11 @@ else ()
 endif ()
 
 include_directories(include)
+include_directories(imports/covscript_system/include)
 include_directories(imports/mozart/include)
 include_directories(imports/zip/include)
 
+add_subdirectory(imports/covscript_system)
 add_subdirectory(imports/mozart)
 add_subdirectory(imports/zip)
 
@@ -38,7 +40,7 @@ set(SOURCE_CODE
 
 add_executable(csman ${SOURCE_CODE})
 
-target_link_libraries(csman mozart zip curl)
+target_link_libraries(csman mozart zip curl cs_system)
 
 if (WIN32)
     target_compile_definitions(csman PRIVATE CURL_STATICLIB)

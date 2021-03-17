@@ -15,6 +15,7 @@
 #include <regex>
 #include <set>
 
+#include <covscript_impl/system.hpp>
 #include <csman/exception.hpp>
 #include <mozart++/core>
 
@@ -27,45 +28,53 @@
 #endif
 
 namespace csman {
-    template<typename K, typename V> using map_t = std::unordered_map<K, V>;
-    template<typename T> using set_t = std::set<T>;
+	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
+	template<typename T> using set_t = std::set<T>;
 
-    namespace sys{
-        bool exist(const std::string &);
-        namespace dir {
-            bool create(std::string);
-            bool remove(std::string);
-        }
-        namespace file{
-            bool create(std::string);
-            bool remove(std::string);
-        }
-    }
+	namespace sys {
+		inline bool exist(const std::string &path)
+		{
+			return cs_impl::file_system::exists(path);
+		}
+		namespace dir {
+			inline bool create(const std::string& path)
+			{
+				return cs_impl::file_system::mkdir_p(path);
+			}
+			using cs_impl::file_system::remove;
+			std::vector<std::string> scan(std::string);
+		}
+		namespace file {
+			bool create(std::string);
+			using cs_impl::file_system::remove;
+			std::vector<std::string> scan(std::string);
+		}
+	}
 
-    namespace network {
-        bool http_get(const std::string &, std::string , int);
-        std::vector<char> http_get(const std::string &, int);
-    }
+	namespace network {
+		bool http_get(const std::string &, std::string, int);
+		std::vector<char> http_get(const std::string &, int);
+	}
 
-    namespace str{
-        bool is_abi(const std::string &);
-        bool is_std(const std::string &);
-        bool is_ver(const std::string &);
-        bool is_pac(const std::string &);
-        bool weak_equal(const std::string &, const std::string &);
-        std::vector<std::string> split(const std::string &);
-        std::vector<std::string> split(const std::string &, const std::string &);
-        bool readline(std::ifstream &, std::vector<std::string> &);
-        bool path_char(const char &);
-        bool is_path(const std::string &);
-        bool path_compare(std::string , std::string );
-        std::string to_dir_path(const std::string &);
-        std::string to_file_path(const std::string &);
-    }
+	namespace str {
+		bool is_abi(const std::string &);
+		bool is_std(const std::string &);
+		bool is_ver(const std::string &);
+		bool is_pac(const std::string &);
+		bool weak_equal(const std::string &, const std::string &);
+		std::vector<std::string> split(const std::string &);
+		std::vector<std::string> split(const std::string &, const std::string &);
+		bool readline(std::ifstream &, std::vector<std::string> &);
+		bool path_char(const char &);
+		bool is_path(const std::string &);
+		bool path_compare(std::string, std::string );
+		std::string to_dir_path(const std::string &);
+		std::string to_file_path(const std::string &);
+	}
 }
 namespace csman {
-    template<typename K, typename V> using map_t = std::unordered_map<K, V>;
-    template<typename T> using set_t = std::set<T>;
+	template<typename K, typename V> using map_t = std::unordered_map<K, V>;
+	template<typename T> using set_t = std::set<T>;
 	class context {
 	private:
 
@@ -80,7 +89,7 @@ namespace csman {
 				bool is_notes;
 
 				line_data(const std::string &text, bool is_notes) : text(text),
-                                                                      is_notes(is_notes) {}// 该行不是注释，则记录key；反之记录该行注释内容
+					is_notes(is_notes) {}// 该行不是注释，则记录key；反之记录该行注释内容
 			};
 			std::vector<line_data> lines;
 		} config_data;
@@ -98,13 +107,15 @@ namespace csman {
 		void show(const std::string &key);
 		void show_all();
 		void set(const std::string &key, const std::string &val);
-        void read_config(); // 需要手动调用read
-        void write_config(); // 析构会自动调用write，可提前手动调用
+		void read_config(); // 需要手动调用read
+		void write_config(); // 析构会自动调用write，可提前手动调用
 
-		context(){
+		context()
+		{
 			try {
 				initialize_val();
-                get_covscript_env();
+
+				get_covscript_env();
 			}
 			catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
@@ -112,14 +123,15 @@ namespace csman {
 			}
 		}
 
-		~context(){
-            if(vars.count("config_path") != 0) {
-                std::ofstream ofs(vars["config_path"]);
-                write_config();
-                ofs.close();
-            }
-            else
-                std::cout<<"Warning: your file for recording .csman_config updating failed, it may cause extremely problems while next last_update_time. Please try to repair it by using \"csman repair\""<<std::endl;
+		~context()
+		{
+			if(vars.count("config_path") != 0) {
+				std::ofstream ofs(vars["config_path"]);
+				write_config();
+				ofs.close();
+			}
+			else
+				std::cout<<"Warning: your file for recording .csman_config updating failed, it may cause extremely problems while next last_update_time. Please try to repair it by using \"csman repair\""<<std::endl;
 		}
 	};
 
