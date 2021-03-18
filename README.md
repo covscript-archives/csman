@@ -1,14 +1,14 @@
 # Csman
 
-* **Platform**: Linux&MacOs&Windows
+* **Platform**: **Linux** & **MacOs** & **Windows**
 
 ## Description 
 
-  The Csman is a package manager. This tool helps managing all packages that users installed for CovScript. To install and control them easily, also handle their dependencies correctly.    
+  The csman is a package manager. This tool helps managing all packages that users installed for CovScript. To install and control them easily, also handle their dependencies correctly.    
   
-  Csman is a tool which need online condition. Users can only use a part of function offline.    
+  It need online condition. But you can only use the part of function offline.    
   
-  Wherever users install it in, csman can successfully run. And users can set some options in configure file of Csman.    
+  You can set some vars by writing them down in configure file of csman.    
 
 ## Usage
 
@@ -18,13 +18,9 @@
 
 use    
 
-```
-git clone https://github.com/Access-Rend/csman
-```
-
-then in the path of where you clone csman (../csman)  
-  
-```
+``` shell
+git clone https://github.com/covscript/csman/
+cd csman
 make 
 ```
 
@@ -32,21 +28,19 @@ make
 
 use    
 
-```
+``` shell
 sudo apt install csman
 ```
 
 or    
 
-```
+``` shell
 sudo yum install csman
 ```
 
 #### official homepage
 
-goto our homepage for all platform downloading.    
-
-coming soon...   
+goto our [homepage](https://covariant.cn/covscript/) for all platform downloading.       
 
 + Version management: Support for installing multiple CovScript versions, and support for setting default versions
 	+ csman install <latest | nightly | version> [--reinstall | --fix]
