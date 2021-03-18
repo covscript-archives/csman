@@ -18,7 +18,7 @@ namespace csman {
 		void init_pac_repo(pac_repo &, csman::context *);
 		void init_sources_idx(idx_file &, csman::context *);
 	public:
-		initializer() = default;
+		initializer() = delete;
 		explicit initializer(csman::context *);
 		~initializer() = default;
 	};
