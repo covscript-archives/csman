@@ -30,7 +30,7 @@ namespace csman {
 		};
 
 		map_t<std::string, pac_data> local_pac;
-	private:/*私有方法*/
+    public:/*公开接口*/
 		void read_pac_list(const std::string &path)
 		{
 			std::ifstream ifs(path + delimiter + "pac_list");
@@ -56,17 +56,16 @@ namespace csman {
 			ofs.close();
 		}
 
-	public:/*公开接口*/
 		pac_repo() = default;
 
 		explicit pac_repo(context *cxt) : cxt(cxt)
 		{
 			if(cxt->vars.count("pac_repo_path") != 0) {
 				try {
-					read_pac_list(cxt->vars["pac_repo_path"]);
+				    initialize_local_pac();
 				}
 				catch (const std::exception &e) {
-					throw std::runtime_error("reading pac_list failed: "+std::string(e.what()));
+					throw std::runtime_error("initializing pac_list failed: "+std::string(e.what()));
 				}
 			}
 			else
@@ -84,9 +83,18 @@ namespace csman {
 			}
 		}
 
-		void initialize_pac_list()
-		{
-
+		void initialize_local_pac() {
+            std::string path = cxt->vars["pac_repo_path"];
+            if(!sys::exist(path)){
+                sys::dir::create(path);
+                sys::file::create(path+delimiter+"pac_list");
+            }
+            else{
+                for(auto &pac : sys::dir::scan(path)){
+                    for(auto &ver : sys::dir::scan(path+delimiter+pac))
+                        local_pac[pac].ver.insert(ver);
+                }
+            }
 		}
 		/*还差安装runtime特殊处理*/
 		void update_install(const std::string &name, const std::string &ver, bool is_available)

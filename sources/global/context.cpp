@@ -82,7 +82,7 @@ namespace csman {
 		vars["max_reconnect_time"] = "5";
 	}
 
-	void context::get_covscript_env()
+	void context::get_covscript_env() // 确定安装了covscript后执行
 	{
 		try {
 			mpp::process_builder builder;

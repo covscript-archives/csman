@@ -79,9 +79,6 @@ namespace csman {
 	private:
 
 		void initialize_val();
-
-		void get_covscript_env();
-
 		set_t<std::string> only_read_vars;
 		struct Config_Data {
 			struct line_data {
@@ -95,6 +92,7 @@ namespace csman {
 		} config_data;
 		std::string home_path;
 	public:
+        void get_covscript_env();
 		std::string ABI, STD, runtime_ver;
 		map_t<std::string, std::string> vars;
 
@@ -114,8 +112,6 @@ namespace csman {
 		{
 			try {
 				initialize_val();
-
-				get_covscript_env();
 			}
 			catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;

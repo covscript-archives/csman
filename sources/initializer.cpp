@@ -30,9 +30,11 @@ namespace csman {
 	}
 	void initializer::init_pac_repo(pac_repo &repo,csman::context *cxt)
 	{
+        repo = pac_repo(cxt);
 	}
 	void initializer::init_sources_idx(idx_file &sources_idx, csman::context *cxt)
 	{
+	    // json_to_idx
 		sources_idx = csman::idx_file(cxt);
 	}
 };

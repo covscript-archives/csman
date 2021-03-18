@@ -55,6 +55,17 @@ namespace csman {
 		}
 	}
 
+	void parser::install_covscript(){
+	    if(args.size()<=2) // install covscript
+	        ;
+	    else if(csman::str::is_ver(args[2])) // install covscript x.x.x.x
+	        ;
+	    else if(args.size()>3)
+	        throw std::invalid_argument("syntax error.");
+	    else
+	        throw std::invalid_argument("no such version of CovScript.");
+	}
+
 	parser::parser(context *_context, const std::vector<std::string> &arguments) : cxt(_context), args(arguments) {}
 
 	void parser::parse()
@@ -80,11 +91,14 @@ namespace csman {
 			}
 
 			repo = pac_repo(cxt);
+			repo.read_pac_list(cxt->vars["pac_repo_path"]+delimiter+"list");
+
 			if (predicate == "list")
 				list();
-			else if (predicate == "config")
+			else if (predicate == "config") // 可以预先指定covscript相关目录，可以允许未安装covscript情况下使用该命令
 				config();
 
+            cxt->get_covscript_env();
 			idx = idx_file(cxt);
 			if (predicate == "install")
 				install();
@@ -115,11 +129,12 @@ namespace csman {
 	void parser::install()
 	{
 		std::string ver;
-		if (args.size() <= 2) ver = idx.get_stable_ver(object);
-		else if (args[2] == "stable") ver = idx.get_stable_ver(object);
-		else if (args[2] == "unstable") ver = idx.get_unstable_ver(object);
-		else if (!csman::str::is_ver(args[2])) throw std::invalid_argument("wrong package version.");
-		else ver = args[2];
+		if(csman::str::weak_equal(args[1],"covscript")) install_covscript(); // install covscript ....
+		else if (args.size() <= 2) ver = idx.get_stable_ver(object); // install pac
+		else if (args[2] == "stable") ver = idx.get_stable_ver(object); // install pac stable
+		else if (args[2] == "unstable") ver = idx.get_unstable_ver(object); // install pac unstable
+		else if (csman::str::is_ver(args[2])) ver = args[2]; // install pac x.x.x.x
+		else throw std::invalid_argument("wrong package version.");
 
 		try {
 			// 获取依赖

@@ -41,6 +41,7 @@ namespace csman {
 
 		const std::string VERSION = "csman 1.0";
 
+		void install_covscript();
 		bool y_or_n();
 		/*从args分离opt的filter, 分离后args将不带有opt参数*/
 		void opt_filter();
