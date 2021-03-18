@@ -8,7 +8,9 @@
   
   It need online condition. But you can only use the part of function offline.    
   
-  You can set some vars by writing them down in configure file of csman.    
+  You can set some vars by writing them down in configure file of csman.   
+  
+***
 
 ## Usage
 
@@ -24,7 +26,7 @@ cd csman
 make 
 ```
 
-#### for linux
+#### for Linux
 
 use    
 
@@ -38,7 +40,7 @@ or
 sudo yum install csman
 ```
 
-#### official homepage
+#### Official Homepage
 
 goto our [homepage](https://covariant.cn/covscript/) for all platform downloading.       
 
