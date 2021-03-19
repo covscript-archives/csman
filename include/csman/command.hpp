@@ -7,6 +7,7 @@
  * Github:  https://github.com/chengdu-zhirui/
  */
 #include <csman/global.hpp>
+#include <csman/initializer.hpp>
 #include <csman/pac_repo.hpp>
 #include <csman/idx_file.hpp>
 #include <zip.hpp>

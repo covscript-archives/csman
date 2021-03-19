@@ -48,7 +48,6 @@ namespace csman {
 	/*从args分离opt的filter, 分离后args将不带有opt参数*/
 	void parser::opt_filter()     // 改
 	{
-
 		for (auto it = args.begin(); it != args.end(); it++) {
 			if (it->operator[](0) == '-')
 				opt.insert(*it), args.erase(it);
@@ -56,8 +55,9 @@ namespace csman {
 	}
 
 	void parser::install_covscript(){
-	    if(args.size()<=2) // install covscript
-	        ;
+	    if(args.size()<=2) {// install covscript
+	        auto dep_set = idx.get_depend_set("runtime","stable");
+	    }
 	    else if(csman::str::is_ver(args[2])) // install covscript x.x.x.x
 	        ;
 	    else if(args.size()>3)
@@ -70,6 +70,15 @@ namespace csman {
 
 	void parser::parse()
 	{
+	    /* 需要操作的文件：
+	     * pac_repo:
+	     *      initialize_local_pac
+	     *      read_pac_list
+	     *      write_pac_list
+	     *      ~pac_repo():write_pac_list // 即便析构函数会强制写一次，但那只是保障，建议不要依赖析构来写文件
+	     * idx_file:
+	     *
+	     */
 		try {
 			opt_filter();
 
@@ -88,6 +97,14 @@ namespace csman {
 			else if (predicate == "version") {
 				std::cout << VERSION;
 				return;
+			}
+			else if (predicate == "init") {
+			    try {
+                    init();
+                }
+			    catch (const std::exception &e){
+                    throw e;
+			    }
 			}
 
 			repo = pac_repo(cxt);
@@ -126,6 +143,14 @@ namespace csman {
 }
 
 namespace csman {
+    void parser::init() {
+        try{
+            csman::initializer I(cxt,repo,idx);
+        }
+        catch (const std::exception &e){
+            throw std::runtime_error("initializing csman failed: " + std::string(e.what()));
+        }
+    }
 	void parser::install()
 	{
 		std::string ver;
@@ -158,7 +183,7 @@ namespace csman {
 			message.first_sentence("csman: install", object + " " + ver + " and it's dependencies successfully.");
 		}
 		catch (const std::exception &e) {
-			throw e;
+            throw std::runtime_error("installing failed: " + std::string(e.what()));
 		}
 	}
 
@@ -197,7 +222,7 @@ namespace csman {
 			message.first_sentence("csman: uninstall", object + " " + ver + " and it's supports successfully.");
 		}
 		catch (const std::exception &e) {
-			throw e;
+			throw std::runtime_error("uninstalling failed: " + std::string(e.what()));
 		}
 	}
 
@@ -205,12 +230,7 @@ namespace csman {
 	{
 		if (object == "set") {
 			if (args.size() == 4) {
-				try {
-					cxt->set(args[3], args[4]);
-				}
-				catch (const std::exception &e) {
-					throw e;
-				}
+                cxt->set(args[3], args[4]);
 			}
 			else throw std::invalid_argument("syntax error.");
 		}

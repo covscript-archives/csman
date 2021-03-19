@@ -65,7 +65,7 @@ namespace csman {
 				    initialize_local_pac();
 				}
 				catch (const std::exception &e) {
-					throw std::runtime_error("initializing pac_list failed: "+std::string(e.what()));
+					throw std::runtime_error("initializing pac_list failed: " + std::string(e.what()));
 				}
 			}
 			else

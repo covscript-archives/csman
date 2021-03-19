@@ -272,6 +272,39 @@ namespace csman {
 		graph G;
 
 	public:/*公开接口*/
+	    void json_to_idx(){
+
+	    }
+
+	    void read_idx(){
+            std::ifstream ifs(cxt->vars["sources_idx_path"]);
+            if (!ifs.is_open())
+                throw std::runtime_error("open idx_file failed");
+            std::string str;
+            std::vector<std::string> args;
+
+            std::getline(ifs, last_update_time); //2020.02.30.10.35
+            str::readline(ifs, args); //PAC 14 28
+            int cnt_1 = std::stoi(args[1]); // cnt_1 包个数（按名称）
+            G.init(std::stoi(args[2])); // cnt_2 包个数（按名称+版本）
+
+
+            for (int i = 1; i <= cnt_1; i++) { // 0为空位无效包编号，所有包编号为1~cnt_2，共cnt个包 改
+                if (!str::readline(ifs, args))
+                    throw std::runtime_error("incorrect format of sources_idx.");
+
+                std::string name = args[0];
+                int cnt = std::stoi(args[1]); // cnt 当前包内 包个数（按名称+版本）
+
+                if (name == "cs.runtime")
+                    readruntime(name, cnt, ifs, args);
+                else
+                    readpackage(name, cnt, ifs, args);
+            }
+            //读取依赖
+            while (readdep(ifs, args));
+	    }
+
 		std::string get_stable_ver(const std::string &name)
 		{
 			return this->un_stable_ver[name].second;
@@ -298,33 +331,8 @@ namespace csman {
 
 		idx_file(context *_cxt) : cxt(_cxt)
 		{
-			std::ifstream ifs(cxt->vars["sources_idx_path"]);
-			if (!ifs.is_open())
-				throw std::runtime_error("open idx_file failed");
-			std::string str;
-			std::vector<std::string> args;
-
-			std::getline(ifs, last_update_time); //2020.02.30.10.35
-			str::readline(ifs, args); //PAC 14 28
-			int cnt_1 = std::stoi(args[1]); // cnt_1 包个数（按名称）
-			G.init(std::stoi(args[2])); // cnt_2 包个数（按名称+版本）
-
-
-			for (int i = 1; i <= cnt_1; i++) { // 0为空位无效包编号，所有包编号为1~cnt_2，共cnt个包 改
-				if (!str::readline(ifs, args))
-					throw std::runtime_error("incorrect format of sources_idx.");
-
-				std::string name = args[0];
-				int cnt = std::stoi(args[1]); // cnt 当前包内 包个数（按名称+版本）
-
-				if (name == "cs.runtime")
-					readruntime(name, cnt, ifs, args);
-				else
-					readpackage(name, cnt, ifs, args);
-			}
-
-			//读取依赖
-			while (readdep(ifs, args));
+	        read_idx();
+	        json_to_idx();
 		}
 
 		idx_file() = default;
